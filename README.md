@@ -2,6 +2,19 @@
 
 A responsive React + TypeScript recreation of the [La La Land Cafe homepage](https://lalalandcafe.com/), built with Vite. The video, Poppins fonts, logos, product photography, illustrations, and payment icons are stored locally. Asset source URLs are recorded in `public/assets/sources.json`.
 
+**Live website:** https://xirui-li.github.io/lalaland-cafe-replica/
+
+## GitHub Pages
+
+The GitHub Actions workflow in `.github/workflows/deploy-pages.yml` builds and deploys the website automatically on every push to `main`. GitHub Pages uses **GitHub Actions** as its deployment source.
+
+The workflow sets `SITE_BASE_PATH` for the repository URL. Local development uses `/` by default. To verify the GitHub Pages layout locally:
+
+```sh
+SITE_BASE_PATH=/lalaland-cafe-replica/ npm run build
+SITE_BASE_PATH=/lalaland-cafe-replica/ npm test
+```
+
 ## Run
 
 ```sh

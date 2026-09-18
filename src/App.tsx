@@ -1,5 +1,18 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import catalog from "./catalog.json";
+import catalogData from "./catalog.json";
+
+const homeUrl = import.meta.env.BASE_URL;
+const assetUrl = (path: string) => `${homeUrl}${path.replace(/^\//, "")}`;
+const catalog = catalogData.map((collection) => ({
+  ...collection,
+  products: collection.products.map((product) => ({
+    ...product,
+    images: product.images.map((image) => ({
+      ...image,
+      src: assetUrl(image.src),
+    })),
+  })),
+}));
 
 type Product = (typeof catalog)[number]["products"][number];
 type CartItem = { id: string; quantity: number };
@@ -14,7 +27,7 @@ const allProducts = catalog.flatMap((collection) => collection.products);
 const official = (path: string) => `https://lalalandcafe.com${path}`;
 const orderUrl = "https://order.lalalandcafe.com/";
 const nav = [
-  ["home", "/"],
+  ["home", homeUrl],
   ["order now", orderUrl],
   ["menu", official("/pages/menu")],
   ["locations", official("/pages/locations")],
@@ -483,9 +496,9 @@ export default function App() {
           >
             <Icon name="menu" />
           </button>
-          <a className="brand" href="/" aria-label="La La Land home">
+          <a className="brand" href={homeUrl} aria-label="La La Land home">
             <img
-              src="/assets/logo-brown.png"
+              src={assetUrl("/assets/logo-brown.png")}
               alt="lalaland"
               width="130"
               height="23"
@@ -579,10 +592,10 @@ export default function App() {
             muted
             playsInline
             preload="auto"
-            poster="/assets/hero-poster.jpg"
+            poster={assetUrl("/assets/hero-poster.jpg")}
             aria-hidden="true"
           >
-            <source src="/assets/hero.mp4" type="video/mp4" />
+            <source src={assetUrl("/assets/hero.mp4")} type="video/mp4" />
           </video>
           <div className="hero-content">
             <h1>
@@ -605,7 +618,7 @@ export default function App() {
           <div className="story page-width">
             <div className="story-photo">
               <img
-                src="/assets/cafe.jpg"
+                src={assetUrl("/assets/cafe.jpg")}
                 alt="Neighbors gathering outside a sunny La La Land cafe"
                 width="1500"
                 height="1500"
@@ -632,7 +645,7 @@ export default function App() {
           <div className="app-content">
             <img
               className="app-illustration"
-              src="/assets/app-icon.png"
+              src={assetUrl("/assets/app-icon.png")}
               alt="Order your cafe favorites on the La La Land app"
               width="216"
               height="216"
@@ -692,7 +705,7 @@ export default function App() {
         <div className="page-width footer-top">
           <div className="footer-brand">
             <img
-              src="/assets/angel.png"
+              src={assetUrl("/assets/angel.png")}
               alt="La La Land angel"
               width="125"
               height="86"
@@ -707,7 +720,7 @@ export default function App() {
                   <li key={label}>
                     <a
                       className={href === "/" ? "active" : ""}
-                      href={href === "/" ? "/" : official(href)}
+                      href={href === "/" ? homeUrl : official(href)}
                     >
                       {label}
                     </a>
@@ -732,7 +745,7 @@ export default function App() {
             ].map((name, i) => (
               <img
                 key={name}
-                src={`/assets/payment-${i}.svg`}
+                src={assetUrl(`/assets/payment-${i}.svg`)}
                 alt={name}
                 width="38"
                 height="24"
@@ -742,7 +755,7 @@ export default function App() {
           </div>
           <div className="legal">
             <span>
-              © {new Date().getFullYear()}, <a href="/">La La Land</a>
+              © {new Date().getFullYear()}, <a href={homeUrl}>La La Land</a>
             </span>
             {[
               ["Refund policy", "refund-policy"],

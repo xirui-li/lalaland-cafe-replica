@@ -3,7 +3,9 @@ import { chromium } from "playwright";
 import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
 import { spawn } from "node:child_process";
-const url = process.env.TEST_BASE_URL || "http://127.0.0.1:4173";
+const url =
+  process.env.TEST_BASE_URL ||
+  `http://127.0.0.1:4173${process.env.SITE_BASE_PATH || "/"}`;
 let server;
 if (!process.env.TEST_BASE_URL) {
   server = spawn("npm", ["run", "preview", "--", "--port", "4173"], {
@@ -36,7 +38,10 @@ const context = await browser.newContext({
 const page = await context.newPage();
 page.on("pageerror", (error) => failures.push(error.message));
 page.on("response", (response) => {
-  if (response.status() >= 400 && response.url().startsWith(url))
+  if (
+    response.status() >= 400 &&
+    new URL(response.url()).origin === new URL(url).origin
+  )
     failures.push(`${response.status()} ${response.url()}`);
 });
 const check = async (name, test) => {
@@ -46,6 +51,17 @@ const check = async (name, test) => {
 try {
   await page.goto(url, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
+  await check("Home links respect the deployment path", async () => {
+    for (const selector of [
+      ".brand",
+      ".desktop-nav .active",
+      ".footer-column .active",
+      ".legal span a",
+    ]) {
+      const href = await page.locator(selector).getAttribute("href");
+      assert.equal(new URL(href, page.url()).pathname, new URL(url).pathname);
+    }
+  });
   await check("Original hero video and local assets load", async () => {
     await page.waitForFunction(
       () => document.querySelector("video").readyState >= 2,
