@@ -1,0 +1,170 @@
+[
+  {
+    "title": "New Arrivals",
+    "products": [
+      {
+        "title": "La La Land Tumbler w/straw 32oz",
+        "href": "/products/classic-la-la-land-tumbler-w-straw",
+        "images": [
+          {
+            "src": "/assets/classic-la-la-land-tumbler-w-straw.png",
+            "alt": "La La Land Tumbler w/straw 32oz"
+          },
+          {
+            "src": "/assets/classic-la-la-land-tumbler-w-straw-hover.png",
+            "alt": "A tall, yellow tumbler with a handle and a straw, featuring a stylish script design."
+          }
+        ],
+        "price": "$28.00 USD",
+        "soldOut": false,
+        "id": "classic-la-la-land-tumbler-w-straw"
+      },
+      {
+        "title": "Espresso Martini Candle",
+        "href": "/products/espresso-martini-candle",
+        "images": [
+          {
+            "src": "/assets/espresso-martini-candle.png",
+            "alt": "Espresso Martini Candle"
+          },
+          {
+            "src": "/assets/espresso-martini-candle-hover.png",
+            "alt": "A lit candle in a decorative glass holder, topped with coffee beans, emits a warm glow."
+          }
+        ],
+        "price": "$24.00 USD",
+        "soldOut": false,
+        "id": "espresso-martini-candle"
+      },
+      {
+        "title": "\" Tumbler\" La La Land Clear",
+        "href": "/products/tumbler-la-la-land-clear-copy",
+        "images": [
+          {
+            "src": "/assets/tumbler-la-la-land-clear-copy.jpg",
+            "alt": "\" Tumbler\" La La Land Clear"
+          },
+          {
+            "src": "/assets/tumbler-la-la-land-clear-copy-hover.png",
+            "alt": ""
+          }
+        ],
+        "price": "$24.00 USD",
+        "soldOut": false,
+        "id": "tumbler-la-la-land-clear-copy"
+      },
+      {
+        "title": "La La Matcha",
+        "href": "/products/la-la-matcha-copy",
+        "images": [
+          {
+            "src": "/assets/la-la-matcha-copy.png",
+            "alt": "La La Matcha"
+          },
+          {
+            "src": "/assets/la-la-matcha-copy-hover.png",
+            "alt": ""
+          }
+        ],
+        "price": "$29.00 USD",
+        "soldOut": false,
+        "id": "la-la-matcha-copy"
+      },
+      {
+        "title": "La La Land Beanie",
+        "href": "/products/classic-beanie-2",
+        "images": [
+          {
+            "src": "/assets/classic-beanie-2.png",
+            "alt": "La La Land Beanie"
+          },
+          {
+            "src": "/assets/classic-beanie-2-hover.png",
+            "alt": ""
+          }
+        ],
+        "price": "$10.00 USD",
+        "soldOut": false,
+        "id": "classic-beanie-2"
+      }
+    ]
+  },
+  {
+    "title": "All Coffee",
+    "products": [
+      {
+        "title": "Magic",
+        "href": "/products/magic",
+        "images": [
+          {
+            "src": "/assets/magic.png",
+            "alt": "Magic"
+          }
+        ],
+        "price": "$17.90 USD",
+        "soldOut": false,
+        "id": "magic"
+      },
+      {
+        "title": "Diner",
+        "href": "/products/diner",
+        "images": [
+          {
+            "src": "/assets/diner.png",
+            "alt": "Diner"
+          }
+        ],
+        "price": "$17.90 USD",
+        "soldOut": false,
+        "id": "diner"
+      },
+      {
+        "title": "Nirvana",
+        "href": "/products/nirvana",
+        "images": [
+          {
+            "src": "/assets/nirvana.png",
+            "alt": "Nirvana"
+          }
+        ],
+        "price": "$18.90 USD",
+        "soldOut": false,
+        "id": "nirvana"
+      },
+      {
+        "title": "Heaven",
+        "href": "/products/heaven",
+        "images": [
+          {
+            "src": "/assets/heaven.png",
+            "alt": "Heaven"
+          }
+        ],
+        "price": "$17.90 USD",
+        "soldOut": false,
+        "id": "heaven"
+      },
+      {
+        "title": "Wired",
+        "href": "/products/wired",
+        "images": [
+          {
+            "src": "/assets/wired.png",
+            "alt": "Wired"
+          }
+        ],
+        "price": "$18.90 USD",
+        "soldOut": true,
+        "id": "wired"
+      },
+      {
+        "title": "Sh'mallow's for drinks",
+        "href": "/products/shmallow-for-drinks",
+        "id": "shmallow-for-drinks",
+        "images": [],
+        "price": "$0.00 USD",
+        "soldOut": false
+      }
+    ]
+  }
+]
