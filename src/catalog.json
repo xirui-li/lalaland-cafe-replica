@@ -1,169 +1,77 @@
 [
   {
-    "title": "New Arrivals",
+    "id": "yogurt",
+    "title": "Our yogurt",
     "products": [
       {
-        "title": "La La Land Tumbler w/straw 32oz",
-        "href": "/products/classic-la-la-land-tumbler-w-straw",
+        "id": "yogurt-bowl-01",
+        "title": "Yogurt bowl 01",
         "images": [
           {
-            "src": "/assets/classic-la-la-land-tumbler-w-straw.png",
-            "alt": "La La Land Tumbler w/straw 32oz"
-          },
-          {
-            "src": "/assets/classic-la-la-land-tumbler-w-straw-hover.png",
-            "alt": "A tall, yellow tumbler with a handle and a straw, featuring a stylish script design."
+            "src": "/assets/thick-yogurt-01.webp",
+            "alt": "THICK. yogurt bowl with red and blue berries around a chocolate-colored center"
           }
-        ],
-        "price": "$28.00 USD",
-        "soldOut": false,
-        "id": "classic-la-la-land-tumbler-w-straw"
+        ]
       },
       {
-        "title": "Espresso Martini Candle",
-        "href": "/products/espresso-martini-candle",
+        "id": "yogurt-bowl-02",
+        "title": "Yogurt bowl 02",
         "images": [
           {
-            "src": "/assets/espresso-martini-candle.png",
-            "alt": "Espresso Martini Candle"
-          },
-          {
-            "src": "/assets/espresso-martini-candle-hover.png",
-            "alt": "A lit candle in a decorative glass holder, topped with coffee beans, emits a warm glow."
+            "src": "/assets/thick-yogurt-02.webp",
+            "alt": "THICK. yogurt bowl with banana slices, dark berries and chocolate pieces"
           }
-        ],
-        "price": "$24.00 USD",
-        "soldOut": false,
-        "id": "espresso-martini-candle"
+        ]
       },
       {
-        "title": "\" Tumbler\" La La Land Clear",
-        "href": "/products/tumbler-la-la-land-clear-copy",
+        "id": "yogurt-bowl-03",
+        "title": "Yogurt bowl 03",
         "images": [
           {
-            "src": "/assets/tumbler-la-la-land-clear-copy.jpg",
-            "alt": "\" Tumbler\" La La Land Clear"
-          },
-          {
-            "src": "/assets/tumbler-la-la-land-clear-copy-hover.png",
-            "alt": ""
+            "src": "/assets/thick-yogurt-03.webp",
+            "alt": "THICK. yogurt bowl with apple slices and red berries"
           }
-        ],
-        "price": "$24.00 USD",
-        "soldOut": false,
-        "id": "tumbler-la-la-land-clear-copy"
+        ]
       },
       {
-        "title": "La La Matcha",
-        "href": "/products/la-la-matcha-copy",
+        "id": "yogurt-bowl-04",
+        "title": "Yogurt bowl 04",
         "images": [
           {
-            "src": "/assets/la-la-matcha-copy.png",
-            "alt": "La La Matcha"
-          },
-          {
-            "src": "/assets/la-la-matcha-copy-hover.png",
-            "alt": ""
+            "src": "/assets/thick-yogurt-04.webp",
+            "alt": "THICK. yogurt bowl with yellow fruit, red toppings and white cubes"
           }
-        ],
-        "price": "$29.00 USD",
-        "soldOut": false,
-        "id": "la-la-matcha-copy"
+        ]
       },
       {
-        "title": "La La Land Beanie",
-        "href": "/products/classic-beanie-2",
+        "id": "yogurt-bowl-05",
+        "title": "Yogurt bowl 05",
         "images": [
           {
-            "src": "/assets/classic-beanie-2.png",
-            "alt": "La La Land Beanie"
-          },
-          {
-            "src": "/assets/classic-beanie-2-hover.png",
-            "alt": ""
+            "src": "/assets/thick-yogurt-05.webp",
+            "alt": "THICK. yogurt bowl with cherries and blueberries around a dark center"
           }
-        ],
-        "price": "$10.00 USD",
-        "soldOut": false,
-        "id": "classic-beanie-2"
-      }
-    ]
-  },
-  {
-    "title": "All Coffee",
-    "products": [
-      {
-        "title": "Magic",
-        "href": "/products/magic",
-        "images": [
-          {
-            "src": "/assets/magic.png",
-            "alt": "Magic"
-          }
-        ],
-        "price": "$17.90 USD",
-        "soldOut": false,
-        "id": "magic"
+        ]
       },
       {
-        "title": "Diner",
-        "href": "/products/diner",
+        "id": "yogurt-bowl-06",
+        "title": "Yogurt bowl 06",
         "images": [
           {
-            "src": "/assets/diner.png",
-            "alt": "Diner"
+            "src": "/assets/thick-yogurt-06.webp",
+            "alt": "THICK. yogurt bowl with a blue and green globe-shaped center, dragon fruit and grapes"
           }
-        ],
-        "price": "$17.90 USD",
-        "soldOut": false,
-        "id": "diner"
+        ]
       },
       {
-        "title": "Nirvana",
-        "href": "/products/nirvana",
+        "id": "yogurt-bowl-07",
+        "title": "Yogurt bowl 07",
         "images": [
           {
-            "src": "/assets/nirvana.png",
-            "alt": "Nirvana"
+            "src": "/assets/thick-yogurt-07.webp",
+            "alt": "THICK. yogurt bowl with strawberries, dark berries and a pink center"
           }
-        ],
-        "price": "$18.90 USD",
-        "soldOut": false,
-        "id": "nirvana"
-      },
-      {
-        "title": "Heaven",
-        "href": "/products/heaven",
-        "images": [
-          {
-            "src": "/assets/heaven.png",
-            "alt": "Heaven"
-          }
-        ],
-        "price": "$17.90 USD",
-        "soldOut": false,
-        "id": "heaven"
-      },
-      {
-        "title": "Wired",
-        "href": "/products/wired",
-        "images": [
-          {
-            "src": "/assets/wired.png",
-            "alt": "Wired"
-          }
-        ],
-        "price": "$18.90 USD",
-        "soldOut": true,
-        "id": "wired"
-      },
-      {
-        "title": "Sh'mallow's for drinks",
-        "href": "/products/shmallow-for-drinks",
-        "id": "shmallow-for-drinks",
-        "images": [],
-        "price": "$0.00 USD",
-        "soldOut": false
+        ]
       }
     ]
   }

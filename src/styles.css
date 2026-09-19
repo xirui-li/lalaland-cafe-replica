@@ -51,7 +51,7 @@
   overflow: hidden;
   pointer-events: none;
 }
-/* The same theme treatment follows media into product, search, and cart views. */
+/* Keep the existing hero treatment; yogurt photos retain the requested blue filter. */
 .hero video,
 .story-photo img,
 .app-illustration,
@@ -244,7 +244,7 @@ input:focus-visible {
   line-height: 0;
 }
 .brand img {
-  width: 130px;
+  width: 170px;
   height: auto;
   opacity: 0;
 }
@@ -253,7 +253,7 @@ input:focus-visible {
   position: absolute;
   inset: 7.5px;
   background: var(--ink);
-  mask: url("/assets/logo-brown.png") center/contain no-repeat;
+  mask: url("/assets/thick-logo.png") center/contain no-repeat;
   pointer-events: none;
 }
 .desktop-nav {
@@ -380,11 +380,11 @@ input:focus-visible {
   padding-bottom: 13.125px;
 }
 .hero-logo {
-  height: 54.59375px;
+  height: 150px;
   max-width: 700px;
   margin: auto;
   background: var(--surface);
-  mask: url("/assets/logo-cream.png") center/contain no-repeat;
+  mask: url("/assets/thick-logo.png") center/contain no-repeat;
 }
 .hero-button {
   display: inline-block;
@@ -407,11 +407,27 @@ input:focus-visible {
   overflow: hidden;
   scroll-margin-top: 10px;
 }
-.collection#all-coffee {
-  padding-bottom: 20px;
-}
 .collection-title {
   margin-bottom: 25px;
+}
+.collection-intro,
+.collection-note {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.collection-note a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.product-link {
+  display: block;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+}
+.product-link:hover .product-image img {
+  transform: scale(1.04);
 }
 .collection h2 {
   font-size: 24px;
@@ -447,7 +463,7 @@ input:focus-visible {
 .product-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 12px;
   transition:
     opacity 0.35s,
@@ -744,7 +760,7 @@ input:focus-visible {
   width: 125px;
   height: 86px;
   background: var(--ink);
-  mask: url("/assets/angel.png") center/contain no-repeat;
+  mask: url("/assets/thick-bowl.png") center/contain no-repeat;
   pointer-events: none;
 }
 .footer-brand img {
@@ -1032,6 +1048,23 @@ input:focus-visible {
   font-size: 30px;
   margin-bottom: 18px;
 }
+.product-detail-copy .menu-note {
+  margin-top: 18px;
+  color: var(--muted);
+}
+.yogurt-call {
+  margin-top: 24px;
+  padding-inline: 28px;
+}
+.newsletter .contact-button {
+  margin-top: 28px;
+  background: var(--ink);
+  color: var(--surface);
+  padding-inline: 30px;
+}
+.newsletter .contact-button:hover {
+  background: var(--focus);
+}
 .product-detail-copy .shipping-note {
   font-size: 12px;
   color: var(--muted);
@@ -1302,6 +1335,8 @@ input:focus-visible {
   --border-strong: #163c5c;
 }
 .large-text .story-content p,
+.large-text .store-details,
+.large-text .product-detail-copy p,
 .large-text .app-copy p,
 .large-text .nav-link,
 .large-text .footer a {
@@ -1405,7 +1440,7 @@ input:focus-visible {
   }
   .hero-logo {
     max-width: 300px;
-    height: 45.5px;
+    height: 110px;
   }
   .hero-button {
     padding: 6.75px 60px;
@@ -1413,9 +1448,6 @@ input:focus-visible {
   }
   .collection {
     padding: 27px 0 30px;
-  }
-  .collection#all-coffee {
-    padding-bottom: 15px;
   }
   .collection h2 {
     font-size: 20px;

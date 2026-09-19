@@ -15,101 +15,46 @@ const catalog = catalogData.map((collection) => ({
     })),
   })),
 }));
-
 type Product = (typeof catalog)[number]["products"][number];
-type CartItem = { id: string; quantity: number };
-type Overlay =
-  | "cart"
-  | "search"
-  | "menu"
-  | "preferences"
-  | "accessibility"
-  | null;
+type Overlay = "search" | "menu" | "accessibility" | null;
 const allProducts = catalog.flatMap((collection) => collection.products);
-const official = (path: string) => `https://lalalandcafe.com${path}`;
-const orderUrl = "https://order.lalalandcafe.com/";
 const nav = [
   ["home", homeUrl],
-  ["order now", orderUrl],
-  ["menu", official("/pages/menu")],
+  ["our yogurt", "#yogurt"],
+  ["about THICK.", "#about-thick"],
   ["our store", "#our-store"],
-  ["shop", "#shop"],
-  ["our story", official("/pages/about-us")],
-  ["rewards", official("/pages/rewards")],
-  ["careers", official("/pages/careers")],
-];
-const shopGroups = [
-  { title: "New Arrivals", href: "#new-arrivals", children: [] },
-  { title: "Shop All", href: official("/collections/shop-all"), children: [] },
-  { title: "All Coffee and Tea", href: "#all-coffee", children: [] },
-  {
-    title: "All Apparel",
-    href: official("/collections/apparel"),
-    children: [["Hats", "/collections/hats"]],
-  },
-  {
-    title: "All Drinkware",
-    href: official("/collections/drinkware"),
-    children: [
-      ["Ceramics", "/collections/ceramics"],
-      ["Travel Mugs", "/collections/mugs"],
-    ],
-  },
-  {
-    title: "All Accessories",
-    href: official("/collections/accessories"),
-    children: [
-      ["Jewelry", "/collections/jewelry"],
-      ["Magnets", "/collections/magnets"],
-      ["Keychains", "/collections/keychains"],
-      ["Enamel Pins", "/collections/enamel-pins"],
-    ],
-  },
-  {
-    title: "Home and Fragrance",
-    href: official("/collections/home-and-fragrance"),
-    children: [["Candles", "/collections/candles"]],
-  },
-  { title: "Gift Cards", href: official("/pages/gift-cards"), children: [] },
 ];
 const footerGroups = [
   {
-    title: "Company",
+    title: "THICK.",
     links: [
-      ["Home", "/"],
-      ["Menu", "/pages/menu"],
-      ["Ordering", "/pages/ordering"],
-      ["Rewards", "/pages/rewards"],
+      ["Home", homeUrl],
+      ["Our Yogurt", "#yogurt"],
+      ["About THICK.", "#about-thick"],
+    ],
+  },
+  {
+    title: "Visit",
+    links: [
       ["Our Store", "#our-store"],
-      ["Careers", "/pages/careers"],
+      ["Hours & Address", "#our-store"],
+      ["Get Directions", storeDirectionsUrl],
     ],
   },
   {
-    title: "Shop",
+    title: "Say hello",
     links: [
-      ["Coffee", "/collections/at-home-coffee-and-tea"],
-      ["Apparel", "/collections/apparel"],
-      ["Drinkware", "/collections/drinkware"],
-      ["Accessories", "/collections/accessories"],
-      ["Home & Fragrance", "/collections/home-and-fragrance"],
-      ["Gift Cards", "/pages/gift-cards"],
-    ],
-  },
-  {
-    title: "Learn",
-    links: [
-      ["Our Story", "/pages/about-us"],
-      ["Collaborations", "/pages/collaborations"],
-      ["FAQ", "/pages/faq"],
-      ["Sustainability", "/pages/sustainability"],
-      ["Allergens", "/pages/allergens"],
-      ["Contact Us", "/pages/contact"],
+      [store.phone, store.phoneHref],
+      ["Washington, DC", "#our-store"],
     ],
   },
 ];
 
 function Icon({ name, className = "" }: { name: string; className?: string }) {
   const paths: Record<string, ReactNode> = {
+    phone: (
+      <path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 2a14 14 0 0 1-7-7l2-2-2-5Z" />
+    ),
     search: (
       <>
         <circle cx="10.5" cy="10.5" r="6.8" />
@@ -184,7 +129,7 @@ function Modal({
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = old;
-      active?.focus();
+      active?.focus({ preventScroll: true });
     };
   }, []);
   return (
@@ -219,26 +164,35 @@ function Modal({
 }
 
 function ProductCarousel({
+  id,
   title,
   products,
   onSelect,
 }: {
+  id: string;
   title: string;
   products: Product[];
-  onSelect: (p: Product) => void;
+  onSelect: (product: Product) => void;
 }) {
   const track = useRef<HTMLUListElement>(null);
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(2);
-  const id = title === "New Arrivals" ? "new-arrivals" : "all-coffee";
+  const [total, setTotal] = useState(1);
   useEffect(() => {
     const el = track.current!;
     const update = () => {
-      const card = el.firstElementChild as HTMLElement;
+      const card = el.firstElementChild as HTMLElement | null;
+      if (!card) return;
       const step = card.offsetWidth + parseFloat(getComputedStyle(el).gap);
-      const max = Math.ceil((el.scrollWidth - el.clientWidth) / step) + 1;
+      const max = Math.max(
+        1,
+        Math.ceil((el.scrollWidth - el.clientWidth) / step) + 1,
+      );
       setTotal(max);
-      setPage(Math.min(max, Math.round(el.scrollLeft / step) + 1));
+      setPage(
+        el.scrollLeft >= el.scrollWidth - el.clientWidth - 2
+          ? max
+          : Math.min(max, Math.round(el.scrollLeft / step) + 1),
+      );
     };
     const observer = new ResizeObserver(update);
     observer.observe(el);
@@ -260,47 +214,31 @@ function ProductCarousel({
     <section className="collection" id={id} aria-labelledby={`${id}-title`}>
       <div className="page-width collection-title">
         <h2 id={`${id}-title`}>{title}</h2>
+        <p className="collection-intro">
+          A look at our non-dripping strained yogurt bowls.
+        </p>
       </div>
       <ul className="product-track" ref={track} aria-label={title}>
         {products.map((product) => (
           <li className="product-card" key={product.id}>
-            <a
+            <button
               className="product-link"
-              href={official(product.href)}
-              onClick={(e) => {
-                e.preventDefault();
-                onSelect(product);
-              }}
+              onClick={() => onSelect(product)}
+              aria-label={`View ${product.title.toLowerCase()}`}
             >
               <div className="product-image">
-                {product.images[0] ? (
-                  <img
-                    src={product.images[0].src}
-                    alt={product.images[0].alt || product.title}
-                    loading="lazy"
-                    width="900"
-                    height="900"
-                  />
-                ) : (
-                  <div className="text-product">{product.title}</div>
-                )}
-                {product.images[1] && (
-                  <img
-                    className="product-hover"
-                    src={product.images[1].src}
-                    alt=""
-                    loading="lazy"
-                    width="900"
-                    height="900"
-                  />
-                )}
-                {product.soldOut && <span className="sold-out">Sold out</span>}
+                <img
+                  src={product.images[0].src}
+                  alt={product.images[0].alt}
+                  loading="lazy"
+                  width="1254"
+                  height="1254"
+                />
               </div>
               <div className="product-info">
                 <h3>{product.title}</h3>
-                <p>{product.price}</p>
               </div>
-            </a>
+            </button>
           </li>
         ))}
       </ul>
@@ -325,106 +263,38 @@ function ProductCarousel({
           <Icon name="chevron" />
         </button>
       </div>
+      <p className="collection-note page-width">
+        For today’s selection and prices,{" "}
+        <a href={store.phoneHref}>call our store</a>.
+      </p>
     </section>
   );
 }
 
-function readCart(): CartItem[] {
-  try {
-    const value = JSON.parse(
-      localStorage.getItem("lalaland-preview-cart") || "[]",
-    );
-    return Array.isArray(value)
-      ? value
-          .filter(
-            (i) =>
-              allProducts.some((p) => p.id === i.id) &&
-              Number.isInteger(i.quantity) &&
-              i.quantity > 0,
-          )
-          .map((i) => ({ id: i.id, quantity: Math.min(i.quantity, 99) }))
-      : [];
-  } catch {
-    return [];
-  }
-}
-
 export default function App() {
   const [overlay, setOverlay] = useState<Overlay>(null);
-  const [shopOpen, setShopOpen] = useState(false);
   const [headerHidden, setHeaderHidden] = useState(false);
   const [selected, setSelected] = useState<Product | null>(null);
-  const [productImage, setProductImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
-  const [cart, setCart] = useState<CartItem[]>(readCart);
   const [query, setQuery] = useState("");
-  const [notice, setNotice] = useState("");
-  const [newsletterNotice, setNewsletterNotice] = useState("");
-  const [cookieVisible, setCookieVisible] = useState(() => {
-    try {
-      return !localStorage.getItem("lalaland-cookie-choice");
-    } catch {
-      return true;
-    }
-  });
-  const [analytics, setAnalytics] = useState(false);
   const [largeText, setLargeText] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const video = useRef<HTMLVideoElement>(null);
-  const header = useRef<HTMLElement>(null);
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const subtotal = cart.reduce(
-    (sum, item) =>
-      sum +
-      Number(
-        allProducts.find((p) => p.id === item.id)!.price.replace(/[^\d.]/g, ""),
-      ) *
-        item.quantity,
-    0,
-  );
-  const searchResults = allProducts.filter((p) =>
-    `${p.title} ${catalog.find((c) => c.products.some((item) => item.id === p.id))?.title}`
+  const searchResults = allProducts.filter((product) =>
+    `${product.title} ${product.images[0].alt}`
       .toLowerCase()
       .includes(query.toLowerCase().trim()),
   );
   useEffect(() => {
-    try {
-      localStorage.setItem("lalaland-preview-cart", JSON.stringify(cart));
-    } catch {
-      /* Storage can be disabled. */
-    }
-  }, [cart]);
-  useEffect(() => {
     let previous = window.scrollY;
     const scroll = () => {
       const y = window.scrollY;
-      setHeaderHidden(y > 150 && y > previous && !shopOpen);
+      setHeaderHidden(y > 150 && y > previous);
       previous = y;
     };
     window.addEventListener("scroll", scroll, { passive: true });
     return () => window.removeEventListener("scroll", scroll);
-  }, [shopOpen]);
-  useEffect(() => {
-    const close = (e: MouseEvent) => {
-      if (header.current && !header.current.contains(e.target as Node))
-        setShopOpen(false);
-    };
-    const escape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setShopOpen(false);
-    };
-    document.addEventListener("click", close);
-    document.addEventListener("keydown", escape);
-    return () => {
-      document.removeEventListener("click", close);
-      document.removeEventListener("keydown", escape);
-    };
   }, []);
-  useEffect(() => {
-    if (!notice) return;
-    const timer = setTimeout(() => setNotice(""), 4500);
-    return () => clearTimeout(timer);
-  }, [notice]);
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setReduceMotion(preference.matches);
@@ -436,44 +306,10 @@ export default function App() {
     if (reduceMotion) video.current?.pause();
     else video.current?.play().catch(() => {});
   }, [reduceMotion]);
-  const chooseCookie = (choice: string) => {
-    try {
-      localStorage.setItem("lalaland-cookie-choice", choice);
-    } catch {}
-    setCookieVisible(false);
+  const selectProduct = (product: Product) => {
     setOverlay(null);
+    setSelected(product);
   };
-  const selectProduct = (p: Product) => {
-    setOverlay(null);
-    setSelected(p);
-    setQuantity(1);
-    setProductImage(0);
-  };
-  const addToCart = () => {
-    if (!selected || selected.soldOut) return;
-    setCart((items) => {
-      const existing = items.find((i) => i.id === selected.id);
-      return existing
-        ? items.map((i) =>
-            i.id === selected.id
-              ? { ...i, quantity: Math.min(99, i.quantity + quantity) }
-              : i,
-          )
-        : [...items, { id: selected.id, quantity }];
-    });
-    setSelected(null);
-    setOverlay("cart");
-  };
-  const updateQuantity = (id: string, change: number) =>
-    setCart((items) =>
-      items
-        .map((i) =>
-          i.id === id
-            ? { ...i, quantity: Math.min(99, i.quantity + change) }
-            : i,
-        )
-        .filter((i) => i.quantity > 0),
-    );
   return (
     <div
       className={`site ${largeText ? "large-text" : ""} ${highContrast ? "high-contrast" : ""} ${reduceMotion ? "reduce-motion" : ""}`}
@@ -483,14 +319,11 @@ export default function App() {
         Skip to content
       </a>
       <div className="announcement">
-        <a href={official("/collections/shop-all")}>
-          Free shipping over $100 <Icon name="arrow" />
+        <a href="#our-store">
+          Your yogurt stop in Washington, DC <Icon name="arrow" />
         </a>
       </div>
-      <header
-        ref={header}
-        className={`site-header ${headerHidden ? "is-hidden" : ""}`}
-      >
+      <header className={`site-header ${headerHidden ? "is-hidden" : ""}`}>
         <div className="header-inner page-width">
           <button
             className="icon-button mobile-menu-button"
@@ -499,95 +332,46 @@ export default function App() {
           >
             <Icon name="menu" />
           </button>
-          <a className="brand" href={homeUrl} aria-label="La La Land home">
+          <a className="brand" href={homeUrl} aria-label="THICK. home">
             <img
-              src={assetUrl("/assets/logo-brown.png")}
-              alt="lalaland"
-              width="130"
-              height="23"
+              src={assetUrl("/assets/thick-logo.png")}
+              alt="THICK. — non-dripping strained yogurt"
+              width="2637"
+              height="864"
             />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
-            {nav.map(([label, href]) =>
-              label === "shop" ? (
-                <button
-                  key={label}
-                  className={`nav-link shop-toggle ${shopOpen ? "active" : ""}`}
-                  aria-expanded={shopOpen}
-                  aria-controls="shop-menu"
-                  onClick={() => setShopOpen(!shopOpen)}
-                >
-                  shop <Icon name="chevron" />
-                </button>
-              ) : (
-                <a
-                  className={`nav-link ${label === "home" ? "active" : ""} ${label === "careers" ? "careers" : ""}`}
-                  href={href}
-                  key={label}
-                  aria-current={label === "home" ? "page" : undefined}
-                >
-                  {label}
-                </a>
-              ),
-            )}
+            {nav.map(([label, href]) => (
+              <a
+                className={`nav-link ${label === "home" ? "active" : ""}`}
+                href={href}
+                key={label}
+                aria-current={label === "home" ? "page" : undefined}
+              >
+                {label}
+              </a>
+            ))}
           </nav>
           <div className="header-actions">
             <button
               className="icon-button search-button"
-              aria-label="Search"
-              onClick={() => {
-                setShopOpen(false);
-                setOverlay("search");
-              }}
+              aria-label="Search yogurt"
+              onClick={() => setOverlay("search")}
             >
               <Icon name="search" />
             </button>
             <a
-              className="icon-button account-button"
-              aria-label="Log in"
-              href={official("/account/login")}
+              className="icon-button"
+              href={store.phoneHref}
+              aria-label="Call THICK."
             >
-              <Icon name="account" />
+              <Icon name="phone" />
             </a>
-            <button
-              className="icon-button bag-button"
-              aria-label={`Your cart${count ? `, ${count} items` : ""}`}
-              onClick={() => setOverlay("cart")}
-            >
-              <Icon name="bag" />
-              {count > 0 && <span className="cart-count">{count}</span>}
-            </button>
           </div>
         </div>
-        {shopOpen && (
-          <nav
-            className="mega-menu"
-            id="shop-menu"
-            aria-label="Shop categories"
-          >
-            <div className="page-width mega-menu-grid">
-              {shopGroups.map((group) => (
-                <div key={group.title}>
-                  <a
-                    className="shop-group-title"
-                    href={group.href}
-                    onClick={() => setShopOpen(false)}
-                  >
-                    {group.title}
-                  </a>
-                  {group.children.map(([label, href]) => (
-                    <a key={label} href={official(href)}>
-                      {label}
-                    </a>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </nav>
-        )}
       </header>
       <main id="main">
-        <section className="hero" aria-label="Welcome to La La Land">
+        <section className="hero" aria-label="Welcome to THICK. yogurt">
           <video
             ref={video}
             autoPlay
@@ -602,21 +386,52 @@ export default function App() {
           </video>
           <div className="hero-content">
             <h1>
-              WELCOME TO<span className="visually-hidden"> La La Land</span>
+              WELCOME TO<span className="visually-hidden"> THICK. yogurt</span>
             </h1>
-            <div className="hero-logo" role="img" aria-label="lalaland" />
-            <a className="hero-button" href={orderUrl}>
-              Order Now
+            <div
+              className="hero-logo"
+              role="img"
+              aria-label="THICK. — non-dripping strained yogurt"
+            />
+            <a className="hero-button" href="#yogurt">
+              Explore our yogurt
             </a>
           </div>
         </section>
         {catalog.map((collection) => (
           <ProductCarousel
-            key={collection.title}
+            key={collection.id}
             {...collection}
             onSelect={selectProduct}
           />
         ))}
+        <section
+          className="app-section"
+          id="about-thick"
+          aria-labelledby="about-title"
+        >
+          <div className="app-content">
+            <img
+              className="app-illustration"
+              src={assetUrl("/assets/thick-bowl.png")}
+              alt="THICK. bowl and spoon mark"
+              width="853"
+              height="644"
+              loading="lazy"
+            />
+            <div className="app-copy">
+              <h2 id="about-title">All about yogurt.</h2>
+              <p>
+                THICK. is all about non-dripping strained yogurt. Explore our
+                bowls and make your next yogurt stop at our Washington, DC
+                store.
+              </p>
+            </div>
+          </div>
+          <a className="button" href="#our-store">
+            VISIT THICK.
+          </a>
+        </section>
         <section
           className="story-section"
           id="our-store"
@@ -683,74 +498,25 @@ export default function App() {
             </div>
           </div>
         </section>
-        <section className="app-section" aria-labelledby="app-title">
-          <div className="app-content">
-            <img
-              className="app-illustration"
-              src={assetUrl("/assets/app-icon.png")}
-              alt="Order your cafe favorites on the La La Land app"
-              width="216"
-              height="216"
-              loading="lazy"
-            />
-            <div className="app-copy">
-              <h2 id="app-title">Your cafe favorites are just a tap away.</h2>
-              <p>
-                From your favorite La La Land Coffee to mid-afternoon snack,
-                order ahead on the app.
-              </p>
-            </div>
-          </div>
-          <a
-            className="button download-button"
-            href="https://l.ead.me/La-La-Land-App"
-          >
-            DOWNLOAD NOW
-          </a>
-        </section>
-        <section className="newsletter" aria-labelledby="newsletter-title">
-          <h2 id="newsletter-title">Subscribe to our emails</h2>
+        <section className="newsletter" aria-labelledby="contact-title">
+          <h2 id="contact-title">Your next yogurt stop.</h2>
           <p>
-            Be the first to know about new collections and exclusive offers.
+            Visit us every day, {store.hours.opensLabel}–
+            {store.hours.closesLabel}.
           </p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setNewsletterNotice(
-                "This is a website preview. Email subscriptions are not connected yet.",
-              );
-            }}
-          >
-            <div className="email-field">
-              <input
-                type="email"
-                id="newsletter-email"
-                name="email"
-                placeholder=" "
-                autoComplete="email"
-                required
-              />
-              <label htmlFor="newsletter-email">Email</label>
-              <button type="submit" aria-label="Subscribe">
-                <Icon name="arrow" />
-              </button>
-            </div>
-          </form>
-          {newsletterNotice && (
-            <p className="newsletter-notice" role="status">
-              {newsletterNotice}
-            </p>
-          )}
+          <a className="button contact-button" href={store.phoneHref}>
+            LET’S TALK YOGURT
+          </a>
         </section>
       </main>
       <footer className="footer">
         <div className="page-width footer-top">
           <div className="footer-brand">
             <img
-              src={assetUrl("/assets/angel.png")}
-              alt="La La Land angel"
-              width="125"
-              height="86"
+              src={assetUrl("/assets/thick-bowl.png")}
+              alt="THICK. bowl mark"
+              width="853"
+              height="644"
               loading="lazy"
             />
           </div>
@@ -760,16 +526,7 @@ export default function App() {
               <ul>
                 {group.links.map(([label, href]) => (
                   <li key={label}>
-                    <a
-                      className={href === "/" ? "active" : ""}
-                      href={
-                        href === "/"
-                          ? homeUrl
-                          : href.startsWith("#")
-                            ? href
-                            : official(href)
-                      }
-                    >
+                    <a className={label === "Home" ? "active" : ""} href={href}>
                       {label}
                     </a>
                   </li>
@@ -779,45 +536,12 @@ export default function App() {
           ))}
         </div>
         <div className="page-width footer-bottom">
-          <div className="payment-icons" aria-label="Accepted payment methods">
-            {[
-              "American Express",
-              "Apple Pay",
-              "Diners Club",
-              "Discover",
-              "Google Pay",
-              "Mastercard",
-              "PayPal",
-              "Shop Pay",
-              "Visa",
-            ].map((name, i) => (
-              <img
-                key={name}
-                src={assetUrl(`/assets/payment-${i}.svg`)}
-                alt={name}
-                width="38"
-                height="24"
-                loading="lazy"
-              />
-            ))}
-          </div>
           <div className="legal">
             <span>
-              © {new Date().getFullYear()}, <a href={homeUrl}>La La Land</a>
+              © {new Date().getFullYear()}{" "}
+              <a href={homeUrl}>{store.company}</a>
             </span>
-            {[
-              ["Refund policy", "refund-policy"],
-              ["Privacy policy", "privacy-policy"],
-              ["Terms of service", "terms-of-service"],
-              ["Shipping policy", "shipping-policy"],
-            ].map(([label, path]) => (
-              <a key={path} href={official(`/policies/${path}`)}>
-                {label}
-              </a>
-            ))}
-            <button onClick={() => setOverlay("preferences")}>
-              Cookie preferences
-            </button>
+            <span>THICK. · Non-dripping strained yogurt</span>
           </div>
         </div>
       </footer>
@@ -828,29 +552,6 @@ export default function App() {
       >
         <Icon name="person" />
       </button>
-      {cookieVisible && (
-        <section className="cookie-banner" aria-labelledby="cookie-title">
-          <h2 id="cookie-title">Cookie consent</h2>
-          <p>
-            We and our partners, including Shopify, use cookies and other
-            technologies to personalize your experience, show you ads, and
-            perform analytics, and we will not use cookies or other technologies
-            for these purposes unless you accept them. Learn more in our{" "}
-            <a href={official("/policies/privacy-policy")}>Privacy Policy</a>
-          </p>
-          <div className="cookie-actions">
-            <button
-              className="cookie-manage"
-              onClick={() => setOverlay("preferences")}
-            >
-              Manage
-              <br className="desktop-break" /> preferences
-            </button>
-            <button onClick={() => chooseCookie("accepted")}>Accept</button>
-            <button onClick={() => chooseCookie("declined")}>Decline</button>
-          </div>
-        </section>
-      )}
       {overlay === "menu" && (
         <Modal
           label="Main navigation"
@@ -858,86 +559,61 @@ export default function App() {
           onClose={() => setOverlay(null)}
         >
           <nav className="mobile-nav">
-            {nav.map(([label, href]) =>
-              label === "shop" ? (
-                <details key={label}>
-                  <summary>
-                    shop <Icon name="chevron" />
-                  </summary>
-                  <div className="mobile-shop">
-                    {shopGroups.map((group) => (
-                      <a
-                        key={group.title}
-                        href={group.href}
-                        onClick={() => setOverlay(null)}
-                      >
-                        {group.title}
-                      </a>
-                    ))}
-                  </div>
-                </details>
-              ) : (
-                <a
-                  key={label}
-                  className={`${label === "home" ? "active" : ""} ${label === "careers" ? "careers" : ""}`}
-                  href={href}
-                  onClick={() => setOverlay(null)}
-                >
-                  {label}
-                </a>
-              ),
-            )}
+            {nav.map(([label, href]) => (
+              <a
+                key={label}
+                className={label === "home" ? "active" : ""}
+                href={href}
+                onClick={() => setOverlay(null)}
+              >
+                {label}
+              </a>
+            ))}
             <button onClick={() => setOverlay("search")}>
-              <Icon name="search" /> Search
+              <Icon name="search" /> Search yogurt
             </button>
-            <a className="mobile-login" href={official("/account/login")}>
-              <Icon name="account" /> Log in
+            <a href={store.phoneHref}>
+              <Icon name="phone" /> {store.phone}
             </a>
           </nav>
         </Modal>
       )}
       {overlay === "search" && (
         <Modal
-          label="Search products"
+          label="Search yogurt"
           className="search-dialog"
           onClose={() => setOverlay(null)}
         >
-          <h2>Search</h2>
+          <h2>Search yogurt</h2>
           <div className="search-input-wrap">
             <input
               type="search"
-              aria-label="Search products"
+              aria-label="Search yogurt"
               autoFocus
-              placeholder="Search"
+              placeholder="Search our yogurt bowls"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(event) => setQuery(event.target.value)}
             />
             <Icon name="search" />
           </div>
           <p className="search-caption">
             {query
               ? `${searchResults.length} results`
-              : "Explore our favorites"}
+              : "Explore our yogurt bowls"}
           </p>
           <div className="search-results">
             {searchResults.map((product) => (
               <button key={product.id} onClick={() => selectProduct(product)}>
-                {product.images[0] ? (
-                  <img src={product.images[0].src} alt="" />
-                ) : (
-                  <span className="search-placeholder">
-                    <Icon name="bag" />
-                  </span>
-                )}
+                <img src={product.images[0].src} alt="" />
                 <span>
                   {product.title}
-                  <small>{product.price}</small>
+                  <small>THICK. yogurt</small>
                 </span>
                 <Icon name="arrow" />
               </button>
             ))}
             {searchResults.length === 0 && (
-              <p>No products found. Try “coffee”, “matcha”, or “tumbler”.</p>
+              <p>No yogurt bowls found. Try “yogurt” or “berries”.</p>
             )}
           </div>
         </Modal>
@@ -949,203 +625,29 @@ export default function App() {
           onClose={() => setSelected(null)}
         >
           <div className="product-detail-image">
-            {selected.images[productImage] ? (
-              <img
-                src={selected.images[productImage].src}
-                alt={selected.title}
-              />
-            ) : (
-              <div className="text-product">{selected.title}</div>
-            )}
-            {selected.images.length > 1 && (
-              <div className="image-dots">
-                {selected.images.map((_, i) => (
-                  <button
-                    key={i}
-                    className={i === productImage ? "selected" : ""}
-                    aria-label={`Product image ${i + 1}`}
-                    aria-pressed={i === productImage}
-                    onClick={() => setProductImage(i)}
-                  />
-                ))}
-              </div>
-            )}
+            <img src={selected.images[0].src} alt={selected.images[0].alt} />
           </div>
           <div className="product-detail-copy">
-            <p className="eyebrow">LA LA LAND</p>
+            <p className="eyebrow">THICK. YOGURT</p>
             <h2>{selected.title}</h2>
-            <p>{selected.price}</p>
-            <p className="shipping-note">Shipping calculated at checkout.</p>
-            <label className="quantity-label">Quantity</label>
-            <div className="quantity-control">
-              <button
-                aria-label="Decrease quantity"
-                disabled={quantity <= 1}
-                onClick={() => setQuantity((q) => q - 1)}
-              >
-                <Icon name="minus" />
-              </button>
-              <output aria-live="polite">{quantity}</output>
-              <button
-                aria-label="Increase quantity"
-                disabled={quantity >= 99}
-                onClick={() => setQuantity((q) => q + 1)}
-              >
-                <Icon name="plus" />
-              </button>
-            </div>
-            <button
-              className="button add-to-cart"
-              disabled={selected.soldOut}
-              onClick={addToCart}
+            <p>
+              Non-dripping strained yogurt. Discover our bowls at our
+              Washington, DC store.
+            </p>
+            <p className="menu-note">
+              For today’s selection and prices, call {store.phone}.
+            </p>
+            <a className="button yogurt-call" href={store.phoneHref}>
+              CALL THE STORE
+            </a>
+            <a
+              className="detail-link"
+              href="#our-store"
+              onClick={() => setSelected(null)}
             >
-              {selected.soldOut ? "Sold out" : "Add to cart"}
-            </button>
-            <a className="detail-link" href={official(selected.href)}>
-              View full details <Icon name="arrow" />
+              Visit our store <Icon name="arrow" />
             </a>
           </div>
-        </Modal>
-      )}
-      {overlay === "cart" && (
-        <Modal
-          label="Your cart"
-          className="cart-dialog"
-          onClose={() => setOverlay(null)}
-        >
-          {count === 0 ? (
-            <div className="empty-cart">
-              <h2>Your cart is empty</h2>
-              <button
-                className="button"
-                onClick={() => {
-                  setOverlay(null);
-                  document
-                    .getElementById("new-arrivals")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Continue shopping
-              </button>
-              <h3>Have an account?</h3>
-              <p>
-                <a href={official("/account/login")}>Log in</a> to check out
-                faster.
-              </p>
-            </div>
-          ) : (
-            <>
-              <h2>Your cart</h2>
-              <div className="cart-items">
-                {cart.map((item) => {
-                  const p = allProducts.find(
-                    (product) => product.id === item.id,
-                  )!;
-                  return (
-                    <div className="cart-item" key={item.id}>
-                      {p.images[0] ? (
-                        <img src={p.images[0].src} alt={p.title} />
-                      ) : (
-                        <span className="search-placeholder">
-                          <Icon name="bag" />
-                        </span>
-                      )}
-                      <div>
-                        <h3>{p.title}</h3>
-                        <p>{p.price}</p>
-                        <div className="quantity-control">
-                          <button
-                            aria-label={`Remove one ${p.title}`}
-                            onClick={() => updateQuantity(item.id, -1)}
-                          >
-                            <Icon name="minus" />
-                          </button>
-                          <output>{item.quantity}</output>
-                          <button
-                            aria-label={`Add one ${p.title}`}
-                            disabled={item.quantity >= 99}
-                            onClick={() => updateQuantity(item.id, 1)}
-                          >
-                            <Icon name="plus" />
-                          </button>
-                        </div>
-                        <button
-                          className="remove-item"
-                          onClick={() =>
-                            setCart((items) =>
-                              items.filter((i) => i.id !== item.id),
-                            )
-                          }
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="cart-summary">
-                <div>
-                  <h3>Estimated total</h3>
-                  <p>${subtotal.toFixed(2)} USD</p>
-                </div>
-                <p>Taxes, discounts and shipping calculated at checkout.</p>
-                <button
-                  className="button"
-                  onClick={() =>
-                    setNotice(
-                      "This is a local preview. Checkout is not connected to a payment provider.",
-                    )
-                  }
-                >
-                  Check out
-                </button>
-                {notice && (
-                  <p className="checkout-notice" role="status">
-                    {notice}
-                  </p>
-                )}
-              </div>
-            </>
-          )}
-        </Modal>
-      )}
-      {overlay === "preferences" && (
-        <Modal
-          label="Cookie preferences"
-          className="preferences-dialog"
-          onClose={() => setOverlay(null)}
-        >
-          <h2>Cookie preferences</h2>
-          <p>
-            Choose which cookies you allow. This local preview stores your
-            preferences and shopping bag on this device; it does not run
-            advertising or analytics trackers.
-          </p>
-          <div className="preference-row">
-            <span>
-              Essential storage
-              <small>Remembers your shopping bag and preferences.</small>
-            </span>
-            <span>Always active</span>
-          </div>
-          <label className="preference-row">
-            <span>
-              Analytics and marketing
-              <small>Optional cookies for a connected storefront.</small>
-            </span>
-            <input
-              type="checkbox"
-              checked={analytics}
-              onChange={(e) => setAnalytics(e.target.checked)}
-            />
-          </label>
-          <button
-            className="button"
-            onClick={() => chooseCookie(analytics ? "accepted" : "essential")}
-          >
-            Save preferences
-          </button>
         </Modal>
       )}
       {overlay === "accessibility" && (
@@ -1190,18 +692,6 @@ export default function App() {
             Reset settings
           </button>
         </Modal>
-      )}
-      {notice && overlay !== "cart" && (
-        <div className="toast" role="status">
-          {notice}
-          <button
-            className="icon-button"
-            aria-label="Dismiss notification"
-            onClick={() => setNotice("")}
-          >
-            <Icon name="close" />
-          </button>
-        </div>
       )}
     </div>
   );

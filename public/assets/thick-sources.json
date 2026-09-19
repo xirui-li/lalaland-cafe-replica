@@ -1,0 +1,59 @@
+{
+  "owner": "THICK Holdings LLC",
+  "assets": [
+    {
+      "source": "Brand logo-THICK/THICK-logo-长一行-透明底.png",
+      "asset": "thick-logo.png",
+      "sourceSha256": "f28551716ccf4f5fbeef3934426ac2139346eabbef1f75685d7f103eebe45299",
+      "assetSha256": "f28551716ccf4f5fbeef3934426ac2139346eabbef1f75685d7f103eebe45299"
+    },
+    {
+      "source": "word+碗/碗mark-蓝.psd",
+      "asset": "thick-bowl.png",
+      "sourceSha256": "48922b973a53b0bacff93036adb5bdca40bc96959c0af86c167e0297391c98fe",
+      "assetSha256": "a93a1a4af29510092b61df304f930b97cf666250e64e5fe61ab3f1ad6c05a0a3"
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144004.jpg",
+      "asset": "thick-yogurt-01.webp",
+      "sourceSha256": "ab3def92a3a22c4a0facf6e83b3e368ec1013dfbce850a5cc83f26c61e29ecaa",
+      "assetSha256": "0f67ee070a62072ac79e5d74797ad37166afc298fb9a488e2b5e3cfdf027ebef"
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144031.png",
+      "asset": "thick-yogurt-02.webp",
+      "sourceSha256": "c77528fa22af025aeaff8fcd462c865241544f397d15899645d3e743e7a5ce1b",
+      "assetSha256": "3666b666ae900f739acf52188a8a29d9aa8b1bfcacd1af31472577c8aa75be6e"
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144038.png",
+      "asset": "thick-yogurt-03.webp",
+      "sourceSha256": "bc4b8e2d6f422c70f0a22efcfb81e69b34ba132b41b7c4d86e851eae1a035bcb",
+      "assetSha256": "b6e7a75c9908c72f6a34c5e0f12e69138895f5f608d0552d0a00050cb044f136"
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144045.png",
+      "asset": "thick-yogurt-04.webp",
+      "sourceSha256": "cef6662e53072054d5eebd6a36fb84554c351fc5c757f1e201802692b5ed9464",
+      "assetSha256": "205515314afd40645b2cb3cb440f64867db3403fae214f4d59091622a8cd1f65"
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144049.png",
+      "asset": "thick-yogurt-05.webp",
+      "sourceSha256": "44ce7e91cb2bc8ac1115d71eb6aea14429546a801d99f64ceaed1ed789c3fbcb",
+      "assetSha256": "7687e1002b7b0f23ded7ca6299a738d6dd8a946d7a65eaf291a4248a763fa982"
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144104.png",
+      "asset": "thick-yogurt-06.webp",
+      "sourceSha256": "4420a89d887356b1f6cb475783cc7784e0ca90ee9b873b55418212020e53db45",
+      "assetSha256": "4f847ecbfacec7e640ed8d316e5c97bd3e669df563603bd74a5f1f36efc09da3"
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144108.png",
+      "asset": "thick-yogurt-07.webp",
+      "sourceSha256": "75c0bfc3f840c77045ad502bebc25100c66aac8e3302d99bcea7b5d376ff3429",
+      "assetSha256": "4ed29e984da68b0377f6be1c97512c9a629a4cb64245f33ff24108cbb0eca5c4"
+    }
+  ]
+}

@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { spawn } from "node:child_process";
+
 const url =
   process.env.TEST_BASE_URL ||
   `http://127.0.0.1:4173${process.env.SITE_BASE_PATH || "/"}`;
@@ -15,13 +17,12 @@ if (!process.env.TEST_BASE_URL) {
   let ready = false;
   for (let i = 0; i < 60; i++) {
     try {
-      const response = await fetch(url);
-      if (response.ok) {
+      if ((await fetch(url)).ok) {
         ready = true;
         break;
       }
     } catch {}
-    await new Promise((r) => setTimeout(r, 150));
+    await new Promise((resolve) => setTimeout(resolve, 150));
   }
   if (!ready) {
     process.kill(-server.pid, "SIGTERM");
@@ -31,11 +32,8 @@ if (!process.env.TEST_BASE_URL) {
 const browser = await chromium.launch(
   existsSync("/Applications/Google Chrome.app") ? { channel: "chrome" } : {},
 );
+const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
 const failures = [];
-const context = await browser.newContext({
-  viewport: { width: 1440, height: 1000 },
-});
-const page = await context.newPage();
 page.on("pageerror", (error) => failures.push(error.message));
 page.on("response", (response) => {
   if (
@@ -48,176 +46,247 @@ const check = async (name, test) => {
   await test();
   console.log(`✓ ${name}`);
 };
+const top = async () => {
+  await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
+  await page.waitForTimeout(250);
+};
 try {
   await page.goto(url, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
-  await check("Home links respect the deployment path", async () => {
-    for (const selector of [
-      ".brand",
-      ".desktop-nav .active",
-      ".footer-column .active",
-      ".legal span a",
-    ]) {
-      const href = await page.locator(selector).getAttribute("href");
-      assert.equal(new URL(href, page.url()).pathname, new URL(url).pathname);
-    }
-  });
-  await check("Original hero video and local assets load", async () => {
+  await check("The original main video and poster are preserved", async () => {
+    for (const [file, hash] of [
+      [
+        "hero.mp4",
+        "6bf91d05f5e13a1533af5c0a45f2377fbd54db2ca00d1778f7bda60fe4e723cb",
+      ],
+      [
+        "hero-poster.jpg",
+        "412614eaa0bb4eba714fe3d7d6080ed363896ed6c635980ef969c8efa09a9d6c",
+      ],
+    ])
+      assert.equal(
+        createHash("sha256")
+          .update(await fs.readFile(`public/assets/${file}`))
+          .digest("hex"),
+        hash,
+      );
     await page.waitForFunction(
       () => document.querySelector("video").readyState >= 2,
     );
-    assert.equal(
-      await page.locator("video").evaluate((v) => v.videoWidth / v.videoHeight),
-      16 / 9,
-    );
+    const video = await page.locator("video").evaluate((element) => ({
+      ratio: element.videoWidth / element.videoHeight,
+      autoplay: element.autoplay,
+      muted: element.muted,
+      loop: element.loop,
+      inline: element.playsInline,
+      filter: getComputedStyle(element).filter,
+    }));
+    assert.equal(video.ratio, 16 / 9);
+    assert.ok(video.autoplay && video.muted && video.loop && video.inline);
+    assert.match(video.filter, /brand-tone/);
     assert.equal(
       await page
         .locator(".hero")
-        .evaluate((el) => el.getBoundingClientRect().height),
+        .evaluate((element) => element.getBoundingClientRect().height),
       810,
     );
   });
-  await check("Cookie choice persists across reload", async () => {
-    await page.getByRole("button", { name: "Decline", exact: true }).click();
-    await page.reload({ waitUntil: "networkidle" });
-    assert.equal(await page.locator(".cookie-banner").count(), 0);
-  });
   await check(
-    "Shop menu opens, navigates locally, and closes with Escape",
+    "THICK. yogurt branding replaces reference-site copy and links",
     async () => {
-      const button = page.getByRole("button", { name: "shop", exact: true });
-      await button.click();
-      assert.equal(await button.getAttribute("aria-expanded"), "true");
-      await page.keyboard.press("Escape");
-      assert.equal(await button.getAttribute("aria-expanded"), "false");
-      await button.click();
-      await page
-        .locator(".mega-menu")
-        .getByRole("link", { name: "New Arrivals", exact: true })
-        .click();
-      await page.waitForTimeout(500);
-      assert.equal(await page.locator(".mega-menu").count(), 0);
-      assert.equal(new URL(page.url()).hash, "#new-arrivals");
-    },
-  );
-  await check("Carousel advances and reverses", async () => {
-    const track = page.locator("#new-arrivals .product-track");
-    await page
-      .getByRole("button", { name: "Next new arrivals", exact: true })
-      .click();
-    await page.waitForFunction(
-      () =>
-        document.querySelector("#new-arrivals .product-track").scrollLeft > 100,
-    );
-    await page
-      .getByRole("button", { name: "Previous new arrivals", exact: true })
-      .click();
-    await page.waitForFunction(
-      () =>
-        document.querySelector("#new-arrivals .product-track").scrollLeft < 2,
-    );
-    assert.ok((await track.evaluate((el) => el.scrollLeft)) < 2);
-  });
-  await check(
-    "Product selection, quantity, and persistent cart work",
-    async () => {
-      await page.locator("#new-arrivals .product-link").first().click();
-      await page
-        .getByRole("button", { name: "Increase quantity", exact: true })
-        .click();
-      await page
-        .getByRole("button", { name: "Add to cart", exact: true })
-        .click();
-      assert.equal(await page.locator(".cart-item output").textContent(), "2");
-      assert.match(
-        await page.locator(".cart-summary").innerText(),
-        /\$56\.00 USD/,
+      assert.match(await page.title(), /THICK.*Yogurt/);
+      const body = await page.locator("body").innerText();
+      assert.match(body, /THICK Holdings LLC/);
+      assert.match(body, /non-dripping strained yogurt/i);
+      assert.doesNotMatch(
+        body,
+        /La La Land|coffee|café|tumbler|shipping|checkout|Shopify/i,
       );
-      await page.keyboard.press("Escape");
-      await page.reload({ waitUntil: "networkidle" });
-      await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
-      await page.waitForTimeout(250);
-      await page
-        .getByRole("button", { name: "Your cart, 2 items", exact: true })
-        .click();
-      assert.equal(await page.locator(".cart-item output").textContent(), "2");
-      await page
-        .locator(".cart-item")
-        .getByRole("button", { name: /Remove one/ })
-        .click();
-      assert.match(
-        await page.locator(".cart-summary").innerText(),
-        /\$28\.00 USD/,
-      );
-      await page
-        .getByRole("button", { name: "Check out", exact: true })
-        .click();
-      await page
-        .getByRole("status")
-        .filter({ hasText: "Checkout is not connected" })
-        .waitFor({ state: "visible" });
-      await page.getByRole("button", { name: "Remove", exact: true }).click();
       assert.equal(
-        await page.getByRole("heading", { name: "Your cart is empty" }).count(),
-        1,
+        await page
+          .locator(
+            'a[href*="lalalandcafe.com"], a[href*="lalalandcares.com"], a[href*="l.ead.me"]',
+          )
+          .count(),
+        0,
+      );
+      for (const selector of [
+        ".brand",
+        ".desktop-nav .active",
+        ".footer-column .active",
+        ".legal span a",
+      ]) {
+        const href = await page.locator(selector).getAttribute("href");
+        assert.equal(new URL(href, page.url()).pathname, new URL(url).pathname);
+      }
+      for (const href of await page
+        .locator('a[href^="#"]')
+        .evaluateAll((links) =>
+          links.map((link) => link.getAttribute("href")),
+        )) {
+        assert.equal(
+          await page.locator(href).count(),
+          1,
+          `Anchor ${href} has a target`,
+        );
+      }
+    },
+  );
+  await check(
+    "Yogurt gallery scrolls in both directions and reaches its end",
+    async () => {
+      assert.equal(await page.locator("#yogurt .product-card").count(), 7);
+      const next = page.getByRole("button", {
+        name: "Next our yogurt",
+        exact: true,
+      });
+      const previous = page.getByRole("button", {
+        name: "Previous our yogurt",
+        exact: true,
+      });
+      await next.click();
+      await page.waitForFunction(
+        () => document.querySelector("#yogurt .product-track").scrollLeft > 100,
+      );
+      await page.waitForTimeout(400);
+      await previous.click();
+      await page.waitForFunction(
+        () => document.querySelector("#yogurt .product-track").scrollLeft < 2,
+      );
+      for (let i = 0; i < 10 && (await next.isEnabled()); i++) {
+        await next.click();
+        await page.waitForTimeout(500);
+      }
+      assert.ok(await next.isDisabled());
+      assert.ok(await previous.isEnabled());
+      await page
+        .locator(".product-track")
+        .evaluate((element) =>
+          element.scrollTo({ left: 0, behavior: "instant" }),
+        );
+    },
+  );
+  await check(
+    "Yogurt details retain the blue filter and offer the correct store phone",
+    async () => {
+      const trigger = page.getByRole("button", {
+        name: "View yogurt bowl 01",
+        exact: true,
+      });
+      await trigger.click();
+      const dialog = page.getByRole("dialog", {
+        name: "Yogurt bowl 01",
+        exact: true,
+      });
+      assert.ok(await dialog.isVisible());
+      assert.match(await dialog.innerText(), /selection and prices/);
+      assert.doesNotMatch(await dialog.innerText(), /\$|Add to cart|Shipping/);
+      assert.equal(
+        await dialog
+          .getByRole("link", { name: "CALL THE STORE" })
+          .getAttribute("href"),
+        "tel:+17712539358",
+      );
+      assert.match(
+        await dialog
+          .locator("img")
+          .evaluate((element) => getComputedStyle(element).filter),
+        /brand-tone/,
+      );
+      await page.keyboard.press("Escape");
+      assert.equal(await page.locator("dialog").count(), 0);
+      assert.ok(
+        await trigger.evaluate((element) => element === document.activeElement),
+      );
+    },
+  );
+  await check(
+    "Yogurt search handles matching, empty results, and image selection",
+    async () => {
+      await top();
+      await page
+        .getByRole("button", { name: "Search yogurt", exact: true })
+        .click();
+      const search = page.getByRole("searchbox", { name: "Search yogurt" });
+      await search.fill("banana");
+      assert.equal(await page.locator(".search-results > button").count(), 1);
+      assert.match(
+        await page
+          .locator(".search-results img")
+          .evaluate((element) => getComputedStyle(element).filter),
+        /brand-tone/,
+      );
+      await page.locator(".search-results > button").click();
+      assert.ok(
+        await page.getByRole("dialog", { name: "Yogurt bowl 02" }).isVisible(),
+      );
+      await page.keyboard.press("Escape");
+      await top();
+      await page
+        .getByRole("button", { name: "Search yogurt", exact: true })
+        .click();
+      await search.fill("coffee");
+      assert.equal(await page.locator(".search-results > button").count(), 0);
+      assert.match(
+        await page.locator(".search-results").innerText(),
+        /No yogurt bowls found/,
       );
       await page.keyboard.press("Escape");
     },
   );
-  await check("Search handles matching and empty results", async () => {
-    await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
-    await page.waitForTimeout(250);
-    await page.getByRole("button", { name: "Search", exact: true }).click();
-    await page
-      .getByRole("searchbox", { name: "Search products" })
-      .fill("matcha");
-    assert.equal(await page.locator(".search-results>button").count(), 1);
-    await page
-      .getByRole("searchbox", { name: "Search products" })
-      .fill("xyz-no-such-product");
-    assert.match(
-      await page.locator(".search-results").innerText(),
-      /No products found/,
-    );
-    await page.keyboard.press("Escape");
-  });
-  await check("Newsletter validation and preview feedback work", async () => {
-    await page.locator("#newsletter-email").fill("not-an-email");
-    await page.getByRole("button", { name: "Subscribe", exact: true }).click();
-    assert.equal(
-      await page
-        .locator("#newsletter-email")
-        .evaluate((el) => el.validity.valid),
-      false,
-    );
-    await page.locator("#newsletter-email").fill("preview@example.com");
-    await page.getByRole("button", { name: "Subscribe", exact: true }).click();
-    assert.match(
-      await page.locator(".newsletter-notice").innerText(),
-      /not connected/,
-    );
-  });
-  await check("Reduced motion pauses video", async () => {
-    await page
-      .getByRole("button", { name: "Accessibility options", exact: true })
-      .click();
-    await page
-      .getByRole("checkbox", { name: "Reduce motion / pause video" })
-      .check();
-    assert.equal(await page.locator("video").evaluate((el) => el.paused), true);
-    await page.keyboard.press("Escape");
-  });
   await check(
-    "Every image loads and the page fits desktop, tablet, and mobile",
+    "One store has the confirmed address, hours, phone, and map destination",
+    async () => {
+      const store = page.locator("#our-store");
+      assert.equal(await store.count(), 1);
+      const content = await store.innerText();
+      assert.match(content, /1073 Wisconsin Ave NW, 1st Floor/);
+      assert.match(content, /Washington, DC 20007/);
+      assert.match(content, /Every day\s+11:30 AM – 10:30 PM/);
+      assert.match(content, /\(771\) 253-9358/);
+      const map = new URL(
+        await store
+          .getByRole("link", { name: "GET DIRECTIONS" })
+          .getAttribute("href"),
+      );
+      assert.equal(
+        map.searchParams.get("query"),
+        "1073 Wisconsin Ave NW, 1st Floor, Washington, DC 20007",
+      );
+    },
+  );
+  await check(
+    "Accessibility controls pause video and support larger text",
+    async () => {
+      await page
+        .getByRole("button", { name: "Accessibility options", exact: true })
+        .click();
+      await page
+        .getByRole("checkbox", { name: "Reduce motion / pause video" })
+        .check();
+      assert.ok(
+        await page.locator("video").evaluate((element) => element.paused),
+      );
+      await page.getByRole("checkbox", { name: "Larger text" }).check();
+      await page.keyboard.press("Escape");
+      assert.ok(
+        await page
+          .locator(".site")
+          .evaluate((element) => element.classList.contains("large-text")),
+      );
+    },
+  );
+  await check(
+    "All images load and layouts fit desktop, tablet, and mobile",
     async () => {
       for (const width of [1440, 1024, 768, 390, 320]) {
         await page.setViewportSize({ width, height: 844 });
         await page.evaluate(() => {
-          for (const img of document.images) img.loading = "eager";
+          for (const image of document.images) image.loading = "eager";
         });
         await page.waitForFunction(() =>
           [...document.images].every(
-            (img) => img.complete && img.naturalWidth > 0,
+            (image) => image.complete && image.naturalWidth > 0,
           ),
         );
         assert.ok(
@@ -230,30 +299,42 @@ try {
     },
   );
   await check(
-    "Mobile menu and product dialog work with keyboard dismissal",
+    "Mobile menu links close the dialog and reach the store",
     async () => {
       await page.setViewportSize({ width: 390, height: 844 });
-      await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
-      await page.waitForTimeout(250);
+      await top();
       await page
         .getByRole("button", { name: "Open menu", exact: true })
         .click();
-      await page.locator(".mobile-nav summary").click();
       await page
-        .locator(".mobile-shop")
-        .getByRole("link", { name: "New Arrivals", exact: true })
+        .locator(".mobile-nav")
+        .getByRole("link", { name: "our store", exact: true })
         .click();
-      await page.locator("#new-arrivals .product-link").first().click();
-      assert.equal(await page.locator(".product-dialog").isVisible(), true);
+      assert.equal(new URL(page.url()).hash, "#our-store");
+      assert.equal(await page.locator("dialog").count(), 0);
+      await page.waitForFunction(
+        () =>
+          Math.abs(
+            document.querySelector("#our-store").getBoundingClientRect().top -
+              100,
+          ) < 5,
+      );
+      await page.locator("#yogurt .product-link").first().click();
+      assert.ok(await page.locator(".product-dialog").isVisible());
       await page.keyboard.press("Escape");
       assert.equal(await page.locator("dialog").count(), 0);
     },
   );
+  await page
+    .getByRole("button", { name: "Accessibility options", exact: true })
+    .click();
+  await page.getByRole("checkbox", { name: "Larger text" }).uncheck();
+  await page.keyboard.press("Escape");
   await fs.mkdir("artifacts", { recursive: true });
   await page.evaluate(() => {
-    const v = document.querySelector("video");
-    v.pause();
-    v.currentTime = 2;
+    const video = document.querySelector("video");
+    video.pause();
+    video.currentTime = 2;
     scrollTo({ top: 0, behavior: "instant" });
   });
   await page.waitForTimeout(300);
@@ -266,7 +347,7 @@ try {
     path: "artifacts/verified-desktop.png",
     fullPage: true,
   });
-  assert.deepEqual(failures, [], "No browser errors or failed local requests");
+  assert.deepEqual(failures, [], "No browser errors or failed requests");
   console.log("All browser checks passed.");
 } finally {
   await browser.close();

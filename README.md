@@ -1,64 +1,70 @@
-# La La Land Cafe recreation
+# THICK. yogurt
 
-A responsive React + TypeScript recreation of the [La La Land Cafe homepage](https://lalalandcafe.com/), built with Vite. The video, Poppins fonts, logos, product photography, illustrations, and payment icons are stored locally. Asset source URLs are recorded in `public/assets/sources.json`.
+A responsive React + TypeScript website for **THICK.**, the yogurt brand operated by **THICK Holdings LLC**. Built with Vite, using the layout of the original La La Land homepage recreation.
 
 **Live website:** https://xirui-li.github.io/lalaland-cafe-replica/
 
-## THICK. store information
+## Confirmed brand and store information
 
-The store section now features the single THICK. location at **1073 Wisconsin Ave NW, 1st Floor, Washington, DC 20007**, open **every day from 11:30 AM to 10:30 PM**, phone **(771) 253-9358**. Hours were confirmed by the owner. Header, mobile, and footer store links point to this section; visitors can open directions or call the store. `src/store.ts` holds the confirmed details and the company name, **THICK Holdings LLC**. The storefront photograph is supplied by the owner.
+- Main product: yogurt. The supplied logo reads **non-dripping strained yogurt**.
+- Brand: **THICK.**; the supplied graphic wordmark retains its lowercase **thick.** lettering.
+- Company: **THICK Holdings LLC**.
+- One store: **1073 Wisconsin Ave NW, 1st Floor, Washington, DC 20007**.
+- Hours: **every day, 11:30 AM–10:30 PM**, confirmed by the owner after correcting the pasted AM/PM values.
+- Phone: **(771) 253-9358**.
 
-The remaining branding and product catalog are still the original recreation and await the THICK. conversion.
+`src/store.ts` holds the store details. Header, mobile, and footer links lead to the store section, Google Maps, or the telephone number.
 
-## Theme
+## Media and theme requirements
 
-The site uses **PANTONE 2141 C**, approximated on screen as **#8BBEE8** ([color reference](https://www.colorxs.com/color/pantone-2141-c)). The palette in `src/styles.css` combines this light blue with deep blue text and pale blue surfaces. Navigation, buttons, forms, dialogs, the footer, and the favicon share the same palette.
+**Keep the existing main hero video.** The owner explicitly requested that it stay unchanged. Preserve `public/assets/hero.mp4`, `public/assets/hero-poster.jpg`, the existing playback settings, and its blue treatment. The resource-folder advertising clips are not replacements for this video. The browser checks verify the hero video and poster checksums.
 
-Images, illustrations, and video use the reversible blue duotone in `src/ThemeFilters.tsx`. Original media files are preserved. Brand marks use CSS masks to match the palette precisely.
+The site uses **PANTONE 2141 C**, approximated on screen as **#8BBEE8** ([color reference](https://www.colorxs.com/color/pantone-2141-c)). The palette combines this light blue with deep blue text and pale blue surfaces.
 
-## GitHub Pages
+The owner explicitly chose to keep the blue filter on yogurt photography. The reversible filter in `src/ThemeFilters.tsx` follows photos into product details and search. Logo masks use the palette without changing the supplied artwork.
 
-The GitHub Actions workflow in `.github/workflows/deploy-pages.yml` builds and deploys the website automatically on every push to `main`. GitHub Pages uses **GitHub Actions** as its deployment source.
+THICK. logos, the bowl mark, storefront photo, and yogurt photos are owner-supplied. The gallery uses seven product photos with clean backgrounds. The three JPGs with baked-in checkerboard backgrounds remain pending cleanup and are not displayed. WebP conversion is lossless and preserves original image dimensions. `public/assets/thick-sources.json` records provenance and file hashes.
 
-The workflow sets `SITE_BASE_PATH` for the repository URL. Local development uses `/` by default. To verify the GitHub Pages layout locally:
+## Content scope
 
-```sh
-SITE_BASE_PATH=/lalaland-cafe-replica/ npm run build
-SITE_BASE_PATH=/lalaland-cafe-replica/ npm test
-```
+The yogurt gallery uses numbered photo labels, not invented menu names. Confirmed product names, descriptions, prices, availability, and an ordering URL have not yet been supplied. Visitors can view photos, search the gallery, and call the store for the current menu and prices.
 
-## Run
+The reference site's coffee catalog, shopping cart, account links, app promotion, newsletter demo, payment claims, and third-party policy links are no longer part of the interface. This site does not process orders, payments, or newsletter subscriptions. Accessibility controls support larger text, higher contrast, and reduced motion.
+
+## Run and verify
 
 ```sh
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite (normally http://localhost:5173).
-
-## Build and verify
+The local development URL is normally http://localhost:5173.
 
 ```sh
 npm run build
 npm test
 ```
 
-The browser checks start a production preview server and exercise the menus, carousels, product details, persistent cart, search, newsletter validation, accessibility options, and layouts at 320, 390, 768, 1024, and 1440 pixels. They also check for missing images and browser errors. Screenshots are saved in `artifacts/`.
+To verify the GitHub Pages deployment path:
 
-Tests use Google Chrome when installed at the standard macOS location. Otherwise, install the test browser with `npx playwright install chromium`. To test an already running server, set `TEST_BASE_URL`.
+```sh
+SITE_BASE_PATH=/lalaland-cafe-replica/ npm run build
+SITE_BASE_PATH=/lalaland-cafe-replica/ npm test
+```
 
-## Scope
+The checks cover retained hero assets and playback, THICK. content and links, gallery scrolling, image dialogs, yogurt search, keyboard dismissal, store information, and responsive layouts at 320, 390, 768, 1024, and 1440 pixels. Screenshots are saved in `artifacts/`. Tests use installed Google Chrome, or Playwright Chromium if Chrome is unavailable.
 
-The homepage is reproduced locally, with desktop and mobile navigation, product image hover states, touch carousels, product dialogs, search, a shopping bag stored on the device, cookie preferences, and accessibility controls. Reduced motion preferences are respected.
+## Deployment
 
-The order, account, informational, and full product detail links lead to the original website. Checkout and email signup display explicit preview messages; they do not process payments or transmit email addresses. The original cookie banner appearance is reproduced, but no analytics or advertising scripts are included.
+`.github/workflows/deploy-pages.yml` builds and deploys to GitHub Pages on pushes to `main`. It sets `SITE_BASE_PATH` to `/lalaland-cafe-replica/`; local development defaults to `/`. The repository slug is retained so the existing published address keeps working.
 
 ## Files
 
-- `src/App.tsx`: page sections and interactions
-- `src/styles.css`: responsive styles and fonts
-- `src/catalog.json`: product information
-- `public/assets/`: original media and fonts
-- `scripts/verify.mjs`: browser checks
+- `src/App.tsx`: page sections, gallery, search, and accessibility interactions.
+- `src/catalog.json`: owner-supplied yogurt photography and descriptive alternative text.
+- `src/store.ts`: confirmed store and company information.
+- `src/styles.css`, `src/ThemeFilters.tsx`: responsive styles and blue media treatment.
+- `public/assets/`: local media and fonts. Original reference-asset source URLs remain in `sources.json`.
+- `scripts/verify.mjs`: production browser checks.
 
-Reference branding and media remain the property of their respective owners.
+Reference media retained from the original recreation remain the property of their respective owners.
