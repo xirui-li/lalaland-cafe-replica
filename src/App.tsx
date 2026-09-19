@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import catalogData from "./catalog.json";
+import ThemeFilters from "./ThemeFilters";
 
 const homeUrl = import.meta.env.BASE_URL;
 const assetUrl = (path: string) => `${homeUrl}${path.replace(/^\//, "")}`;
@@ -476,6 +477,7 @@ export default function App() {
     <div
       className={`site ${largeText ? "large-text" : ""} ${highContrast ? "high-contrast" : ""} ${reduceMotion ? "reduce-motion" : ""}`}
     >
+      <ThemeFilters />
       <a className="skip-link" href="#main">
         Skip to content
       </a>

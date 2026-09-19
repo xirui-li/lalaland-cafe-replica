@@ -21,17 +21,53 @@
 }
 :root {
   font-family: Poppins, sans-serif;
-  color: #6c4c32;
-  background: #fff;
+  color: var(--ink);
+  background: var(--surface);
   font-synthesis: none;
   font-weight: 400;
-  --brown: #6c4c32;
-  --muted: rgba(108, 76, 50, 0.75);
-  --cream: #fff7d2;
+  /* PANTONE 2141 C: sRGB screen approximation. */
+  --brand: #8bbee8;
+  --brand-hover: #76aedc;
+  --ink: #163c5c;
+  --muted: #345b7a;
+  --surface: #ffffff;
+  --surface-soft: #f6faff;
+  --surface-tint: #edf5fc;
+  --surface-accent: #deedfa;
+  --border: #c4dced;
+  --border-strong: #6b8fae;
+  --focus: #235f91;
   --page-gutter: max(50px, calc((100vw - 1400px) / 2));
 }
 * {
   box-sizing: border-box;
+}
+.site {
+  color: var(--ink);
+  background: var(--surface);
+}
+.theme-filters {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+}
+/* The same theme treatment follows media into product, search, and cart views. */
+.hero video,
+.story-photo img,
+.app-illustration,
+.product-image img,
+.product-detail-image > img,
+.search-results img,
+.cart-item > img {
+  filter: url("#brand-tone");
+}
+::selection {
+  color: var(--ink);
+  background: var(--brand);
+}
+input::placeholder {
+  color: var(--muted);
+  opacity: 1;
 }
 html {
   scroll-behavior: smooth;
@@ -96,7 +132,7 @@ button:focus-visible,
 a:focus-visible,
 summary:focus-visible,
 input:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid var(--focus);
   outline-offset: 4px;
 }
 .page-width {
@@ -135,7 +171,7 @@ input:focus-visible {
   top: 8px;
   left: 8px;
   z-index: 1000;
-  background: white;
+  background: var(--surface);
   padding: 12px;
   transform: translateY(-160%);
 }
@@ -149,20 +185,23 @@ input:focus-visible {
   min-height: 46px;
   padding: 11px 77.5px;
   border-radius: 43px;
-  background: var(--brown);
-  color: #fffdf1;
+  background: var(--brand);
+  color: var(--ink);
   font-size: 15px;
   line-height: 18px;
   letter-spacing: 1px;
-  transition: box-shadow 0.18s;
+  transition:
+    background 0.18s,
+    box-shadow 0.18s;
 }
 .button:hover:not(:disabled) {
-  box-shadow: 0 0 0 1px var(--brown);
+  background: var(--brand-hover);
+  box-shadow: 0 0 0 1px var(--brand-hover);
 }
 .announcement {
   height: 39px;
-  background: #fff7d2;
-  border-bottom: 1px solid rgba(108, 76, 50, 0.08);
+  background: var(--brand);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,7 +223,7 @@ input:focus-visible {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: #fff;
+  background: var(--surface);
   transition: transform 0.2s;
 }
 .site-header.is-hidden {
@@ -197,6 +236,7 @@ input:focus-visible {
   gap: 20px;
 }
 .brand {
+  position: relative;
   display: block;
   flex-shrink: 0;
   margin-left: -7.5px;
@@ -206,6 +246,15 @@ input:focus-visible {
 .brand img {
   width: 130px;
   height: auto;
+  opacity: 0;
+}
+.brand::after {
+  content: "";
+  position: absolute;
+  inset: 7.5px;
+  background: var(--ink);
+  mask: url("/assets/logo-brown.png") center/contain no-repeat;
+  pointer-events: none;
 }
 .desktop-nav {
   display: flex;
@@ -221,7 +270,7 @@ input:focus-visible {
   color: var(--muted);
 }
 .nav-link.active {
-  color: var(--brown);
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -231,7 +280,7 @@ input:focus-visible {
 }
 .nav-link.careers,
 .careers {
-  color: red;
+  color: var(--focus);
 }
 .shop-toggle {
   display: flex;
@@ -262,8 +311,8 @@ input:focus-visible {
   position: absolute;
   bottom: 1px;
   right: 1px;
-  background: var(--brown);
-  color: white;
+  background: var(--brand);
+  color: var(--ink);
   border-radius: 50%;
   min-width: 17px;
   height: 17px;
@@ -278,10 +327,10 @@ input:focus-visible {
   top: 100%;
   left: 0;
   right: 0;
-  background: white;
-  border-block: 1px solid rgba(108, 76, 50, 0.12);
+  background: var(--surface);
+  border-block: 1px solid var(--border);
   padding: 30px 0;
-  box-shadow: 0 12px 12px #00000006;
+  box-shadow: 0 12px 12px rgba(22, 60, 92, 0.06);
 }
 .mega-menu-grid {
   display: grid;
@@ -302,13 +351,13 @@ input:focus-visible {
 .mega-menu .shop-group-title {
   font-size: 14px;
   font-weight: 500;
-  color: var(--brown);
+  color: var(--ink);
 }
 .hero {
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
-  background: #e4ddcf;
+  background: var(--surface-accent);
 }
 .hero video {
   width: 100%;
@@ -327,19 +376,22 @@ input:focus-visible {
   font-size: 17.5px;
   line-height: 22.3125px;
   color: #fff;
+  text-shadow: 0 1px 12px rgba(22, 60, 92, 0.6);
   padding-bottom: 13.125px;
 }
 .hero-logo {
   height: 54.59375px;
   max-width: 700px;
   margin: auto;
-  background: url("/assets/logo-cream.png") center/contain no-repeat;
+  background: var(--surface);
+  mask: url("/assets/logo-cream.png") center/contain no-repeat;
 }
 .hero-button {
   display: inline-block;
   padding: 11.25px 71.25px;
-  background: white;
-  color: #000;
+  background: var(--brand);
+  color: var(--ink);
+  box-shadow: 0 2px 16px rgba(22, 60, 92, 0.16);
   border-radius: 40px;
   margin-top: 40px;
   font-size: 15px;
@@ -348,7 +400,7 @@ input:focus-visible {
   transition: background 0.2s;
 }
 .hero-button:hover {
-  background: #fff7d2;
+  background: var(--brand-hover);
 }
 .collection {
   padding: 36px 0 40px;
@@ -434,8 +486,8 @@ input:focus-visible {
   left: 18px;
   font-size: 12px;
   letter-spacing: 1px;
-  background: white;
-  border: 1px solid #eee7e0;
+  background: var(--surface);
+  border: 1px solid var(--border);
   padding: 2px 13px;
   border-radius: 18px;
 }
@@ -498,7 +550,7 @@ input:focus-visible {
 }
 .story-content {
   min-height: 695px;
-  background: #fff7d2;
+  background: var(--surface-tint);
   border-radius: 0 20px 20px 0;
   padding: 60px 70px 70px;
   display: flex;
@@ -549,11 +601,11 @@ input:focus-visible {
 .download-button {
   padding: 11.25px 71.25px;
   margin: 18.75px 0;
-  color: white;
+  color: var(--ink);
 }
 .newsletter {
-  background: var(--brown);
-  color: #fff;
+  background: var(--brand);
+  color: var(--ink);
   padding: 40px 90px 52px;
   text-align: center;
 }
@@ -564,7 +616,7 @@ input:focus-visible {
 .newsletter > p {
   margin: 20px auto 0;
   max-width: 700px;
-  color: #ffffffbf;
+  color: var(--ink);
 }
 .newsletter form {
   max-width: 360px;
@@ -575,21 +627,21 @@ input:focus-visible {
   height: 47px;
   display: flex;
   align-items: center;
-  border: 1px solid #ffffff85;
+  border: 1px solid var(--ink);
   border-radius: 28px;
   transition: border-color 0.2s;
 }
 .email-field:hover,
 .email-field:focus-within {
-  border-color: white;
-  box-shadow: 0 0 0 1px white;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 1px var(--ink);
 }
 .email-field input {
   height: 100%;
   width: 100%;
   padding: 18px 48px 5px 20px;
   outline: none;
-  color: white;
+  color: var(--ink);
   border: 0;
   background: transparent;
   border-radius: 28px;
@@ -602,7 +654,7 @@ input:focus-visible {
   left: 20px;
   font-size: 16px;
   pointer-events: none;
-  color: #ffffffbf;
+  color: var(--ink);
   transition: all 0.15s;
 }
 .email-field input:focus + label,
@@ -617,7 +669,7 @@ input:focus-visible {
   height: 45px;
   width: 44px;
   padding: 14px;
-  color: #ffffffbf;
+  color: var(--ink);
 }
 .email-field button .icon {
   width: 17px;
@@ -628,8 +680,8 @@ input:focus-visible {
   max-width: 500px;
 }
 .footer {
-  background: var(--brown);
-  color: #ffffffbf;
+  background: var(--brand);
+  color: var(--ink);
   padding: 60px 0 36px;
 }
 .footer-top {
@@ -638,14 +690,29 @@ input:focus-visible {
   column-gap: 12px;
   padding-bottom: 50px;
 }
+.footer-brand {
+  position: relative;
+}
+.footer-brand::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 125px;
+  height: 86px;
+  background: var(--ink);
+  mask: url("/assets/angel.png") center/contain no-repeat;
+  pointer-events: none;
+}
 .footer-brand img {
   width: 125px;
   height: auto;
+  opacity: 0;
 }
 .footer-column h2 {
   font-size: 18px;
   line-height: 22.95px;
-  color: white;
+  color: var(--ink);
   margin-bottom: 20px;
 }
 .footer-column a {
@@ -711,11 +778,11 @@ input:focus-visible {
   z-index: 60;
   width: 44px;
   height: 44px;
-  background: #927055;
-  color: #fff;
+  background: var(--brand);
+  color: var(--ink);
   border-radius: 50%;
-  border: 2px solid #927055;
-  box-shadow: inset 0 0 0 2px #fff;
+  border: 2px solid var(--brand);
+  box-shadow: inset 0 0 0 2px var(--ink);
   padding: 7px;
 }
 .accessibility-button .icon {
@@ -730,9 +797,9 @@ input:focus-visible {
   width: 650px;
   max-width: 100%;
   padding: 32px;
-  color: #222;
-  background: #fff;
-  box-shadow: 0 0 12px #0003;
+  color: var(--ink);
+  background: var(--surface-soft);
+  box-shadow: 0 0 12px rgba(22, 60, 92, 0.18);
   border-radius: 3px 0 0 0;
   letter-spacing: 0;
 }
@@ -759,14 +826,22 @@ input:focus-visible {
 .cookie-actions button {
   flex: 1;
   min-height: 52px;
-  border: 1px solid #222;
+  border: 1px solid var(--border-strong);
   border-radius: 2px;
   padding: 8px;
   line-height: 18px;
   font-size: 15px;
 }
 .cookie-actions button:hover {
-  background: #f5f5f5;
+  background: var(--surface-tint);
+}
+.cookie-actions button:nth-child(2) {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.cookie-actions button:nth-child(2):hover {
+  background: var(--brand-hover);
+  border-color: var(--brand-hover);
 }
 .cookie-actions .cookie-manage {
   border-color: transparent;
@@ -779,17 +854,17 @@ input:focus-visible {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--brown);
+  color: var(--ink);
   max-width: calc(100% - 40px);
   max-height: calc(100dvh - 40px);
   overflow: visible;
 }
 .modal::backdrop {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(22, 60, 92, 0.3);
 }
 .modal-surface {
   position: relative;
-  background: white;
+  background: var(--surface);
   padding: 40px;
   overflow: auto;
   max-height: calc(100dvh - 40px);
@@ -818,11 +893,11 @@ input:focus-visible {
 }
 .search-input-wrap input {
   width: 100%;
-  border: 1px solid #aa9382;
+  border: 1px solid var(--border-strong);
   padding: 13px 48px 13px 20px;
   border-radius: 30px;
   background: transparent;
-  color: var(--brown);
+  color: var(--ink);
   font-size: 16px;
 }
 .search-input-wrap > .icon {
@@ -850,10 +925,10 @@ input:focus-visible {
   width: 100%;
   gap: 20px;
   padding: 10px 0;
-  border-bottom: 1px solid #eee6db;
+  border-bottom: 1px solid var(--border);
 }
 .search-results > button:hover {
-  background: #fffdf1;
+  background: var(--surface-soft);
 }
 .search-results img {
   width: 70px;
@@ -895,12 +970,12 @@ input:focus-visible {
 .image-dots button {
   width: 10px;
   height: 10px;
-  border: 1px solid var(--brown);
+  border: 1px solid var(--ink);
   border-radius: 50%;
   padding: 0;
 }
 .image-dots button.selected {
-  background: var(--brown);
+  background: var(--ink);
 }
 .product-detail-copy {
   padding: 65px 40px 45px 25px;
@@ -929,7 +1004,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid #b8a797;
+  border: 1px solid var(--border-strong);
   width: 130px;
   height: 44px;
   border-radius: 24px;
@@ -1014,7 +1089,7 @@ input:focus-visible {
   display: flex;
   gap: 18px;
   padding: 20px 0;
-  border-bottom: 1px solid #eee6db;
+  border-bottom: 1px solid var(--border);
 }
 .cart-item > img {
   width: 110px;
@@ -1075,7 +1150,7 @@ input:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  border-block-end: 1px solid #e5dace;
+  border-block-end: 1px solid var(--border);
   padding: 20px 0;
   font-size: 14px;
 }
@@ -1091,7 +1166,7 @@ input:focus-visible {
 .preference-row input {
   width: 20px;
   height: 20px;
-  accent-color: var(--brown);
+  accent-color: var(--ink);
   flex-shrink: 0;
 }
 .preferences-dialog .button {
@@ -1106,10 +1181,10 @@ input:focus-visible {
   max-width: calc(100% - 40px);
   width: 540px;
   z-index: 150;
-  background: #fff7d2;
-  color: var(--brown);
+  background: var(--surface-tint);
+  color: var(--ink);
   padding: 18px 50px 18px 22px;
-  box-shadow: 0 3px 20px #0002;
+  box-shadow: 0 3px 20px rgba(22, 60, 92, 0.14);
   border-radius: 12px;
   font-size: 14px;
 }
@@ -1163,11 +1238,11 @@ input:focus-visible {
   height: 15px;
 }
 .mobile-nav .active {
-  background: #faf7f3;
+  background: var(--surface-tint);
 }
 .mobile-shop {
   padding: 10px 30px 15px 45px;
-  background: #fffdf1;
+  background: var(--surface-soft);
 }
 .mobile-shop a {
   display: block;
@@ -1179,16 +1254,9 @@ input:focus-visible {
   font-size: 14px;
 }
 .high-contrast {
-  --muted: #51351f;
-  --brown: #51351f;
-}
-.high-contrast .footer,
-.high-contrast .newsletter {
-  color: #fff;
-}
-.high-contrast .footer a,
-.high-contrast .newsletter > p {
-  color: white;
+  --muted: #163c5c;
+  --ink: #08253d;
+  --border-strong: #163c5c;
 }
 .large-text .story-content p,
 .large-text .app-copy p,
@@ -1343,7 +1411,7 @@ input:focus-visible {
   .story-content {
     min-height: 0;
     border-radius: 0;
-    background: #fffdf1;
+    background: var(--surface-soft);
     padding: 40px 35px;
     align-items: center;
     text-align: center;
@@ -1548,12 +1616,12 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fffdf1;
+  background: var(--surface-soft);
   border-radius: 8px;
 }
 .cart-summary .checkout-notice {
   padding: 12px;
-  background: #fff7d2;
+  background: var(--surface-tint);
   border-radius: 8px;
   font-size: 12px;
   margin-bottom: 0;

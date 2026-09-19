@@ -4,6 +4,12 @@ A responsive React + TypeScript recreation of the [La La Land Cafe homepage](htt
 
 **Live website:** https://xirui-li.github.io/lalaland-cafe-replica/
 
+## Theme
+
+The site uses **PANTONE 2141 C**, approximated on screen as **#8BBEE8** ([color reference](https://www.colorxs.com/color/pantone-2141-c)). The palette in `src/styles.css` combines this light blue with deep blue text and pale blue surfaces. Navigation, buttons, forms, dialogs, the footer, and the favicon share the same palette.
+
+Images, illustrations, and video use the reversible blue duotone in `src/ThemeFilters.tsx`. Original media files are preserved. Brand marks use CSS masks to match the palette precisely.
+
 ## GitHub Pages
 
 The GitHub Actions workflow in `.github/workflows/deploy-pages.yml` builds and deploys the website automatically on every push to `main`. GitHub Pages uses **GitHub Actions** as its deployment source.
