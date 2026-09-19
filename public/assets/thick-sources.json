@@ -75,6 +75,20 @@
       "sourceSha256": "213dc568b5c09fe7a814afe1c6d7333ac86e9a6fa96465dac2732e4f427b7f1b",
       "assetSha256": "213dc568b5c09fe7a814afe1c6d7333ac86e9a6fa96465dac2732e4f427b7f1b",
       "displayTreatment": "CSS clip-path follows the bowl rim to hide the baked-in checkerboard; original raster unchanged."
+    },
+    {
+      "source": "word+碗/thick_logo_长—米白.psd",
+      "asset": "thick-logo-cream.png",
+      "sourceSha256": "211ba363cfe9d3b2d5e71a92cd23230611fc9875f38f53733257f68360eb2edc",
+      "assetSha256": "94a2f10d78333d09323474c69f8d22ba3d6f7b999708090e3d76b4cd53f85886",
+      "displayTreatment": "Transparent PNG exported from the supplied cream PSD artwork; shown directly as an image without CSS masking."
+    },
+    {
+      "source": "word+碗/碗mark-米白.psd",
+      "asset": "thick-bowl-cream.png",
+      "sourceSha256": "bd3d92a2d09113187e4c179591388870d087b9b230ac04f6d79d574406f21079",
+      "assetSha256": "ae64010ba65b9888023d9bb64b3cfcce37f99f4b3e316dd275b6c0c612f9d8f0",
+      "displayTreatment": "Transparent PNG exported from the supplied cream PSD artwork; shown directly as an image without CSS masking."
     }
   ]
 }

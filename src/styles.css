@@ -241,15 +241,6 @@ input:focus-visible {
 .brand img {
   width: 170px;
   height: auto;
-  opacity: 0;
-}
-.brand::after {
-  content: "";
-  position: absolute;
-  inset: 7.5px;
-  background: var(--ink);
-  mask: url("/assets/thick-logo.png") center/contain no-repeat;
-  pointer-events: none;
 }
 .desktop-nav {
   display: flex;
@@ -375,11 +366,10 @@ input:focus-visible {
   padding-bottom: 13.125px;
 }
 .hero-logo {
-  height: 150px;
-  max-width: 700px;
+  width: 520px;
+  max-width: calc(100% - 40px);
+  height: auto;
   margin: auto;
-  background: var(--surface);
-  mask: url("/assets/thick-logo.png") center/contain no-repeat;
 }
 .hero-button {
   display: inline-block;
@@ -747,21 +737,9 @@ input:focus-visible {
 .footer-brand {
   position: relative;
 }
-.footer-brand::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 125px;
-  height: 86px;
-  background: var(--ink);
-  mask: url("/assets/thick-bowl.png") center/contain no-repeat;
-  pointer-events: none;
-}
 .footer-brand img {
   width: 125px;
   height: auto;
-  opacity: 0;
 }
 .footer-column h2 {
   font-size: 18px;
@@ -1435,8 +1413,7 @@ input:focus-visible {
     padding-bottom: 7.5px;
   }
   .hero-logo {
-    max-width: 300px;
-    height: 110px;
+    width: 300px;
   }
   .hero-button {
     padding: 6.75px 60px;

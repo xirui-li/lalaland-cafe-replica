@@ -21,7 +21,9 @@ A responsive React + TypeScript website for **THICK.**, the yogurt brand operate
 
 The site uses **PANTONE 2141 C**, approximated on screen as **#8BBEE8** ([color reference](https://www.colorxs.com/color/pantone-2141-c)). The palette combines this light blue with deep blue text and pale blue surfaces.
 
-The owner’s latest instructions are to show yogurt and store photography in their original colors, without a filter. This applies to the product gallery, product details, search results, and storefront photo. The blue treatment in `src/ThemeFilters.tsx` remains on the main video and brand illustration. Logo masks and page colors retain the Pantone palette.
+The owner’s latest instructions are to show yogurt and store photography in their original colors, without a filter. This applies to the product gallery, product details, search results, and storefront photo. The blue treatment in `src/ThemeFilters.tsx` remains on the main video and brand illustration. Page colors retain the Pantone palette.
+
+Brand marks are displayed directly as transparent PNG images, without CSS masks or solid-color placeholder backgrounds. The header uses the supplied blue logo; the hero and footer use the supplied cream PSD artwork exported to transparent PNG. This avoids rectangular blocks in browsers where CSS masking is unavailable.
 
 THICK. logos, the bowl mark, storefront photo, and yogurt photos are owner-supplied. The gallery displays all ten product photos. The seven original gallery images use lossless WebP conversion at their original dimensions. Three additional JPGs are copied unchanged and use a per-image CSS clip path around the bowl rim to hide baked-in checkerboard backgrounds. The same clipping applies to gallery, search, and detail views. `public/assets/thick-sources.json` records provenance and file hashes.
 

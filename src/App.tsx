@@ -396,10 +396,13 @@ export default function App() {
             <h1>
               WELCOME TO<span className="visually-hidden"> THICK. yogurt</span>
             </h1>
-            <div
+            <img
               className="hero-logo"
-              role="img"
-              aria-label="THICK. — non-dripping strained yogurt"
+              src={assetUrl("/assets/thick-logo-cream.png")}
+              alt="THICK. — non-dripping strained yogurt"
+              width="2637"
+              height="1028"
+              fetchPriority="high"
             />
             <a className="hero-button" href="#yogurt">
               Explore our yogurt
@@ -521,7 +524,7 @@ export default function App() {
         <div className="page-width footer-top">
           <div className="footer-brand">
             <img
-              src={assetUrl("/assets/thick-bowl.png")}
+              src={assetUrl("/assets/thick-bowl-cream.png")}
               alt="THICK. bowl mark"
               width="853"
               height="644"
