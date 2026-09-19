@@ -1,6 +1,6 @@
 # THICK. yogurt
 
-A responsive React + TypeScript website for **THICK.**, the yogurt brand operated by **THICK Holdings LLC**. Built with Vite, using the layout of the original La La Land homepage recreation.
+A responsive React + TypeScript website for **THICK.**, the yogurt brand operated by **THICK Holdings LLC**. Built with Vite.
 
 **Live website:** https://xirui-li.github.io/lalaland-cafe-replica/
 
@@ -64,7 +64,10 @@ The checks cover retained hero assets and playback, THICK. content and links, ga
 - `src/catalog.json`: owner-supplied yogurt photography and descriptive alternative text.
 - `src/store.ts`: confirmed store and company information.
 - `src/styles.css`, `src/ThemeFilters.tsx`: responsive styles and blue media treatment.
-- `public/assets/`: local media and fonts. Original reference-asset source URLs remain in `sources.json`.
+- `public/assets/`: active THICK. media, the retained main video, and fonts. Retired reference-brand logos, merchandise, and payment graphics have been removed from the published assets.
+- `docs/reference-asset-sources.json`: source attribution for the original reference assets, kept outside the published site.
 - `scripts/verify.mjs`: production browser checks.
 
 Reference media retained from the original recreation remain the property of their respective owners.
+
+The retained main video contains the original venue’s signage within its footage. Its pixels are unchanged under the owner’s keep-video instruction; that signage is independent of the webpage’s THICK. text and logo.
