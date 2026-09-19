@@ -51,14 +51,10 @@
   overflow: hidden;
   pointer-events: none;
 }
-/* Keep the existing hero treatment; yogurt photos retain the requested blue filter. */
+/* Keep the existing hero and store treatment; product photos use their original colors. */
 .hero video,
 .story-photo img,
-.app-illustration,
-.product-image img,
-.product-detail-image > img,
-.search-results img,
-.cart-item > img {
+.app-illustration {
   filter: url("#brand-tone");
 }
 ::selection {

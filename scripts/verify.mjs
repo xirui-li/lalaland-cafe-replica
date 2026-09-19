@@ -167,7 +167,7 @@ try {
     },
   );
   await check(
-    "Yogurt details retain the blue filter and offer the correct store phone",
+    "Yogurt details use original colors and offer the correct store phone",
     async () => {
       const trigger = page.getByRole("button", {
         name: "View yogurt bowl 01",
@@ -187,11 +187,11 @@ try {
           .getAttribute("href"),
         "tel:+17712539358",
       );
-      assert.match(
+      assert.equal(
         await dialog
           .locator("img")
           .evaluate((element) => getComputedStyle(element).filter),
-        /brand-tone/,
+        "none",
       );
       await page.keyboard.press("Escape");
       assert.equal(await page.locator("dialog").count(), 0);
@@ -210,11 +210,11 @@ try {
       const search = page.getByRole("searchbox", { name: "Search yogurt" });
       await search.fill("banana");
       assert.equal(await page.locator(".search-results > button").count(), 1);
-      assert.match(
+      assert.equal(
         await page
           .locator(".search-results img")
           .evaluate((element) => getComputedStyle(element).filter),
-        /brand-tone/,
+        "none",
       );
       await page.locator(".search-results > button").click();
       assert.ok(
