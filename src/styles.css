@@ -570,8 +570,51 @@ input:focus-visible {
 .story-content .button {
   margin-top: 30px;
 }
-.mobile-story-copy {
-  display: none;
+.store-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+.store-details {
+  display: grid;
+  gap: 22px;
+  margin: 28px 0 0;
+  line-height: 1.7;
+}
+.store-details dt {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.store-details dd {
+  margin: 0;
+  color: var(--muted);
+}
+.store-details address {
+  font-style: normal;
+}
+.store-details a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.store-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+  width: 100%;
+}
+.store-actions .button {
+  margin: 0;
+  padding-inline: 24px;
+}
+.store-actions .store-call {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+}
+.store-actions .store-call:hover {
+  background: var(--surface-accent);
 }
 .app-section {
   padding: 60px 15px 36px;
@@ -1427,8 +1470,13 @@ input:focus-visible {
     padding-inline: 77.5px;
     margin-top: 20px;
   }
-  .mobile-story-copy {
-    display: inline;
+  .store-actions {
+    justify-content: center;
+  }
+  .store-actions .button {
+    margin: 0;
+    padding-inline: 24px;
+    width: 100%;
   }
   .app-section {
     padding: 45px 15px 27px;

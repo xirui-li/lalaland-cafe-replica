@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import catalogData from "./catalog.json";
 import ThemeFilters from "./ThemeFilters";
+import { store, storeDirectionsUrl } from "./store";
 
 const homeUrl = import.meta.env.BASE_URL;
 const assetUrl = (path: string) => `${homeUrl}${path.replace(/^\//, "")}`;
@@ -31,7 +32,7 @@ const nav = [
   ["home", homeUrl],
   ["order now", orderUrl],
   ["menu", official("/pages/menu")],
-  ["locations", official("/pages/locations")],
+  ["our store", "#our-store"],
   ["shop", "#shop"],
   ["our story", official("/pages/about-us")],
   ["rewards", official("/pages/rewards")],
@@ -79,7 +80,7 @@ const footerGroups = [
       ["Menu", "/pages/menu"],
       ["Ordering", "/pages/ordering"],
       ["Rewards", "/pages/rewards"],
-      ["Locations", "/pages/locations"],
+      ["Our Store", "#our-store"],
       ["Careers", "/pages/careers"],
     ],
   },
@@ -616,30 +617,69 @@ export default function App() {
             onSelect={selectProduct}
           />
         ))}
-        <section className="story-section" aria-labelledby="story-title">
+        <section
+          className="story-section"
+          id="our-store"
+          aria-labelledby="story-title"
+        >
           <div className="story page-width">
             <div className="story-photo">
               <img
-                src={assetUrl("/assets/cafe.jpg")}
-                alt="Neighbors gathering outside a sunny La La Land cafe"
-                width="1500"
-                height="1500"
+                src={assetUrl("/assets/thick-store.png")}
+                alt="THICK. storefront with a blue sign and outdoor seating in Washington, DC"
+                width="1030"
+                height="1526"
                 loading="lazy"
               />
             </div>
             <div className="story-content">
-              <h2 id="story-title">More than just a coffee shop</h2>
-              <p>
-                We are a café committed to spreading kindness and serving
-                top-quality coffee and delicious treats.{" "}
-                <span className="mobile-story-copy">
-                  We also offer job opportunities for foster youth.{" "}
-                </span>
-                To learn more about La La Land, please visit our website.
-              </p>
-              <a className="button" href="https://lalalandcares.com/">
-                LEARN MORE
-              </a>
+              <span className="store-eyebrow">OUR STORE · WASHINGTON, DC</span>
+              <h2 id="story-title">Visit {store.brand}</h2>
+              <dl className="store-details">
+                <div>
+                  <dt>Address</dt>
+                  <dd>
+                    <address>
+                      {store.street}, {store.unit}
+                      <br />
+                      {store.city}
+                    </address>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Hours</dt>
+                  <dd>
+                    {store.hours.days}
+                    <br />
+                    <time dateTime={store.hours.opens}>
+                      {store.hours.opensLabel}
+                    </time>
+                    {" – "}
+                    <time dateTime={store.hours.closes}>
+                      {store.hours.closesLabel}
+                    </time>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Phone</dt>
+                  <dd>
+                    <a href={store.phoneHref}>{store.phone}</a>
+                  </dd>
+                </div>
+              </dl>
+              <div className="store-actions">
+                <a
+                  className="button"
+                  href={storeDirectionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GET DIRECTIONS
+                </a>
+                <a className="button store-call" href={store.phoneHref}>
+                  CALL THE STORE
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -722,7 +762,13 @@ export default function App() {
                   <li key={label}>
                     <a
                       className={href === "/" ? "active" : ""}
-                      href={href === "/" ? homeUrl : official(href)}
+                      href={
+                        href === "/"
+                          ? homeUrl
+                          : href.startsWith("#")
+                            ? href
+                            : official(href)
+                      }
                     >
                       {label}
                     </a>

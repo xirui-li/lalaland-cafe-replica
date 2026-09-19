@@ -4,6 +4,12 @@ A responsive React + TypeScript recreation of the [La La Land Cafe homepage](htt
 
 **Live website:** https://xirui-li.github.io/lalaland-cafe-replica/
 
+## THICK. store information
+
+The store section now features the single THICK. location at **1073 Wisconsin Ave NW, 1st Floor, Washington, DC 20007**, open **every day from 11:30 AM to 10:30 PM**, phone **(771) 253-9358**. Hours were confirmed by the owner. Header, mobile, and footer store links point to this section; visitors can open directions or call the store. `src/store.ts` holds the confirmed details and the company name, **THICK Holdings LLC**. The storefront photograph is supplied by the owner.
+
+The remaining branding and product catalog are still the original recreation and await the THICK. conversion.
+
 ## Theme
 
 The site uses **PANTONE 2141 C**, approximated on screen as **#8BBEE8** ([color reference](https://www.colorxs.com/color/pantone-2141-c)). The palette in `src/styles.css` combines this light blue with deep blue text and pale blue surfaces. Navigation, buttons, forms, dialogs, the footer, and the favicon share the same palette.
