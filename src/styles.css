@@ -51,9 +51,8 @@
   overflow: hidden;
   pointer-events: none;
 }
-/* Keep the existing hero and store treatment; product photos use their original colors. */
+/* Keep the existing hero treatment; product and store photos use their original colors. */
 .hero video,
-.story-photo img,
 .app-illustration {
   filter: url("#brand-tone");
 }
