@@ -72,6 +72,39 @@
             "alt": "THICK. yogurt bowl with strawberries, dark berries and a pink center"
           }
         ]
+      },
+      {
+        "id": "yogurt-bowl-08",
+        "title": "Yogurt bowl 08",
+        "images": [
+          {
+            "src": "/assets/thick-yogurt-08.jpg",
+            "alt": "THICK. yogurt bowl with grapes, orange slices, a green center and white cubes",
+            "clipPath": "ellipse(48.530% 48.414% at 49.909% 49.442%)"
+          }
+        ]
+      },
+      {
+        "id": "yogurt-bowl-09",
+        "title": "Yogurt bowl 09",
+        "images": [
+          {
+            "src": "/assets/thick-yogurt-09.jpg",
+            "alt": "THICK. yogurt bowl with yellow fruit slices, red berries and an orange center",
+            "clipPath": "ellipse(46.904% 47.607% at 49.688% 49.081%)"
+          }
+        ]
+      },
+      {
+        "id": "yogurt-bowl-10",
+        "title": "Yogurt bowl 10",
+        "images": [
+          {
+            "src": "/assets/thick-yogurt-10.jpg",
+            "alt": "THICK. yogurt bowl with pineapple, kiwi, blueberries and a yellow center",
+            "clipPath": "ellipse(46.384% 46.830% at 49.583% 49.507%)"
+          }
+        ]
       }
     ]
   }

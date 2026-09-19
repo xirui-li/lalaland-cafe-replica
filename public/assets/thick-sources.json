@@ -54,6 +54,27 @@
       "asset": "thick-yogurt-07.webp",
       "sourceSha256": "75c0bfc3f840c77045ad502bebc25100c66aac8e3302d99bcea7b5d376ff3429",
       "assetSha256": "4ed29e984da68b0377f6be1c97512c9a629a4cb64245f33ff24108cbb0eca5c4"
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144053.jpg",
+      "asset": "thick-yogurt-08.jpg",
+      "sourceSha256": "0077515fcdd5373cf63f2fe38bca58c139d18afaa19c1019c9a96338024352d3",
+      "assetSha256": "0077515fcdd5373cf63f2fe38bca58c139d18afaa19c1019c9a96338024352d3",
+      "displayTreatment": "CSS clip-path follows the bowl rim to hide the baked-in checkerboard; original raster unchanged."
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144057.jpg",
+      "asset": "thick-yogurt-09.jpg",
+      "sourceSha256": "034f623aa6adc73e7d27d1e0d6d854ab186afd0ea4502f2ca0aea8248d0800ce",
+      "assetSha256": "034f623aa6adc73e7d27d1e0d6d854ab186afd0ea4502f2ca0aea8248d0800ce",
+      "displayTreatment": "CSS clip-path follows the bowl rim to hide the baked-in checkerboard; original raster unchanged."
+    },
+    {
+      "source": "Products_image/Weixin Image_20260919144100.jpg",
+      "asset": "thick-yogurt-10.jpg",
+      "sourceSha256": "213dc568b5c09fe7a814afe1c6d7333ac86e9a6fa96465dac2732e4f427b7f1b",
+      "assetSha256": "213dc568b5c09fe7a814afe1c6d7333ac86e9a6fa96465dac2732e4f427b7f1b",
+      "displayTreatment": "CSS clip-path follows the bowl rim to hide the baked-in checkerboard; original raster unchanged."
     }
   ]
 }

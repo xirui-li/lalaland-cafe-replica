@@ -5,7 +5,14 @@ import { store, storeDirectionsUrl } from "./store";
 
 const homeUrl = import.meta.env.BASE_URL;
 const assetUrl = (path: string) => `${homeUrl}${path.replace(/^\//, "")}`;
-const catalog = catalogData.map((collection) => ({
+type ProductImage = { src: string; alt: string; clipPath?: string };
+type Collection = {
+  id: string;
+  title: string;
+  products: { id: string; title: string; images: ProductImage[] }[];
+};
+const sourceCatalog: Collection[] = catalogData;
+const catalog = sourceCatalog.map((collection) => ({
   ...collection,
   products: collection.products.map((product) => ({
     ...product,
@@ -230,6 +237,7 @@ function ProductCarousel({
                 <img
                   src={product.images[0].src}
                   alt={product.images[0].alt}
+                  style={{ clipPath: product.images[0].clipPath }}
                   loading="lazy"
                   width="1254"
                   height="1254"
@@ -604,7 +612,11 @@ export default function App() {
           <div className="search-results">
             {searchResults.map((product) => (
               <button key={product.id} onClick={() => selectProduct(product)}>
-                <img src={product.images[0].src} alt="" />
+                <img
+                  src={product.images[0].src}
+                  alt=""
+                  style={{ clipPath: product.images[0].clipPath }}
+                />
                 <span>
                   {product.title}
                   <small>THICK. yogurt</small>
@@ -625,7 +637,11 @@ export default function App() {
           onClose={() => setSelected(null)}
         >
           <div className="product-detail-image">
-            <img src={selected.images[0].src} alt={selected.images[0].alt} />
+            <img
+              src={selected.images[0].src}
+              alt={selected.images[0].alt}
+              style={{ clipPath: selected.images[0].clipPath }}
+            />
           </div>
           <div className="product-detail-copy">
             <p className="eyebrow">THICK. YOGURT</p>

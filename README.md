@@ -23,7 +23,7 @@ The site uses **PANTONE 2141 C**, approximated on screen as **#8BBEE8** ([color 
 
 The owner explicitly chose to keep the blue filter on yogurt photography. The reversible filter in `src/ThemeFilters.tsx` follows photos into product details and search. Logo masks use the palette without changing the supplied artwork.
 
-THICK. logos, the bowl mark, storefront photo, and yogurt photos are owner-supplied. The gallery uses seven product photos with clean backgrounds. The three JPGs with baked-in checkerboard backgrounds remain pending cleanup and are not displayed. WebP conversion is lossless and preserves original image dimensions. `public/assets/thick-sources.json` records provenance and file hashes.
+THICK. logos, the bowl mark, storefront photo, and yogurt photos are owner-supplied. The gallery displays all ten product photos. The seven original gallery images use lossless WebP conversion at their original dimensions. Three additional JPGs are copied unchanged and use a per-image CSS clip path around the bowl rim to hide baked-in checkerboard backgrounds. The same clipping applies to gallery, search, and detail views. `public/assets/thick-sources.json` records provenance and file hashes.
 
 ## Content scope
 

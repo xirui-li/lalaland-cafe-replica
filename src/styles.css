@@ -1105,7 +1105,8 @@ input:focus-visible {
   margin-top: 24px;
 }
 .detail-link {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   align-items: center;
   gap: 8px;
   text-decoration: underline;
@@ -1624,7 +1625,9 @@ input:focus-visible {
     padding: 20px 45px 0;
   }
   .product-detail-image > img {
-    max-height: 32dvh;
+    width: min(100%, 32dvh);
+    max-height: none;
+    margin-inline: auto;
     object-fit: contain;
   }
   .product-detail-copy {

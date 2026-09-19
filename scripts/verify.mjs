@@ -135,7 +135,7 @@ try {
   await check(
     "Yogurt gallery scrolls in both directions and reaches its end",
     async () => {
-      assert.equal(await page.locator("#yogurt .product-card").count(), 7);
+      assert.equal(await page.locator("#yogurt .product-card").count(), 10);
       const next = page.getByRole("button", {
         name: "Next our yogurt",
         exact: true,
