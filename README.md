@@ -2,7 +2,9 @@
 
 A responsive React + TypeScript website for **THICK.**, the yogurt brand operated by **THICK Holdings LLC**. Built with Vite.
 
-**Live website:** https://xirui-li.github.io/lalaland-cafe-replica/
+**Planned custom domain:** https://thisisthick.com/ (Pages binding and DNS setup pending; see [domain setup](docs/domain-setup.md)).
+
+**Live GitHub Pages address:** https://xirui-li.github.io/lalaland-cafe-replica/ (will redirect to the custom domain once bound in Pages settings).
 
 ## Confirmed brand and store information
 
@@ -47,7 +49,7 @@ npm run build
 npm test
 ```
 
-To verify the GitHub Pages deployment path:
+The default build and checks above cover the custom domain at `/`. To verify the fallback GitHub Pages project path:
 
 ```sh
 SITE_BASE_PATH=/lalaland-cafe-replica/ npm run build
@@ -58,7 +60,9 @@ The checks cover retained hero assets and playback, THICK. content and links, ga
 
 ## Deployment
 
-`.github/workflows/deploy-pages.yml` builds and deploys to GitHub Pages on pushes to `main`. It sets `SITE_BASE_PATH` to `/lalaland-cafe-replica/`; local development defaults to `/`. The repository slug is retained so the existing published address keeps working.
+`.github/workflows/deploy-pages.yml` builds and deploys to GitHub Pages on pushes to `main`. It reads the base path from `actions/configure-pages`, so assets and home links use `/` for the custom domain or `/lalaland-cafe-replica/` for the default project address. Local development defaults to `/`.
+
+The owner chose `thisisthick.com` as the primary domain. Manage this under repository Settings → Pages → Custom domain. After changing that setting, rerun the deployment workflow so the build uses the updated path. Custom Actions deployments do not require a `CNAME` file. See [domain setup](docs/domain-setup.md) for DNS records and verification steps.
 
 ## Files
 
