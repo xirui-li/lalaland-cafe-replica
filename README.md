@@ -2,9 +2,9 @@
 
 A responsive React + TypeScript website for **THICK.**, the yogurt brand operated by **THICK Holdings LLC**. Built with Vite.
 
-**Planned custom domain:** https://thisisthick.com/ (Pages binding and DNS setup pending; see [domain setup](docs/domain-setup.md)).
+**Website:** https://thisisthick.com/ (see [domain setup](docs/domain-setup.md)).
 
-**Live GitHub Pages address:** https://xirui-li.github.io/lalaland-cafe-replica/ (will redirect to the custom domain once bound in Pages settings).
+**Previous GitHub Pages address:** https://xirui-li.github.io/lalaland-cafe-replica/ (redirects to the custom domain).
 
 ## Confirmed brand and store information
 

@@ -4,13 +4,13 @@ Primary domain: `thisisthick.com`.
 Alternate domain: `www.thisisthick.com` (GitHub Pages redirects it to the primary domain after both are configured).
 Repository: `xirui-li/lalaland-cafe-replica`.
 
-Status: deployment supports both the custom domain root and the current project path. Pages binding and DNS updates are pending access to the domain provider. Coordinate these steps together to keep the current website available until the domain can be pointed to GitHub.
+The domain is bound in GitHub Pages with HTTPS enforced. On 2026-09-19, the primary domain's four A records and the alternate domain's CNAME passed GitHub's DNS health checks, and the certificate for both names was approved and served successfully. Deployment uses the root path `/`; the previous project URL redirects to the primary domain.
 
 ## DNS setup
 
-On 2026-09-19, authoritative DNS was hosted at `ns1.hosting.businessidentity.llc` and `ns2.hosting.businessidentity.llc`. The primary domain had no A or AAAA record. The `www` host had an A record pointing to `66.223.49.89`.
+The domain is managed through Northwest Registered Agent. Authoritative DNS is hosted at `ns1.hosting.businessidentity.llc` and `ns2.hosting.businessidentity.llc`.
 
-First bind `thisisthick.com` in the repository's Settings → Pages → Custom domain. Then update website records in the existing DNS provider:
+Keep `thisisthick.com` in the repository's Settings → Pages → Custom domain, with these website records at Northwest:
 
 | Type | Host | Value |
 | --- | --- | --- |
@@ -18,9 +18,11 @@ First bind `thisisthick.com` in the repository's Settings → Pages → Custom d
 | A | @ | 185.199.109.153 |
 | A | @ | 185.199.110.153 |
 | A | @ | 185.199.111.153 |
-| CNAME | www | xirui-li.github.io |
+| CNAME | www | xirui-li.github.io. |
 
-Replace the existing `www` A record with the CNAME record; they cannot coexist at the same name. The CNAME target does not include a URL scheme or repository path. Use the provider's default TTL. Leave the existing nameservers, MX, and email-related TXT records in place.
+Northwest requires the CNAME value to end in a dot, exactly as shown above. The target does not include a URL scheme or repository path. The provider's Auto TTL currently publishes these records with a 300-second TTL. Keep a single CNAME for `www`, without an A record at the same name. Leave the existing nameservers, MX, and email-related TXT records in place.
+
+The provider's old `*` A record points to `66.223.49.89`. The explicit `www` CNAME takes precedence over that wildcard; the wildcard is not part of the GitHub Pages configuration.
 
 ## Deployment and verification
 
