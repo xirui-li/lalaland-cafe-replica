@@ -84,12 +84,12 @@ try {
     assert.equal(video.ratio, 16 / 9);
     assert.ok(video.autoplay && video.muted && video.loop && video.inline);
     assert.match(video.filter, /brand-tone/);
-    assert.equal(
-      await page
-        .locator(".hero")
-        .evaluate((element) => element.getBoundingClientRect().height),
-      810,
-    );
+    const hero = await page.locator(".hero").boundingBox();
+    assert.ok(Math.abs(hero.width / hero.height - 16 / 9) < .02);
+    await page.getByRole("button", { name: "Pause brand film", exact: true }).click();
+    assert.ok(await page.locator("video").evaluate((element) => element.paused));
+    await page.getByRole("button", { name: "Play brand film", exact: true }).click();
+    assert.ok(await page.locator("video").evaluate((element) => !element.paused));
   });
   await check(
     "THICK. yogurt branding replaces reference-site copy and links",
@@ -132,6 +132,18 @@ try {
       }
     },
   );
+  await check("Featured bowls open details and Bao responds to touch", async () => {
+    assert.equal(await page.locator(".featured-card").count(), 3);
+    await page.locator(".featured-image").first().click();
+    assert.ok(await page.getByRole("dialog", { name: "Yogurt bowl 01", exact: true }).isVisible());
+    await page.keyboard.press("Escape");
+    const bao = page.getByRole("button", { name: "Say hello to Bao", exact: true });
+    await bao.click();
+    assert.equal(await bao.getAttribute("aria-pressed"), "true");
+    assert.match(await page.locator(".bao-bubble").innerText(), /hi, spoon friend/);
+    await bao.click();
+    assert.equal(await bao.getAttribute("aria-pressed"), "false");
+  });
   await check(
     "Yogurt gallery scrolls in both directions and reaches its end",
     async () => {
@@ -343,6 +355,8 @@ try {
     fullPage: true,
   });
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
+  await page.waitForTimeout(500);
   await page.screenshot({
     path: "artifacts/verified-desktop.png",
     fullPage: true,

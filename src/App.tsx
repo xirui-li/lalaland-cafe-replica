@@ -28,7 +28,8 @@ const allProducts = catalog.flatMap((collection) => collection.products);
 const nav = [
   ["home", homeUrl],
   ["our yogurt", "#yogurt"],
-  ["about THICK.", "#about-thick"],
+  ["our story", "#about-thick"],
+  ["meet Bao", "#meet-bao"],
   ["our store", "#our-store"],
 ];
 const footerGroups = [
@@ -284,6 +285,8 @@ export default function App() {
   const [headerHidden, setHeaderHidden] = useState(false);
   const [selected, setSelected] = useState<Product | null>(null);
   const [query, setQuery] = useState("");
+  const [baoHello, setBaoHello] = useState(false);
+  const [videoPaused, setVideoPaused] = useState(false);
   const [largeText, setLargeText] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
@@ -312,8 +315,8 @@ export default function App() {
   }, []);
   useEffect(() => {
     if (reduceMotion) video.current?.pause();
-    else video.current?.play().catch(() => {});
-  }, [reduceMotion]);
+    else if (!videoPaused) video.current?.play().catch(() => {});
+  }, [reduceMotion, videoPaused]);
   const selectProduct = (product: Product) => {
     setOverlay(null);
     setSelected(product);
@@ -393,22 +396,47 @@ export default function App() {
             <source src={assetUrl("/assets/hero.mp4")} type="video/mp4" />
           </video>
           <div className="hero-content">
-            <h1>
-              WELCOME TO<span className="visually-hidden"> THICK. yogurt</span>
-            </h1>
-            <img
-              className="hero-logo"
-              src={assetUrl("/assets/thick-logo-cream.png")}
-              alt="THICK. — non-dripping strained yogurt"
-              width="2637"
-              height="1028"
-              fetchPriority="high"
-            />
-            <a className="hero-button" href="#yogurt">
-              Explore our yogurt
-            </a>
+            <p className="film-eyebrow">THICK. / STRAINED YOGURT</p>
+            <h1>Good things<br />take their time.</h1>
+            <p className="film-subtitle">A little moment, made THICK.</p>
+          </div>
+          <button className="film-toggle" aria-label={videoPaused || reduceMotion ? "Play brand film" : "Pause brand film"}
+            onClick={() => { if (videoPaused || reduceMotion) { setReduceMotion(false); setVideoPaused(false); video.current?.play().catch(() => {}); } else { setVideoPaused(true); video.current?.pause(); } }}>
+            {videoPaused || reduceMotion ? "▶ Play film" : "Ⅱ Pause film"}
+          </button>
+        </section>
+        <div className="hero-caption page-width">
+          <p>Non-dripping strained yogurt.<span>A little slower. A little thicker.</span></p>
+          <a className="pill" href="#featured-yogurt">Explore our yogurt <span>↓</span></a>
+        </div>
+        <section className="featured-section page-width" id="featured-yogurt" aria-labelledby="featured-title">
+          <div className="section-heading"><div><p className="eyebrow">FIND YOUR FIRST SPOONFUL</p><h2 id="featured-title">Start with something good.</h2></div><a className="editorial-link" href="#yogurt">Explore all bowls ↗</a></div>
+          <div className="featured-grid">{[allProducts[0], allProducts[5], allProducts[6]].map((product, index) => (
+            <article className="featured-card" key={product.id}>
+              <button className="featured-image" onClick={() => selectProduct(product)} aria-label={`Take a closer look at ${product.title.toLowerCase()}`}>
+                <span className="image-number">0{index + 1} / A LITTLE THICK.</span>
+                <img src={product.images[0].src} alt={product.images[0].alt} loading="lazy" style={{clipPath: product.images[0].clipPath}} />
+                <span className="image-arrow" aria-hidden="true">↗</span>
+              </button>
+              <div className="featured-copy"><h3>{product.title}</h3><button className="editorial-link" onClick={() => selectProduct(product)}>Closer look ↗</button></div>
+            </article>
+          ))}</div>
+        </section>
+        <section className="craft-section" id="about-thick" aria-labelledby="craft-title">
+          <div className="craft-layout page-width">
+            <div className="craft-art"><span className="eyebrow">THE ART OF A GOOD SPOONFUL</span><img src={assetUrl("/assets/thick-yogurt-02.webp")} alt={allProducts[1].images[0].alt} loading="lazy" /><span className="craft-footnote">Made for your little moment.</span></div>
+            <div className="craft-text"><p className="eyebrow">A CLOSER LOOK</p><h2 id="craft-title">Why so<br /><em>THICK?</em></h2><p>Meet our non-dripping strained yogurt. A bowl to pause for, a spoonful to make your own.</p><div className="craft-fact"><span>01 / THE YOGURT</span><p>Strained yogurt. The heart of every bowl.</p></div><div className="craft-fact"><span>02 / YOUR MOMENT</span><p>Find your bowl. Take your time.</p></div><a className="editorial-link" href="#our-store">Come try a spoonful ↗</a></div>
           </div>
         </section>
+        <section className="bao-section" id="meet-bao" aria-labelledby="bao-title">
+          <div className="bao-layout page-width"><div className="bao-copy"><p className="eyebrow">A LITTLE COMPANY</p><h2 id="bao-title">Meet Bao.</h2><p>A small friend.<br />A very serious spoon.</p><a className="pill outline-pill" href="#yogurt">Find a spoonful together ↗</a></div><div className="bao-stage">
+          <span className={`bao-bubble ${baoHello ? "visible" : ""}`} role="status" aria-live="polite">{baoHello ? "hi, spoon friend." : ""}</span>
+          <button className="bao-touch" aria-label="Say hello to Bao" aria-pressed={baoHello} onClick={() => setBaoHello(!baoHello)}
+            onPointerMove={(event) => { if (reduceMotion || event.pointerType === "touch") return; const box = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.transform = `rotate(${((event.clientX - box.left) / box.width - .5) * 10}deg)`; }}
+            onPointerLeave={(event) => { event.currentTarget.style.transform = ""; }}><img src={assetUrl("/assets/bao.png")} alt="Bao holding a blue spoon" loading="lazy" /></button><p className="bao-hint">Tap Bao. Say hello.</p>
+          </div></div>
+        </section>
+
         {catalog.map((collection) => (
           <ProductCarousel
             key={collection.id}
@@ -416,33 +444,6 @@ export default function App() {
             onSelect={selectProduct}
           />
         ))}
-        <section
-          className="app-section"
-          id="about-thick"
-          aria-labelledby="about-title"
-        >
-          <div className="app-content">
-            <img
-              className="app-illustration"
-              src={assetUrl("/assets/thick-bowl.png")}
-              alt="THICK. bowl and spoon mark"
-              width="853"
-              height="644"
-              loading="lazy"
-            />
-            <div className="app-copy">
-              <h2 id="about-title">All about yogurt.</h2>
-              <p>
-                THICK. is all about non-dripping strained yogurt. Explore our
-                bowls and make your next yogurt stop at our Washington, DC
-                store.
-              </p>
-            </div>
-          </div>
-          <a className="button" href="#our-store">
-            VISIT THICK.
-          </a>
-        </section>
         <section
           className="story-section"
           id="our-store"
@@ -460,7 +461,7 @@ export default function App() {
             </div>
             <div className="story-content">
               <span className="store-eyebrow">OUR STORE · WASHINGTON, DC</span>
-              <h2 id="story-title">Visit {store.brand}</h2>
+              <h2 id="story-title">Your next<br />yogurt stop.</h2>
               <dl className="store-details">
                 <div>
                   <dt>Address</dt>
@@ -508,16 +509,6 @@ export default function App() {
               </div>
             </div>
           </div>
-        </section>
-        <section className="newsletter" aria-labelledby="contact-title">
-          <h2 id="contact-title">Your next yogurt stop.</h2>
-          <p>
-            Visit us every day, {store.hours.opensLabel}–
-            {store.hours.closesLabel}.
-          </p>
-          <a className="button contact-button" href={store.phoneHref}>
-            LET’S TALK YOGURT
-          </a>
         </section>
       </main>
       <footer className="footer">

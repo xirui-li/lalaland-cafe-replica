@@ -29,6 +29,14 @@ Brand marks are displayed directly as transparent PNG images, without CSS masks 
 
 THICK. logos, the bowl mark, storefront photo, and yogurt photos are owner-supplied. The gallery displays all ten product photos. The seven original gallery images use lossless WebP conversion at their original dimensions. Three additional JPGs are copied unchanged and use a per-image CSS clip path around the bowl rim to hide baked-in checkerboard backgrounds. The same clipping applies to gallery, search, and detail views. `public/assets/thick-sources.json` records provenance and file hashes.
 
+## Homepage design
+
+The homepage follows the supplied THICK. layout sketch: an inset brand film, three featured bowls, a short yogurt introduction, an interactive Bao section, the complete ten-photo gallery, and store information. Cream surfaces, brand blue, and serif display headings establish the visual style. The original hero footage and blue treatment are retained, with a visible play/pause control.
+
+Bao is extracted unchanged from the owner-supplied HTML sketch into `public/assets/bao.png`. Tap or click to toggle a greeting; pointer movement gently tilts the artwork. Reduced-motion preferences disable the tilt. No eye tracking is simulated without layered character assets.
+
+Ordering, social posts, and catering remain absent until confirmed destinations and content are supplied. The featured bowls reuse the existing numbered catalog labels.
+
 ## Content scope
 
 The yogurt gallery uses numbered photo labels, not invented menu names. Confirmed product names, descriptions, prices, availability, and an ordering URL have not yet been supplied. Visitors can view photos, search the gallery, and call the store for the current menu and prices.
