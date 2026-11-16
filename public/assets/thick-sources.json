@@ -14,69 +14,6 @@
       "assetSha256": "a93a1a4af29510092b61df304f930b97cf666250e64e5fe61ab3f1ad6c05a0a3"
     },
     {
-      "source": "Products_image/Weixin Image_20260919144004.jpg",
-      "asset": "thick-yogurt-01.webp",
-      "sourceSha256": "ab3def92a3a22c4a0facf6e83b3e368ec1013dfbce850a5cc83f26c61e29ecaa",
-      "assetSha256": "0f67ee070a62072ac79e5d74797ad37166afc298fb9a488e2b5e3cfdf027ebef"
-    },
-    {
-      "source": "Products_image/Weixin Image_20260919144031.png",
-      "asset": "thick-yogurt-02.webp",
-      "sourceSha256": "c77528fa22af025aeaff8fcd462c865241544f397d15899645d3e743e7a5ce1b",
-      "assetSha256": "3666b666ae900f739acf52188a8a29d9aa8b1bfcacd1af31472577c8aa75be6e"
-    },
-    {
-      "source": "Products_image/Weixin Image_20260919144038.png",
-      "asset": "thick-yogurt-03.webp",
-      "sourceSha256": "bc4b8e2d6f422c70f0a22efcfb81e69b34ba132b41b7c4d86e851eae1a035bcb",
-      "assetSha256": "b6e7a75c9908c72f6a34c5e0f12e69138895f5f608d0552d0a00050cb044f136"
-    },
-    {
-      "source": "Products_image/Weixin Image_20260919144045.png",
-      "asset": "thick-yogurt-04.webp",
-      "sourceSha256": "cef6662e53072054d5eebd6a36fb84554c351fc5c757f1e201802692b5ed9464",
-      "assetSha256": "205515314afd40645b2cb3cb440f64867db3403fae214f4d59091622a8cd1f65"
-    },
-    {
-      "source": "Products_image/Weixin Image_20260919144049.png",
-      "asset": "thick-yogurt-05.webp",
-      "sourceSha256": "44ce7e91cb2bc8ac1115d71eb6aea14429546a801d99f64ceaed1ed789c3fbcb",
-      "assetSha256": "7687e1002b7b0f23ded7ca6299a738d6dd8a946d7a65eaf291a4248a763fa982"
-    },
-    {
-      "source": "Products_image/Weixin Image_20260919144104.png",
-      "asset": "thick-yogurt-06.webp",
-      "sourceSha256": "4420a89d887356b1f6cb475783cc7784e0ca90ee9b873b55418212020e53db45",
-      "assetSha256": "4f847ecbfacec7e640ed8d316e5c97bd3e669df563603bd74a5f1f36efc09da3"
-    },
-    {
-      "source": "Products_image/Weixin Image_20260919144108.png",
-      "asset": "thick-yogurt-07.webp",
-      "sourceSha256": "75c0bfc3f840c77045ad502bebc25100c66aac8e3302d99bcea7b5d376ff3429",
-      "assetSha256": "4ed29e984da68b0377f6be1c97512c9a629a4cb64245f33ff24108cbb0eca5c4"
-    },
-    {
-      "source": "Products_image/Weixin Image_20260919144053.jpg",
-      "asset": "thick-yogurt-08.jpg",
-      "sourceSha256": "0077515fcdd5373cf63f2fe38bca58c139d18afaa19c1019c9a96338024352d3",
-      "assetSha256": "0077515fcdd5373cf63f2fe38bca58c139d18afaa19c1019c9a96338024352d3",
-      "displayTreatment": "CSS clip-path follows the bowl rim to hide the baked-in checkerboard; original raster unchanged."
-    },
-    {
-      "source": "Products_image/Weixin Image_20260919144057.jpg",
-      "asset": "thick-yogurt-09.jpg",
-      "sourceSha256": "034f623aa6adc73e7d27d1e0d6d854ab186afd0ea4502f2ca0aea8248d0800ce",
-      "assetSha256": "034f623aa6adc73e7d27d1e0d6d854ab186afd0ea4502f2ca0aea8248d0800ce",
-      "displayTreatment": "CSS clip-path follows the bowl rim to hide the baked-in checkerboard; original raster unchanged."
-    },
-    {
-      "source": "Products_image/Weixin Image_20260919144100.jpg",
-      "asset": "thick-yogurt-10.jpg",
-      "sourceSha256": "213dc568b5c09fe7a814afe1c6d7333ac86e9a6fa96465dac2732e4f427b7f1b",
-      "assetSha256": "213dc568b5c09fe7a814afe1c6d7333ac86e9a6fa96465dac2732e4f427b7f1b",
-      "displayTreatment": "CSS clip-path follows the bowl rim to hide the baked-in checkerboard; original raster unchanged."
-    },
-    {
       "source": "word+碗/thick_logo_长—米白.psd",
       "asset": "thick-logo-cream.png",
       "sourceSha256": "211ba363cfe9d3b2d5e71a92cd23230611fc9875f38f53733257f68360eb2edc",
@@ -89,6 +26,216 @@
       "sourceSha256": "bd3d92a2d09113187e4c179591388870d087b9b230ac04f6d79d574406f21079",
       "assetSha256": "ae64010ba65b9888023d9bb64b3cfcce37f99f4b3e316dd275b6c0c612f9d8f0",
       "displayTreatment": "Transparent PNG exported from the supplied cream PSD artwork; shown directly as an image without CSS masking."
+    },
+    {
+      "source": "🌟soft open菜单/Remix | 随心酸奶碗/Caramel Cloud.png",
+      "asset": "menu/remix-caramel-cloud.webp",
+      "sourceSha256": "a45f2247d30dca4a7b6dc88d82bc7008c08aff2182ec7744c6d31d30336cd038",
+      "assetSha256": "2ef4b28e5a3e88729aa3eaa1b2f59400e4afe7df096efaddeed65ea5db64c0d0"
+    },
+    {
+      "source": "🌟soft open菜单/Remix | 随心酸奶碗/Hazelnut Crush.png",
+      "asset": "menu/remix-hazelnut-crush.webp",
+      "sourceSha256": "e9e1b8b090a4738bc16097d1355fc667eaa805de9f8e7ac0ea5d81cc44aa6ba1",
+      "assetSha256": "9935f4c13a7a0c648ec8611e21d4eba7d2d316ec2355c70ef210542e388dd5f6"
+    },
+    {
+      "source": "🌟soft open菜单/Remix | 随心酸奶碗/Honey bloom.png",
+      "asset": "menu/remix-honey-bloom.webp",
+      "sourceSha256": "db3cdc0b8f4b8e034d99e8b64da42be7a813624781ae89b5a4512d341841d44b",
+      "assetSha256": "4fbc53bc3649d06cf8c9d5527d80ff3f0e51af539982ea53dcd3d0fc280c7ea8"
+    },
+    {
+      "source": "🌟soft open菜单/Remix | 随心酸奶碗/Midnight Cocoa.png",
+      "asset": "menu/remix-midnight-cocoa.webp",
+      "sourceSha256": "448685701fc7cace345833ad29b68e347da2fdd651ae4b75c1fe6f3cf18b771c",
+      "assetSha256": "8bfe79b3944216d642763e1f26d81cf293eedf22449e43c1b3e43b683f42871f"
+    },
+    {
+      "source": "🌟soft open菜单/Remix | 随心酸奶碗/Peanut Hug.png",
+      "asset": "menu/remix-peanut-hug.webp",
+      "sourceSha256": "5a084a1765f040c1351f4f83c2e6070fa8245fa94397213dccf4d06eaf2a4aca",
+      "assetSha256": "cb9f7434e0268d0623c23ea33fb986b8a7241e703b29c3df8d63e27063827227"
+    },
+    {
+      "source": "🌟soft open菜单/Remix | 随心酸奶碗/Pistachio Pop.png",
+      "asset": "menu/remix-pistachio-pop.webp",
+      "sourceSha256": "702551082085c514015525ffa6767626055438e1f68a090792d6e31e708b93b0",
+      "assetSha256": "6f9650429414b94758ecba3feb815a9e7fecec2752ff305269ff2c7369d0883a"
+    },
+    {
+      "source": "🌟soft open菜单/Remix | 随心酸奶碗/Pumpkin party.png",
+      "asset": "menu/remix-pumpkin-party.webp",
+      "sourceSha256": "785903639428ec9781f3a82e32591ac31fb8c04e9f438485d83a1116b9e3db6a",
+      "assetSha256": "447948a0027b4be02e984ac7f574b2082d7ba3e8c4f2bbcdb73f5d6abe798c98"
+    },
+    {
+      "source": "🌟soft open菜单/Remix | 随心酸奶碗/Rosy Glow.png",
+      "asset": "menu/remix-rosy-glow.webp",
+      "sourceSha256": "16caaa213c340050369ff0b80579dcc816495eeba5d4b2f10c759a9125305d97",
+      "assetSha256": "5dad764fb1355b5f46cc72a7f9fb093c6a5a464aa0a02ab23b2aba2ec248b56f"
+    },
+    {
+      "source": "🌟soft open菜单/Remix | 随心酸奶碗/Tropic bliss.png",
+      "asset": "menu/remix-tropic-bliss.webp",
+      "sourceSha256": "32f47b3a65fa080a4d757d6983671f8007db454e3cb16fd9d49e5ba923ce7669",
+      "assetSha256": "8625f85d7f47e3468955549dd3c8792f69a0a21ff22b8f0f349d55629fd75331"
+    },
+    {
+      "source": "🌟soft open菜单/Swirl｜酸奶 × 巴西莓双旋碗/OG.jpg",
+      "asset": "menu/swirl-og.webp",
+      "sourceSha256": "6c5e582a5deae2ae11c194cc53b50455fa5a22b4dfc5a573b7ee6a19d5050c4d",
+      "assetSha256": "f4f755ce986f17bc725949696036bd7b35588dd65504f56a1f62765747f688d8"
+    },
+    {
+      "source": "🌟soft open菜单/Swirl｜酸奶 × 巴西莓双旋碗/hazelnut.jpg",
+      "asset": "menu/swirl-hazelnut.webp",
+      "sourceSha256": "3e66f5cb9c06e71c6cf2dbb78790150a8a79503346a9177cb4657d56b51aaa62",
+      "assetSha256": "14c7c7d28a367652bbeb9f652aef45c7cd6cd8118334466a0df4f415f194ab0b"
+    },
+    {
+      "source": "🌟soft open菜单/Swirl｜酸奶 × 巴西莓双旋碗/pistachio.jpg",
+      "asset": "menu/swirl-pistachio.webp",
+      "sourceSha256": "f9a736f5f5d837ee01c575d186ca8237f9a97c35a7e79b897e393bc35af9f7b9",
+      "assetSha256": "1b78af58d5bdd3e84ca98041aa381fa542ba141da91a677b01c9988a26d6f5ff"
+    },
+    {
+      "source": "🌟soft open菜单/Swirl｜酸奶 × 巴西莓双旋碗/og mini.png",
+      "asset": "menu/swirl-og-mini.webp",
+      "sourceSha256": "bac6e849382597145d0fd942226780f6b7725bc2972124a1cd432e22d63ef867",
+      "assetSha256": "08494c783da3dcdb4c74bcee0445349573ff79e7707bdf3b1ea3f0183fb7cbb7"
+    },
+    {
+      "source": "🌟soft open菜单/Swirl｜酸奶 × 巴西莓双旋碗/mini hazelnut.png",
+      "asset": "menu/swirl-hazelnut-mini.webp",
+      "sourceSha256": "9d94a93ad0f9215e8d8ad8269f25ee5d5377e6be3b1c891e1e2479366f022046",
+      "assetSha256": "194928cd978074635a9bb7df38325ac0522407258abf5a4fc7a6110a4ce4eb5d"
+    },
+    {
+      "source": "🌟soft open菜单/Swirl｜酸奶 × 巴西莓双旋碗/mini pistachio.png",
+      "asset": "menu/swirl-pistachio-mini.webp",
+      "sourceSha256": "91ede53601b4c42f02aab3cc65528f53c331c1c3da513bb5cb2776274a3df091",
+      "assetSha256": "13ea8fd581afed69baf2dbf59f1e7220e00e7fe3fc04b2e605597e4280e15c1c"
+    },
+    {
+      "source": "🌟soft open菜单/DOME/dubai choco.png",
+      "asset": "menu/dome-dubai-choco.webp",
+      "sourceSha256": "fb45da366c6ac487981da0dad2ca177864a26defcc61ba409af2924be3f45661",
+      "assetSha256": "9751f93fa86a03230e704aa0e795e083a2c125c56667acd102d4dafb72e3ce6b"
+    },
+    {
+      "source": "🌟soft open菜单/DOME/honey bomb.png",
+      "asset": "menu/dome-honey-bomb.webp",
+      "sourceSha256": "151e916e45d06df60f83e1a283ae0fa6606f2e2656f7aaebb166d8e28ae7c61e",
+      "assetSha256": "3d51b807bb7d88104db3192ead21de98bf73f6c3e4b693ae42dacfac2569648d"
+    },
+    {
+      "source": "🌟soft open菜单/DOME/matcha strawberry.png",
+      "asset": "menu/dome-matcha-strawberry.webp",
+      "sourceSha256": "49ee3bcfe83b6ad5157cf8a4c51c24c6f19694cec3599109a69fcbe97389bae5",
+      "assetSha256": "d99994f21285870d1b62192a209167c1033cba2cc251ddeede142bcf0c9b3e9a"
+    },
+    {
+      "source": "🌟soft open菜单/DOME/pumpkin crunch.jpg",
+      "asset": "menu/dome-pumpkin-crunch.webp",
+      "sourceSha256": "cdfdd9ee742c294dd32778f068a0a110f231c41b94dcacc58012558b455bb40a",
+      "assetSha256": "78be0d3f0a5f209b8e7de297c030cc3c28289d472b907c4572e596c627d1378b"
+    },
+    {
+      "source": "🌟soft open菜单/DOME/solid boba tea.png",
+      "asset": "menu/dome-solid-boba-tea.webp",
+      "sourceSha256": "2e9e33b86ee8b7a4e1bcb6fd78fd8b4b905e3b85936c3abb8db85f753d0d9130",
+      "assetSha256": "19e144519b8d4dfa098f396dd491cb6f2f8a0c53caa8442404e9e55eb9ef2efe"
+    },
+    {
+      "source": "🌟soft open菜单/BULK/伯爵茶桃子.png",
+      "asset": "menu/bulk-earl-grey-peach.webp",
+      "sourceSha256": "350056ae2caa257a4b33501b2c549c5080f5241402c2ff0cc583bf5502a17039",
+      "assetSha256": "22c5e87c54f1d09d5b48fc7a85f5557f7fbf3934f2c005a4d753a826b9f9110b"
+    },
+    {
+      "source": "🌟soft open菜单/BULK/地球碗.png",
+      "asset": "menu/bulk-earth-bowl.webp",
+      "sourceSha256": "7988826920cfe63de6224a4e7fc624d1aba94f67a667d2904f09729ebab64b86",
+      "assetSha256": "229deea383d4c7664478251ff3466d980b69a9ba00bfea35b6e74c738be2e89d"
+    },
+    {
+      "source": "🌟soft open菜单/BULK/调色/杨枝甘露.jpg",
+      "asset": "menu/bulk-mango-pomelo-sago.webp",
+      "sourceSha256": "8cf7fab3f92e28dbaa7166825ff401174c22a00c65b81786973f6ba2b3f40c8a",
+      "assetSha256": "41a7ea0df96f890f31ddcf52c3a0bf047517d25b8b595465b752c0fb33cfad6b"
+    },
+    {
+      "source": "🌟soft open菜单/BULK/调色/苹果肉桂.jpg",
+      "asset": "menu/bulk-apple-cinnamon.webp",
+      "sourceSha256": "a2ebf3321af13f508274386ae9ddd29da12f9f556a4bde3f082bccacf3626924",
+      "assetSha256": "62493ea2cc3e1393cababf8c399a060dbcebdb416604050ffa9c2826e0fde444"
+    },
+    {
+      "source": "🌟soft open菜单/BULK/调色/迪拜巧克力.jpg",
+      "asset": "menu/bulk-dubai-chocolate-bowl.webp",
+      "sourceSha256": "0769b4677dd5cdb3ca354895f007668cd8cf77f844a7c446fa232ec8f41c6605",
+      "assetSha256": "ec93bbc3cba4943f8e934ceba2acbb3e15e0cdc9b6b79ccfc3587830e43ea692"
+    },
+    {
+      "source": "🌟soft open菜单/BULK/调色/首尔草莓蜂巢.jpg",
+      "asset": "menu/bulk-seoul-strawberry-honeycomb.webp",
+      "sourceSha256": "884b2b0b94f612d7b111fc8efe5672afe184a8b59a649d13593585ee831e8966",
+      "assetSha256": "f9c4059d2ca8c65e2764599fa13e22a0e68634815d63bcf8a5045ad251a9ce2d"
+    },
+    {
+      "source": "🌟soft open菜单/LOADED/3491790168143_.pic.jpg",
+      "asset": "menu/loaded-loaded-01.webp",
+      "sourceSha256": "f0a498a796157b93847c1c55af3d747f708d0493a413b390354d2806801d8aa2",
+      "assetSha256": "a208a6af3649d87f3adc8d6be9b124cd2ba9d04c743f44691ac1ed85c88aff3c"
+    },
+    {
+      "source": "🌟soft open菜单/LOADED/3501790168144_.pic.jpg",
+      "asset": "menu/loaded-loaded-02.webp",
+      "sourceSha256": "c0dc02dc626c393d1b1fbabf233035df63b0c5dd9c8d9cba112c66be7e1f0daf",
+      "assetSha256": "652350e086e8533b005316675e9aeb1feb4e0ca62c32190d854049c0563d0860"
+    },
+    {
+      "source": "🌟soft open菜单/LOADED/3511790168144_.pic.jpg",
+      "asset": "menu/loaded-loaded-03.webp",
+      "sourceSha256": "d370d95be4413d2b03617b6954791ee3171e11fe28c973d216f9f5cd39c310c6",
+      "assetSha256": "1f46f7bd1994dfcf61436d1ce47ce00e37a81a4eed9b5957ca8db60d8cc13eda"
+    },
+    {
+      "source": "🌟soft open菜单/LOADED/3521790168145_.pic.jpg",
+      "asset": "menu/loaded-loaded-04.webp",
+      "sourceSha256": "3ef171a5aca43ae22ada01156e85d99dad70bb050d68d4d54da50e3d39f6dec3",
+      "assetSha256": "f3840639fba4d222eebf71a9955317620ae638470e99a7ef12c1b514a0144f78"
+    },
+    {
+      "source": "🌟soft open菜单/LOADED/3531790168146_.pic.jpg",
+      "asset": "menu/loaded-loaded-05.webp",
+      "sourceSha256": "c85cd738dd93189ed10aedc48878b560732b1dfe662884c24e14e9abae2defe0",
+      "assetSha256": "8d0266dea7ccfb854e172518bdae92dd0558e2ac6c440e05abc57643da58c097"
+    },
+    {
+      "source": "🌟soft open菜单/LOADED/3541790168146_.pic.jpg",
+      "asset": "menu/loaded-loaded-06.webp",
+      "sourceSha256": "7796f2161a5d5b3bb5ff28f6b910b89ed4b185c8dbf750ba4c12835e006c6c55",
+      "assetSha256": "f2425c07b5d0ed5720a20a478cb74b9cb52d62cb432d2b59f1c7a66b5751a65e"
+    },
+    {
+      "source": "🌟soft open菜单/Sphere ｜ 干噎酸奶球/single scoop.png",
+      "asset": "menu/sphere-single-scoop.webp",
+      "sourceSha256": "1df8ad3446e62c01e599cf523e6a3d683f65ce25abb89b784bb4f99f1dfdf10c",
+      "assetSha256": "d33cf5f06c930908ab33b8128a685b5777b6385c3948eceee6f25c455a61ad57"
+    },
+    {
+      "source": "🌟soft open菜单/Limited ｜ 限定酸奶甜品/dubai chocolate  $12.99.png",
+      "asset": "menu/limited-dubai-chocolate.webp",
+      "sourceSha256": "8fdb5a7c981e765b90f40b7e2ecf8d9e259a9b366bd634bc6dcc11ced6946ad0",
+      "assetSha256": "2b28893d50efad2c07ad69d6f6539c6ec19842bff31b60c354a2d052b897c382"
+    },
+    {
+      "source": "🌟soft open菜单/Limited ｜ 限定酸奶甜品/mango boat $13.99.png",
+      "asset": "menu/limited-mango-boat.webp",
+      "sourceSha256": "39f3b134f22e4ec630b90ebef81660e1da7897b027071545f9d4587ab407d598",
+      "assetSha256": "1ca6bc6c127b9b56c5fccb1e9207b6bd77ee4358b4f51dadb34ee9306d679b67"
     }
   ]
 }

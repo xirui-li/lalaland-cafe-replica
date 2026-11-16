@@ -53,15 +53,27 @@ const top = async () => {
 try {
   await page.goto(url, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
-  await check("The original main video and poster are preserved", async () => {
+  await check("Soft opening announcement greets visitors and can be dismissed", async () => {
+    const dialog = page.getByRole("dialog", { name: "THICK. soft opening" });
+    await dialog.waitFor();
+    assert.match(await dialog.innerText(), /Soft opening/i);
+    assert.match(await dialog.innerText(), /11:30 AM – 8:00 PM/);
+    assert.ok(await dialog.locator("img").evaluate((img) => img.complete && img.naturalWidth > 0));
+    await page.screenshot({ path: "artifacts/soft-opening-1440.png" });
+    await dialog.getByRole("button", { name: "Enter site" }).click();
+    await dialog.waitFor({ state: "detached" });
+    await page.reload({ waitUntil: "networkidle" });
+    assert.equal(await page.getByRole("dialog", { name: "THICK. soft opening" }).count(), 0);
+  });
+  await check("The THICK. brand film and poster are in place", async () => {
     for (const [file, hash] of [
       [
         "hero.mp4",
-        "6bf91d05f5e13a1533af5c0a45f2377fbd54db2ca00d1778f7bda60fe4e723cb",
+        "32d694be19d33be5c1956d21131406a319fac47f8d6948c53666747038bf8079",
       ],
       [
         "hero-poster.jpg",
-        "412614eaa0bb4eba714fe3d7d6080ed363896ed6c635980ef969c8efa09a9d6c",
+        "6b38e9c5e727367ba9659f3017af0bc7011d422838613dd2a076637905a91417",
       ],
     ])
       assert.equal(
@@ -81,9 +93,9 @@ try {
       inline: element.playsInline,
       filter: getComputedStyle(element).filter,
     }));
-    assert.equal(video.ratio, 16 / 9);
+    assert.ok(Math.abs(video.ratio - 864 / 496) < .01);
     assert.ok(video.autoplay && video.muted && video.loop && video.inline);
-    assert.match(video.filter, /brand-tone/);
+    assert.equal(video.filter, "none");
     const hero = await page.locator(".hero").boundingBox();
     assert.ok(Math.abs(hero.width / hero.height - 16 / 9) < .02);
     await page.getByRole("button", { name: "Pause brand film", exact: true }).click();
@@ -135,7 +147,7 @@ try {
   await check("Featured bowls open details and Bao responds to touch", async () => {
     assert.equal(await page.locator(".featured-card").count(), 3);
     await page.locator(".featured-image").first().click();
-    assert.ok(await page.getByRole("dialog", { name: "Yogurt bowl 01", exact: true }).isVisible());
+    assert.ok(await page.getByRole("dialog", { name: "OG", exact: true }).isVisible());
     await page.keyboard.press("Escape");
     const bao = page.getByRole("button", { name: "Say hello to Bao", exact: true });
     await bao.click();
@@ -145,53 +157,51 @@ try {
     assert.equal(await bao.getAttribute("aria-pressed"), "false");
   });
   await check(
-    "Yogurt gallery scrolls in both directions and reaches its end",
+    "Soft opening menu shows every series with tabs",
     async () => {
-      assert.equal(await page.locator("#yogurt .product-card").count(), 10);
-      const next = page.getByRole("button", {
-        name: "Next our yogurt",
-        exact: true,
-      });
-      const previous = page.getByRole("button", {
-        name: "Previous our yogurt",
-        exact: true,
-      });
-      await next.click();
-      await page.waitForFunction(
-        () => document.querySelector("#yogurt .product-track").scrollLeft > 100,
+      const menu = page.locator("#yogurt");
+      assert.match(await menu.locator("h2").innerText(), /Soft Opening Menu/i);
+      const tabs = menu.getByRole("tab");
+      assert.deepEqual(
+        (await tabs.allInnerTexts()).map((text) => text.replace(/\s*\d+$/, "")),
+        ["REMIX", "SWIRL", "DOME", "BULK", "LOADED", "SPHERE", "LIMITED"],
       );
-      await page.waitForTimeout(400);
-      await previous.click();
-      await page.waitForFunction(
-        () => document.querySelector("#yogurt .product-track").scrollLeft < 2,
-      );
-      for (let i = 0; i < 10 && (await next.isEnabled()); i++) {
-        await next.click();
-        await page.waitForTimeout(500);
-      }
-      assert.ok(await next.isDisabled());
-      assert.ok(await previous.isEnabled());
-      await page
-        .locator(".product-track")
-        .evaluate((element) =>
-          element.scrollTo({ left: 0, behavior: "instant" }),
+      assert.equal(await menu.locator(".menu-card").count(), 9);
+      let total = 0;
+      for (const [name, count] of [["Remix", 9], ["Swirl", 6], ["Dome", 5], ["Bulk", 6], ["Loaded", 6], ["Sphere", 1], ["Limited", 2]]) {
+        await menu.getByRole("tab", { name: new RegExp(`^${name}`, "i") }).click();
+        assert.equal(await menu.getByRole("tab", { selected: true }).getAttribute("id"), `tab-${name.toLowerCase()}`);
+        assert.equal(await menu.locator(".menu-card").count(), count);
+        await page.waitForFunction(() =>
+          [...document.querySelectorAll("#yogurt .menu-card img")].every((image) => {
+            image.loading = "eager";
+            return image.complete && image.naturalWidth > 0;
+          }),
         );
+        total += count;
+      }
+      assert.equal(total, 35);
+      assert.match(await menu.innerText(), /Mango Boat[\s\S]*\$13\.99/);
+      await menu.getByRole("tab", { name: /^Bulk/i }).click();
+      assert.match(await menu.innerText(), /Earth Bowl\s*地球碗/);
+      await menu.getByRole("tab", { name: /^Remix/i }).click();
     },
   );
   await check(
     "Yogurt details use original colors and offer the correct store phone",
     async () => {
       const trigger = page.getByRole("button", {
-        name: "View yogurt bowl 01",
+        name: "View Caramel Cloud",
         exact: true,
       });
       await trigger.click();
       const dialog = page.getByRole("dialog", {
-        name: "Yogurt bowl 01",
+        name: "Caramel Cloud",
         exact: true,
       });
       assert.ok(await dialog.isVisible());
-      assert.match(await dialog.innerText(), /selection and prices/);
+      assert.match(await dialog.innerText(), /THICK\. \/ REMIX/);
+      assert.match(await dialog.innerText(), /today’s prices/);
       assert.doesNotMatch(await dialog.innerText(), /\$|Add to cart|Shipping/);
       assert.equal(
         await dialog
@@ -220,7 +230,7 @@ try {
         .getByRole("button", { name: "Search yogurt", exact: true })
         .click();
       const search = page.getByRole("searchbox", { name: "Search yogurt" });
-      await search.fill("banana");
+      await search.fill("lychee");
       assert.equal(await page.locator(".search-results > button").count(), 1);
       assert.equal(
         await page
@@ -230,7 +240,7 @@ try {
       );
       await page.locator(".search-results > button").click();
       assert.ok(
-        await page.getByRole("dialog", { name: "Yogurt bowl 02" }).isVisible(),
+        await page.getByRole("dialog", { name: "Mango Pomelo Sago" }).isVisible(),
       );
       await page.keyboard.press("Escape");
       await top();
@@ -241,7 +251,7 @@ try {
       assert.equal(await page.locator(".search-results > button").count(), 0);
       assert.match(
         await page.locator(".search-results").innerText(),
-        /No yogurt bowls found/,
+        /Nothing on the menu matches/,
       );
       await page.keyboard.press("Escape");
     },
@@ -331,7 +341,7 @@ try {
               100,
           ) < 5,
       );
-      await page.locator("#yogurt .product-link").first().click();
+      await page.locator("#yogurt .menu-card-link").first().click();
       assert.ok(await page.locator(".product-dialog").isVisible());
       await page.keyboard.press("Escape");
       assert.equal(await page.locator("dialog").count(), 0);

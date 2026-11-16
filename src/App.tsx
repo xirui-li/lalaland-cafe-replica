@@ -9,7 +9,16 @@ type ProductImage = { src: string; alt: string; clipPath?: string };
 type Collection = {
   id: string;
   title: string;
-  products: { id: string; title: string; images: ProductImage[] }[];
+  subtitle?: string;
+  description: string;
+  products: {
+    id: string;
+    title: string;
+    series: string;
+    subtitle?: string;
+    price?: string;
+    images: ProductImage[];
+  }[];
 };
 const sourceCatalog: Collection[] = catalogData;
 const catalog = sourceCatalog.map((collection) => ({
@@ -25,6 +34,8 @@ const catalog = sourceCatalog.map((collection) => ({
 type Product = (typeof catalog)[number]["products"][number];
 type Overlay = "search" | "menu" | "accessibility" | null;
 const allProducts = catalog.flatMap((collection) => collection.products);
+const productById = (id: string) => allProducts.find((product) => product.id === id)!;
+const featuredProducts = ["swirl-og", "dome-matcha-strawberry", "bulk-seoul-strawberry-honeycomb"].map(productById);
 const nav = [
   ["home", homeUrl],
   ["our yogurt", "#yogurt"],
@@ -171,111 +182,85 @@ function Modal({
   );
 }
 
-function ProductCarousel({
-  id,
-  title,
-  products,
-  onSelect,
-}: {
-  id: string;
-  title: string;
-  products: Product[];
-  onSelect: (product: Product) => void;
-}) {
-  const track = useRef<HTMLUListElement>(null);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(1);
-  useEffect(() => {
-    const el = track.current!;
-    const update = () => {
-      const card = el.firstElementChild as HTMLElement | null;
-      if (!card) return;
-      const step = card.offsetWidth + parseFloat(getComputedStyle(el).gap);
-      const max = Math.max(
-        1,
-        Math.ceil((el.scrollWidth - el.clientWidth) / step) + 1,
-      );
-      setTotal(max);
-      setPage(
-        el.scrollLeft >= el.scrollWidth - el.clientWidth - 2
-          ? max
-          : Math.min(max, Math.round(el.scrollLeft / step) + 1),
-      );
-    };
-    const observer = new ResizeObserver(update);
-    observer.observe(el);
-    el.addEventListener("scroll", update, { passive: true });
-    update();
-    return () => {
-      observer.disconnect();
-      el.removeEventListener("scroll", update);
-    };
-  }, []);
-  const move = (direction: number) => {
-    const el = track.current!;
-    const step =
-      (el.firstElementChild as HTMLElement).offsetWidth +
-      parseFloat(getComputedStyle(el).gap);
-    el.scrollBy({ left: direction * step, behavior: "smooth" });
-  };
+function MenuSection({ onSelect }: { onSelect: (product: Product) => void }) {
+  const [active, setActive] = useState(catalog[0].id);
+  const series = catalog.find((collection) => collection.id === active)!;
   return (
-    <section className="collection" id={id} aria-labelledby={`${id}-title`}>
-      <div className="page-width collection-title">
-        <h2 id={`${id}-title`}>{title}</h2>
-        <p className="collection-intro">
-          A look at our non-dripping strained yogurt bowls.
+    <section className="menu-section" id="yogurt" aria-labelledby="menu-title">
+      <div className="menu-paper page-width">
+        <header className="menu-masthead">
+          <p className="menu-dateline">
+            <span>GEORGETOWN, DC</span>
+            <span>THICK. NON-DRIPPING STRAINED YOGURT</span>
+            <span>11:30 AM – 8:00 PM</span>
+          </p>
+          <h2 id="menu-title">Soft Opening Menu</h2>
+          <p className="menu-standfirst">Good things take time. Pick your spoonful.</p>
+        </header>
+        <div className="menu-tabs" role="tablist" aria-label="Menu series">
+          {catalog.map((collection) => (
+            <button
+              key={collection.id}
+              role="tab"
+              id={`tab-${collection.id}`}
+              aria-selected={collection.id === active}
+              aria-controls="menu-panel"
+              className={collection.id === active ? "active" : ""}
+              onClick={() => setActive(collection.id)}
+            >
+              {collection.title}
+              <span>{collection.products.length}</span>
+            </button>
+          ))}
+        </div>
+        <div
+          className="menu-panel"
+          id="menu-panel"
+          role="tabpanel"
+          aria-labelledby={`tab-${series.id}`}
+        >
+          <div className="menu-series-head">
+            <h3>
+              {series.title}
+              {series.subtitle && <span lang="zh">{series.subtitle}</span>}
+            </h3>
+            <p>{series.description}</p>
+          </div>
+          <ul className="menu-grid">
+            {series.products.map((product, index) => (
+              <li className="menu-card" key={product.id}>
+                <button
+                  className="menu-card-link"
+                  onClick={() => onSelect(product)}
+                  aria-label={`View ${product.title}`}
+                >
+                  <div className="menu-card-image">
+                    <img
+                      src={product.images[0].src}
+                      alt={product.images[0].alt}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="menu-card-copy">
+                    <span className="menu-card-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h4>
+                      {product.title}
+                      {product.subtitle && <small lang="zh">{product.subtitle}</small>}
+                    </h4>
+                    {product.price && <span className="menu-price">{product.price}</span>}
+                  </div>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="menu-footnote">
+          Soft opening menu. Selection may change daily. For today’s prices,{" "}
+          <a href={store.phoneHref}>call our store</a>.
         </p>
       </div>
-      <ul className="product-track" ref={track} aria-label={title}>
-        {products.map((product) => (
-          <li className="product-card" key={product.id}>
-            <button
-              className="product-link"
-              onClick={() => onSelect(product)}
-              aria-label={`View ${product.title.toLowerCase()}`}
-            >
-              <div className="product-image">
-                <img
-                  src={product.images[0].src}
-                  alt={product.images[0].alt}
-                  style={{ clipPath: product.images[0].clipPath }}
-                  loading="lazy"
-                  width="1254"
-                  height="1254"
-                />
-              </div>
-              <div className="product-info">
-                <h3>{product.title}</h3>
-              </div>
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div className="carousel-controls">
-        <button
-          className="icon-button previous"
-          aria-label={`Previous ${title.toLowerCase()}`}
-          onClick={() => move(-1)}
-          disabled={page <= 1}
-        >
-          <Icon name="chevron" />
-        </button>
-        <span aria-live="polite">
-          {page} <span className="counter-slash">/</span> {total}
-        </span>
-        <button
-          className="icon-button next"
-          aria-label={`Next ${title.toLowerCase()}`}
-          onClick={() => move(1)}
-          disabled={page >= total}
-        >
-          <Icon name="chevron" />
-        </button>
-      </div>
-      <p className="collection-note page-width">
-        For today’s selection and prices,{" "}
-        <a href={store.phoneHref}>call our store</a>.
-      </p>
     </section>
   );
 }
@@ -290,9 +275,22 @@ export default function App() {
   const [largeText, setLargeText] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [softOpening, setSoftOpening] = useState(() => {
+    try {
+      return sessionStorage.getItem("thick-soft-opening-seen") !== "1";
+    } catch {
+      return true;
+    }
+  });
+  const closeSoftOpening = () => {
+    setSoftOpening(false);
+    try {
+      sessionStorage.setItem("thick-soft-opening-seen", "1");
+    } catch {}
+  };
   const video = useRef<HTMLVideoElement>(null);
   const searchResults = allProducts.filter((product) =>
-    `${product.title} ${product.images[0].alt}`
+    `${product.title} ${product.series} ${product.subtitle ?? ""} ${product.images[0].alt}`
       .toLowerCase()
       .includes(query.toLowerCase().trim()),
   );
@@ -395,11 +393,7 @@ export default function App() {
           >
             <source src={assetUrl("/assets/hero.mp4")} type="video/mp4" />
           </video>
-          <div className="hero-content">
-            <p className="film-eyebrow">THICK. / STRAINED YOGURT</p>
-            <h1>Good things<br />take their time.</h1>
-            <p className="film-subtitle">A little moment, made THICK.</p>
-          </div>
+          <h1 className="visually-hidden">THICK. non-dripping strained yogurt</h1>
           <button className="film-toggle" aria-label={videoPaused || reduceMotion ? "Play brand film" : "Pause brand film"}
             onClick={() => { if (videoPaused || reduceMotion) { setReduceMotion(false); setVideoPaused(false); video.current?.play().catch(() => {}); } else { setVideoPaused(true); video.current?.pause(); } }}>
             {videoPaused || reduceMotion ? "▶ Play film" : "Ⅱ Pause film"}
@@ -410,11 +404,11 @@ export default function App() {
           <a className="pill" href="#featured-yogurt">Explore our yogurt <span>↓</span></a>
         </div>
         <section className="featured-section page-width" id="featured-yogurt" aria-labelledby="featured-title">
-          <div className="section-heading"><div><p className="eyebrow">FIND YOUR FIRST SPOONFUL</p><h2 id="featured-title">Start with something good.</h2></div><a className="editorial-link" href="#yogurt">Explore all bowls ↗</a></div>
-          <div className="featured-grid">{[allProducts[0], allProducts[5], allProducts[6]].map((product, index) => (
+          <div className="section-heading"><div><p className="eyebrow">FIND YOUR FIRST SPOONFUL</p><h2 id="featured-title">Start with something good.</h2></div><a className="editorial-link" href="#yogurt">See the menu ↗</a></div>
+          <div className="featured-grid">{featuredProducts.map((product, index) => (
             <article className="featured-card" key={product.id}>
               <button className="featured-image" onClick={() => selectProduct(product)} aria-label={`Take a closer look at ${product.title.toLowerCase()}`}>
-                <span className="image-number">0{index + 1} / A LITTLE THICK.</span>
+                <span className="image-number">0{index + 1} / {product.series.toUpperCase()}</span>
                 <img src={product.images[0].src} alt={product.images[0].alt} loading="lazy" style={{clipPath: product.images[0].clipPath}} />
                 <span className="image-arrow" aria-hidden="true">↗</span>
               </button>
@@ -424,7 +418,7 @@ export default function App() {
         </section>
         <section className="craft-section" id="about-thick" aria-labelledby="craft-title">
           <div className="craft-layout page-width">
-            <div className="craft-art"><span className="eyebrow">THE ART OF A GOOD SPOONFUL</span><img src={assetUrl("/assets/thick-yogurt-02.webp")} alt={allProducts[1].images[0].alt} loading="lazy" /><span className="craft-footnote">Made for your little moment.</span></div>
+            <div className="craft-art"><span className="eyebrow">THE ART OF A GOOD SPOONFUL</span><img src={productById("remix-honey-bloom").images[0].src} alt={productById("remix-honey-bloom").images[0].alt} loading="lazy" /><span className="craft-footnote">Made for your little moment.</span></div>
             <div className="craft-text"><p className="eyebrow">A CLOSER LOOK</p><h2 id="craft-title">Why so<br /><em>THICK?</em></h2><p>Meet our non-dripping strained yogurt. A bowl to pause for, a spoonful to make your own.</p><div className="craft-fact"><span>01 / THE YOGURT</span><p>Strained yogurt. The heart of every bowl.</p></div><div className="craft-fact"><span>02 / YOUR MOMENT</span><p>Find your bowl. Take your time.</p></div><a className="editorial-link" href="#our-store">Come try a spoonful ↗</a></div>
           </div>
         </section>
@@ -437,13 +431,7 @@ export default function App() {
           </div></div>
         </section>
 
-        {catalog.map((collection) => (
-          <ProductCarousel
-            key={collection.id}
-            {...collection}
-            onSelect={selectProduct}
-          />
-        ))}
+        <MenuSection onSelect={selectProduct} />
         <section
           className="story-section"
           id="our-store"
@@ -613,13 +601,13 @@ export default function App() {
                 />
                 <span>
                   {product.title}
-                  <small>THICK. yogurt</small>
+                  <small>THICK. {product.series}</small>
                 </span>
                 <Icon name="arrow" />
               </button>
             ))}
             {searchResults.length === 0 && (
-              <p>No yogurt bowls found. Try “yogurt” or “berries”.</p>
+              <p>Nothing on the menu matches. Try “strawberry” or “mango”.</p>
             )}
           </div>
         </Modal>
@@ -638,14 +626,13 @@ export default function App() {
             />
           </div>
           <div className="product-detail-copy">
-            <p className="eyebrow">THICK. YOGURT</p>
+            <p className="eyebrow">THICK. / {selected.series.toUpperCase()}</p>
             <h2>{selected.title}</h2>
-            <p>
-              Non-dripping strained yogurt. Discover our bowls at our
-              Washington, DC store.
-            </p>
+            {selected.subtitle && <p className="detail-subtitle" lang="zh">{selected.subtitle}</p>}
+            {selected.price && <p className="detail-price">{selected.price}</p>}
+            <p>{selected.images[0].alt}.</p>
             <p className="menu-note">
-              For today’s selection and prices, call {store.phone}.
+              {selected.price ? "On our soft opening menu." : "For today’s prices, call " + store.phone + "."}
             </p>
             <a className="button yogurt-call" href={store.phoneHref}>
               CALL THE STORE
@@ -657,6 +644,36 @@ export default function App() {
             >
               Visit our store <Icon name="arrow" />
             </a>
+          </div>
+        </Modal>
+      )}
+      {softOpening && (
+        <Modal
+          label="THICK. soft opening"
+          className="soft-opening-dialog"
+          onClose={closeSoftOpening}
+        >
+          <img
+            className="soft-opening-image"
+            src={assetUrl("/assets/soft-opening.webp")}
+            width={1600}
+            height={900}
+            alt="THICK. newspaper poster: soft opening, 50% off your first bowl for new THICK Rewards members; grand opening November 21–22, 11:30 AM–5:30 PM; free merch for members; spend $25 for a gacha spin. 1073 Wisconsin Ave NW, Georgetown, DC."
+          />
+          <div className="soft-opening-copy">
+            <div>
+              <p className="eyebrow">NOW OPEN · GEORGETOWN, DC</p>
+              <h2>Soft opening</h2>
+              <p className="soft-opening-hours">11:30 AM – 8:00 PM</p>
+            </div>
+            <div className="soft-opening-actions">
+              <a className="button" href="#our-store" onClick={closeSoftOpening}>
+                VISIT OUR STORE
+              </a>
+              <button className="pill" onClick={closeSoftOpening}>
+                Enter site
+              </button>
+            </div>
           </div>
         </Modal>
       )}

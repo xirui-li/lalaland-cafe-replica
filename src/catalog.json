@@ -1,111 +1,448 @@
 [
   {
-    "id": "yogurt",
-    "title": "Our yogurt",
+    "id": "remix",
+    "title": "Remix",
+    "description": "Strained yogurt bowls, topped your way.",
     "products": [
       {
-        "id": "yogurt-bowl-01",
-        "title": "Yogurt bowl 01",
+        "id": "remix-caramel-cloud",
+        "title": "Caramel Cloud",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/thick-yogurt-01.webp",
-            "alt": "THICK. yogurt bowl with red and blue berries around a chocolate-colored center"
+            "src": "/assets/menu/remix-caramel-cloud.webp",
+            "alt": "Illustrated yogurt bowl with blueberries, mango, strawberries and green grapes under a caramel drizzle"
           }
         ]
       },
       {
-        "id": "yogurt-bowl-02",
-        "title": "Yogurt bowl 02",
+        "id": "remix-hazelnut-crush",
+        "title": "Hazelnut Crush",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/thick-yogurt-02.webp",
-            "alt": "THICK. yogurt bowl with banana slices, dark berries and chocolate pieces"
+            "src": "/assets/menu/remix-hazelnut-crush.webp",
+            "alt": "Illustrated yogurt bowl with blueberries, mango, strawberries and grapes under a chocolate hazelnut drizzle"
           }
         ]
       },
       {
-        "id": "yogurt-bowl-03",
-        "title": "Yogurt bowl 03",
+        "id": "remix-honey-bloom",
+        "title": "Honey Bloom",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/thick-yogurt-03.webp",
-            "alt": "THICK. yogurt bowl with apple slices and red berries"
+            "src": "/assets/menu/remix-honey-bloom.webp",
+            "alt": "Illustrated yogurt bowl with strawberries, blueberries and kiwi around a honey-drizzled center"
           }
         ]
       },
       {
-        "id": "yogurt-bowl-04",
-        "title": "Yogurt bowl 04",
+        "id": "remix-midnight-cocoa",
+        "title": "Midnight Cocoa",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/thick-yogurt-04.webp",
-            "alt": "THICK. yogurt bowl with yellow fruit, red toppings and white cubes"
+            "src": "/assets/menu/remix-midnight-cocoa.webp",
+            "alt": "Illustrated yogurt bowl with blueberries, mango, strawberries and grapes under a dark cocoa drizzle"
           }
         ]
       },
       {
-        "id": "yogurt-bowl-05",
-        "title": "Yogurt bowl 05",
+        "id": "remix-peanut-hug",
+        "title": "Peanut Hug",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/thick-yogurt-05.webp",
-            "alt": "THICK. yogurt bowl with cherries and blueberries around a dark center"
+            "src": "/assets/menu/remix-peanut-hug.webp",
+            "alt": "Illustrated yogurt bowl with banana, strawberries and blueberries around a swirl of peanut butter"
           }
         ]
       },
       {
-        "id": "yogurt-bowl-06",
-        "title": "Yogurt bowl 06",
+        "id": "remix-pistachio-pop",
+        "title": "Pistachio Pop",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/thick-yogurt-06.webp",
-            "alt": "THICK. yogurt bowl with a blue and green globe-shaped center, dragon fruit and grapes"
+            "src": "/assets/menu/remix-pistachio-pop.webp",
+            "alt": "Illustrated yogurt bowl with figs, mango, strawberries and a pistachio drizzle"
           }
         ]
       },
       {
-        "id": "yogurt-bowl-07",
-        "title": "Yogurt bowl 07",
+        "id": "remix-pumpkin-party",
+        "title": "Pumpkin Party",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/thick-yogurt-07.webp",
-            "alt": "THICK. yogurt bowl with strawberries, dark berries and a pink center"
+            "src": "/assets/menu/remix-pumpkin-party.webp",
+            "alt": "Illustrated yogurt bowl with apple slices and figs around a pumpkin drizzle"
           }
         ]
       },
       {
-        "id": "yogurt-bowl-08",
-        "title": "Yogurt bowl 08",
+        "id": "remix-rosy-glow",
+        "title": "Rosy Glow",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/thick-yogurt-08.jpg",
-            "alt": "THICK. yogurt bowl with grapes, orange slices, a green center and white cubes",
-            "clipPath": "ellipse(48.530% 48.414% at 49.909% 49.442%)"
+            "src": "/assets/menu/remix-rosy-glow.webp",
+            "alt": "Illustrated yogurt bowl with raspberries, strawberries, figs and pineapple around a pink scoop"
           }
         ]
       },
       {
-        "id": "yogurt-bowl-09",
-        "title": "Yogurt bowl 09",
+        "id": "remix-tropic-bliss",
+        "title": "Tropic Bliss",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/thick-yogurt-09.jpg",
-            "alt": "THICK. yogurt bowl with yellow fruit slices, red berries and an orange center",
-            "clipPath": "ellipse(46.904% 47.607% at 49.688% 49.081%)"
+            "src": "/assets/menu/remix-tropic-bliss.webp",
+            "alt": "Illustrated yogurt bowl with mango, passion fruit, berries and green grapes"
+          }
+        ]
+      }
+    ],
+    "subtitle": "随心酸奶碗"
+  },
+  {
+    "id": "swirl",
+    "title": "Swirl",
+    "description": "Strained yogurt and açaí, swirled together. Regular or mini.",
+    "products": [
+      {
+        "id": "swirl-og",
+        "title": "OG",
+        "series": "Swirl",
+        "images": [
+          {
+            "src": "/assets/menu/swirl-og.webp",
+            "alt": "Açaí and yogurt swirl bowl with strawberries, banana, blueberries, granola, a yogurt scoop and peanut butter"
           }
         ]
       },
       {
-        "id": "yogurt-bowl-10",
-        "title": "Yogurt bowl 10",
+        "id": "swirl-hazelnut",
+        "title": "Hazelnut",
+        "series": "Swirl",
         "images": [
           {
-            "src": "/assets/thick-yogurt-10.jpg",
-            "alt": "THICK. yogurt bowl with pineapple, kiwi, blueberries and a yellow center",
-            "clipPath": "ellipse(46.384% 46.830% at 49.583% 49.507%)"
+            "src": "/assets/menu/swirl-hazelnut.webp",
+            "alt": "Açaí and yogurt swirl bowl with banana, blueberries, chocolate hazelnut spread and a Biscoff cookie"
+          }
+        ]
+      },
+      {
+        "id": "swirl-pistachio",
+        "title": "Pistachio",
+        "series": "Swirl",
+        "images": [
+          {
+            "src": "/assets/menu/swirl-pistachio.webp",
+            "alt": "Açaí and yogurt swirl bowl with strawberries, green grapes, granola and pistachio cream"
+          }
+        ]
+      },
+      {
+        "id": "swirl-og-mini",
+        "title": "OG Mini",
+        "series": "Swirl",
+        "images": [
+          {
+            "src": "/assets/menu/swirl-og-mini.webp",
+            "alt": "Mini açaí and yogurt cup with strawberries, banana and peanut butter"
+          }
+        ]
+      },
+      {
+        "id": "swirl-hazelnut-mini",
+        "title": "Hazelnut Mini",
+        "series": "Swirl",
+        "images": [
+          {
+            "src": "/assets/menu/swirl-hazelnut-mini.webp",
+            "alt": "Mini açaí and yogurt cup with banana, blueberries, chocolate hazelnut spread and a Biscoff cookie"
+          }
+        ]
+      },
+      {
+        "id": "swirl-pistachio-mini",
+        "title": "Pistachio Mini",
+        "series": "Swirl",
+        "images": [
+          {
+            "src": "/assets/menu/swirl-pistachio-mini.webp",
+            "alt": "Mini açaí and yogurt cup with strawberries, green grapes and pistachio cream"
+          }
+        ]
+      }
+    ],
+    "subtitle": "酸奶 × 巴西莓双旋碗"
+  },
+  {
+    "id": "dome",
+    "title": "Dome",
+    "description": "A dome of thick yogurt over something crunchy.",
+    "products": [
+      {
+        "id": "dome-dubai-choco",
+        "title": "Dubai Choco",
+        "series": "Dome",
+        "images": [
+          {
+            "src": "/assets/menu/dome-dubai-choco.webp",
+            "alt": "Chocolate-coated yogurt dome with pistachio drizzle over shredded pastry in a THICK. cup"
+          }
+        ]
+      },
+      {
+        "id": "dome-honey-bomb",
+        "title": "Honey Bomb",
+        "series": "Dome",
+        "images": [
+          {
+            "src": "/assets/menu/dome-honey-bomb.webp",
+            "alt": "Yogurt dome with honey, honeycomb and crushed pistachio over granola in a THICK. cup"
+          }
+        ]
+      },
+      {
+        "id": "dome-matcha-strawberry",
+        "title": "Matcha Strawberry",
+        "series": "Dome",
+        "images": [
+          {
+            "src": "/assets/menu/dome-matcha-strawberry.webp",
+            "alt": "Matcha-coated yogurt dome surrounded by strawberries in a THICK. cup"
+          }
+        ]
+      },
+      {
+        "id": "dome-pumpkin-crunch",
+        "title": "Pumpkin Crunch",
+        "series": "Dome",
+        "images": [
+          {
+            "src": "/assets/menu/dome-pumpkin-crunch.webp",
+            "alt": "Yogurt dome with pumpkin drizzle, diced apple, pecans and granola in a THICK. cup"
+          }
+        ]
+      },
+      {
+        "id": "dome-solid-boba-tea",
+        "title": "Solid Boba Tea",
+        "series": "Dome",
+        "images": [
+          {
+            "src": "/assets/menu/dome-solid-boba-tea.webp",
+            "alt": "Milk tea yogurt dome with brown sugar syrup, boba pearls and granola in a THICK. cup"
           }
         ]
       }
     ]
+  },
+  {
+    "id": "bulk",
+    "title": "Bulk",
+    "description": "Big bowls, piled high.",
+    "products": [
+      {
+        "id": "bulk-earl-grey-peach",
+        "title": "Earl Grey Peach",
+        "series": "Bulk",
+        "images": [
+          {
+            "src": "/assets/menu/bulk-earl-grey-peach.webp",
+            "alt": "Yogurt bowl with peach slices, blueberries, mochi cubes and an Earl Grey peach sauce"
+          }
+        ],
+        "subtitle": "伯爵茶桃子"
+      },
+      {
+        "id": "bulk-earth-bowl",
+        "title": "Earth Bowl",
+        "series": "Bulk",
+        "images": [
+          {
+            "src": "/assets/menu/bulk-earth-bowl.webp",
+            "alt": "Yogurt bowl with a blue and green Earth-painted scoop, kiwi, green grapes, dragon fruit and coconut"
+          }
+        ],
+        "subtitle": "地球碗"
+      },
+      {
+        "id": "bulk-mango-pomelo-sago",
+        "title": "Mango Pomelo Sago",
+        "series": "Bulk",
+        "images": [
+          {
+            "src": "/assets/menu/bulk-mango-pomelo-sago.webp",
+            "alt": "Yogurt bowl with mango, lychee, pomelo and granola"
+          }
+        ],
+        "subtitle": "杨枝甘露"
+      },
+      {
+        "id": "bulk-apple-cinnamon",
+        "title": "Apple Cinnamon",
+        "series": "Bulk",
+        "images": [
+          {
+            "src": "/assets/menu/bulk-apple-cinnamon.webp",
+            "alt": "Yogurt bowl with diced apple, cinnamon apple sauce, pecans and raspberries"
+          }
+        ],
+        "subtitle": "苹果肉桂"
+      },
+      {
+        "id": "bulk-dubai-chocolate-bowl",
+        "title": "Dubai Chocolate",
+        "series": "Bulk",
+        "images": [
+          {
+            "src": "/assets/menu/bulk-dubai-chocolate-bowl.webp",
+            "alt": "Yogurt bowl with a chocolate dome, pistachio, blueberries, blackberries and shredded pastry"
+          }
+        ],
+        "subtitle": "迪拜巧克力"
+      },
+      {
+        "id": "bulk-seoul-strawberry-honeycomb",
+        "title": "Seoul Strawberry Honeycomb",
+        "series": "Bulk",
+        "images": [
+          {
+            "src": "/assets/menu/bulk-seoul-strawberry-honeycomb.webp",
+            "alt": "Yogurt bowl with a strawberry scoop, honeycomb, strawberries, blueberries, kiwi and granola"
+          }
+        ],
+        "subtitle": "首尔草莓蜂巢"
+      }
+    ]
+  },
+  {
+    "id": "loaded",
+    "title": "Loaded",
+    "description": "Swirled yogurt cups, loaded up top.",
+    "products": [
+      {
+        "id": "loaded-loaded-01",
+        "title": "Loaded 01",
+        "series": "Loaded",
+        "images": [
+          {
+            "src": "/assets/menu/loaded-loaded-01.webp",
+            "alt": "Mint green yogurt swirl cup topped with whipped cream and chocolate shavings"
+          }
+        ]
+      },
+      {
+        "id": "loaded-loaded-02",
+        "title": "Loaded 02",
+        "series": "Loaded",
+        "images": [
+          {
+            "src": "/assets/menu/loaded-loaded-02.webp",
+            "alt": "Pale green yogurt swirl cup topped with whipped cream and diced avocado"
+          }
+        ]
+      },
+      {
+        "id": "loaded-loaded-03",
+        "title": "Loaded 03",
+        "series": "Loaded",
+        "images": [
+          {
+            "src": "/assets/menu/loaded-loaded-03.webp",
+            "alt": "Pink yogurt swirl cup topped with whipped cream and diced strawberries"
+          }
+        ]
+      },
+      {
+        "id": "loaded-loaded-04",
+        "title": "Loaded 04",
+        "series": "Loaded",
+        "images": [
+          {
+            "src": "/assets/menu/loaded-loaded-04.webp",
+            "alt": "Chocolate yogurt swirl cup topped with whipped cream and cookie crumbs"
+          }
+        ]
+      },
+      {
+        "id": "loaded-loaded-05",
+        "title": "Loaded 05",
+        "series": "Loaded",
+        "images": [
+          {
+            "src": "/assets/menu/loaded-loaded-05.webp",
+            "alt": "Magenta yogurt swirl cup topped with whipped cream and dragon fruit"
+          }
+        ]
+      },
+      {
+        "id": "loaded-loaded-06",
+        "title": "Loaded 06",
+        "series": "Loaded",
+        "images": [
+          {
+            "src": "/assets/menu/loaded-loaded-06.webp",
+            "alt": "Yellow yogurt swirl cup topped with whipped cream and diced mango"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sphere",
+    "title": "Sphere",
+    "description": "Just the yogurt. Thick enough to hold its shape.",
+    "products": [
+      {
+        "id": "sphere-single-scoop",
+        "title": "Single Scoop",
+        "series": "Sphere",
+        "images": [
+          {
+            "src": "/assets/menu/sphere-single-scoop.webp",
+            "alt": "A single scoop of thick strained yogurt in a THICK. cup"
+          }
+        ]
+      }
+    ],
+    "subtitle": "干噎酸奶球"
+  },
+  {
+    "id": "limited",
+    "title": "Limited",
+    "description": "Limited-run yogurt desserts.",
+    "products": [
+      {
+        "id": "limited-dubai-chocolate",
+        "title": "Dubai Chocolate",
+        "series": "Limited",
+        "images": [
+          {
+            "src": "/assets/menu/limited-dubai-chocolate.webp",
+            "alt": "Dubai chocolate yogurt dessert cut open to show a white yogurt center under chocolate and pistachio"
+          }
+        ],
+        "price": "$12.99"
+      },
+      {
+        "id": "limited-mango-boat",
+        "title": "Mango Boat",
+        "series": "Limited",
+        "images": [
+          {
+            "src": "/assets/menu/limited-mango-boat.webp",
+            "alt": "Mango half filled with yogurt and topped with pink pomelo"
+          }
+        ],
+        "price": "$13.99"
+      }
+    ],
+    "subtitle": "限定酸奶甜品"
   }
 ]
