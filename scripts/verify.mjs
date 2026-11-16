@@ -57,8 +57,23 @@ try {
     const dialog = page.getByRole("dialog", { name: "THICK. soft opening" });
     await dialog.waitFor();
     assert.match(await dialog.innerText(), /Soft opening/i);
-    assert.match(await dialog.innerText(), /11:30 AM – 8:00 PM/);
-    assert.ok(await dialog.locator("img").evaluate((img) => img.complete && img.naturalWidth > 0));
+    assert.match(await dialog.innerText(), /Now – Nov 20 · 11:30 AM – 8:00 PM/);
+    const slides = dialog.locator(".soft-opening-slide img");
+    assert.equal(await slides.count(), 2);
+    await page.waitForFunction(() =>
+      [...document.querySelectorAll(".soft-opening-slide img")].every((img) => img.complete && img.naturalWidth > 0),
+    );
+    const track = dialog.locator(".soft-opening-track");
+    await dialog.getByRole("button", { name: "Next poster" }).click();
+    await page.waitForFunction(() => {
+      const el = document.querySelector(".soft-opening-track");
+      return Math.abs(el.scrollLeft - el.clientWidth) < 2;
+    });
+    assert.equal(await dialog.getByRole("button", { name: "Show poster 2" }).getAttribute("aria-current"), "true");
+    await page.screenshot({ path: "artifacts/soft-opening-hours-1440.png" });
+    await dialog.getByRole("button", { name: "Show poster 1" }).click();
+    await page.waitForFunction(() => document.querySelector(".soft-opening-track").scrollLeft < 2);
+    assert.ok(await track.isVisible());
     await page.screenshot({ path: "artifacts/soft-opening-1440.png" });
     await dialog.getByRole("button", { name: "Enter site" }).click();
     await dialog.waitFor({ state: "detached" });
@@ -102,6 +117,10 @@ try {
     assert.ok(await page.locator("video").evaluate((element) => element.paused));
     await page.getByRole("button", { name: "Play brand film", exact: true }).click();
     assert.ok(await page.locator("video").evaluate((element) => !element.paused));
+  });
+  await check("The website contains no Chinese text", async () => {
+    const text = await page.evaluate(() => document.documentElement.outerHTML);
+    assert.doesNotMatch(text, /[\u3400-\u9fff\uff00-\uffef]/);
   });
   await check(
     "THICK. yogurt branding replaces reference-site copy and links",
@@ -183,7 +202,7 @@ try {
       assert.equal(total, 35);
       assert.match(await menu.innerText(), /Mango Boat[\s\S]*\$13\.99/);
       await menu.getByRole("tab", { name: /^Bulk/i }).click();
-      assert.match(await menu.innerText(), /Earth Bowl\s*地球碗/);
+      assert.match(await menu.innerText(), /Earth Bowl/);
       await menu.getByRole("tab", { name: /^Remix/i }).click();
     },
   );
@@ -264,7 +283,7 @@ try {
       const content = await store.innerText();
       assert.match(content, /1073 Wisconsin Ave NW, 1st Floor/);
       assert.match(content, /Washington, DC 20007/);
-      assert.match(content, /Every day\s+11:30 AM – 10:30 PM/);
+      assert.match(content, /Every day\s+11:30 AM – 10:00 PM\s*Soft opening through Nov 20: 11:30 AM – 8:00 PM/);
       assert.match(content, /\(771\) 253-9358/);
       const map = new URL(
         await store

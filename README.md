@@ -12,7 +12,7 @@ A responsive React + TypeScript website for **THICK.**, the yogurt brand operate
 - Brand: **THICK.**; the supplied graphic wordmark retains its lowercase **thick.** lettering.
 - Company: **THICK Holdings LLC**.
 - One store: **1073 Wisconsin Ave NW, 1st Floor, Washington, DC 20007**.
-- Hours: **every day, 11:30 AM–10:30 PM**, confirmed by the owner after correcting the pasted AM/PM values.
+- Hours: soft opening **now–Nov 20, 11:30 AM–8 PM daily**; regular hours **from Nov 21, 11:30 AM–10 PM daily** (owner’s opening hours letter, 2026-11-15).
 - Phone: **(771) 253-9358**.
 
 `src/store.ts` holds the store details. Header, mobile, and footer links lead to the store section, Google Maps, or the telephone number.
@@ -39,7 +39,7 @@ Ordering, social posts, and catering remain absent until confirmed destinations 
 
 ## Content scope
 
-**Soft opening (from 2026-11-15).** A dialog greets each visitor once per browser session with the owner’s newspaper poster (`public/assets/soft-opening.webp`) and soft opening hours of 11:30 AM–8:00 PM. The store section still lists the regular hours of 11:30 AM–10:30 PM until the owner decides otherwise.
+**Soft opening (from 2026-11-15).** A dialog greets each visitor once per browser session with a swipeable carousel of two owner posters: the newspaper poster (`public/assets/soft-opening.webp`) and the opening hours letter rendered from `THICK_Opening_Hours_Letter.pdf` (`public/assets/opening-hours.webp`). It advances every 5 seconds until the visitor interacts, and stays still under reduced motion. The store section lists the regular hours and the soft opening hours.
 
 The menu section is styled after that newspaper poster (paper background, deep blue rules, serif headlines) and groups the menu into seven series with tabs: Remix, Swirl, Dome, Bulk, Loaded, Sphere, and Limited. Product names come from the supplied file names; BULK items also show their Chinese names. The six LOADED photos were supplied without names and are labelled Loaded 01–06. Only the two Limited desserts have confirmed prices ($12.99 and $13.99). Visitors can call the store for other prices. There is no ordering URL yet.
 

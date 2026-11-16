@@ -103,8 +103,7 @@
           }
         ]
       }
-    ],
-    "subtitle": "随心酸奶碗"
+    ]
   },
   {
     "id": "swirl",
@@ -177,8 +176,7 @@
           }
         ]
       }
-    ],
-    "subtitle": "酸奶 × 巴西莓双旋碗"
+    ]
   },
   {
     "id": "dome",
@@ -256,8 +254,7 @@
             "src": "/assets/menu/bulk-earl-grey-peach.webp",
             "alt": "Yogurt bowl with peach slices, blueberries, mochi cubes and an Earl Grey peach sauce"
           }
-        ],
-        "subtitle": "伯爵茶桃子"
+        ]
       },
       {
         "id": "bulk-earth-bowl",
@@ -268,8 +265,7 @@
             "src": "/assets/menu/bulk-earth-bowl.webp",
             "alt": "Yogurt bowl with a blue and green Earth-painted scoop, kiwi, green grapes, dragon fruit and coconut"
           }
-        ],
-        "subtitle": "地球碗"
+        ]
       },
       {
         "id": "bulk-mango-pomelo-sago",
@@ -280,8 +276,7 @@
             "src": "/assets/menu/bulk-mango-pomelo-sago.webp",
             "alt": "Yogurt bowl with mango, lychee, pomelo and granola"
           }
-        ],
-        "subtitle": "杨枝甘露"
+        ]
       },
       {
         "id": "bulk-apple-cinnamon",
@@ -292,8 +287,7 @@
             "src": "/assets/menu/bulk-apple-cinnamon.webp",
             "alt": "Yogurt bowl with diced apple, cinnamon apple sauce, pecans and raspberries"
           }
-        ],
-        "subtitle": "苹果肉桂"
+        ]
       },
       {
         "id": "bulk-dubai-chocolate-bowl",
@@ -304,8 +298,7 @@
             "src": "/assets/menu/bulk-dubai-chocolate-bowl.webp",
             "alt": "Yogurt bowl with a chocolate dome, pistachio, blueberries, blackberries and shredded pastry"
           }
-        ],
-        "subtitle": "迪拜巧克力"
+        ]
       },
       {
         "id": "bulk-seoul-strawberry-honeycomb",
@@ -316,8 +309,7 @@
             "src": "/assets/menu/bulk-seoul-strawberry-honeycomb.webp",
             "alt": "Yogurt bowl with a strawberry scoop, honeycomb, strawberries, blueberries, kiwi and granola"
           }
-        ],
-        "subtitle": "首尔草莓蜂巢"
+        ]
       }
     ]
   },
@@ -410,8 +402,7 @@
           }
         ]
       }
-    ],
-    "subtitle": "干噎酸奶球"
+    ]
   },
   {
     "id": "limited",
@@ -442,7 +433,6 @@
         ],
         "price": "$13.99"
       }
-    ],
-    "subtitle": "限定酸奶甜品"
+    ]
   }
 ]

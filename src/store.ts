@@ -9,9 +9,15 @@ export const store = {
   hours: {
     days: "Every day",
     opens: "11:30",
-    closes: "22:30",
+    closes: "22:00",
     opensLabel: "11:30 AM",
-    closesLabel: "10:30 PM",
+    closesLabel: "10:00 PM",
+  },
+  softOpening: {
+    through: "Nov 20",
+    opens: "11:30",
+    closes: "20:00",
+    label: "11:30 AM – 8:00 PM",
   },
 };
 

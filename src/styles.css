@@ -1735,14 +1735,24 @@ input:focus-visible {
 /* Soft opening announcement shown when the site opens */
 .soft-opening-dialog{width:880px}
 .soft-opening-dialog>.modal-surface{padding:0;background:var(--surface)}
-.soft-opening-image{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.soft-opening-slides{position:relative;background:#eef3f6}
+.soft-opening-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.soft-opening-track::-webkit-scrollbar{display:none}
+.soft-opening-slide{flex:0 0 100%;scroll-snap-align:start;margin:0;height:min(64vh,560px);display:flex;align-items:center;justify-content:center;padding:14px}
+.soft-opening-slide img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;box-shadow:0 6px 24px rgba(22,60,92,.18)}
+.soft-opening-arrow{position:absolute;top:50%;translate:0 -50%;background:var(--surface);border-radius:50%;box-shadow:0 2px 10px rgba(22,60,92,.2)}
+.soft-opening-arrow.previous{left:12px}.soft-opening-arrow.next{right:12px}
+.soft-opening-arrow.previous .icon{transform:rotate(90deg)}.soft-opening-arrow.next .icon{transform:rotate(-90deg)}
+.soft-opening-dots{position:absolute;left:50%;bottom:10px;translate:-50% 0;display:flex;gap:8px;padding:6px 10px;border-radius:99px;background:rgba(255,253,248,.85)}
+.soft-opening-dots button{width:8px;height:8px;padding:0;border-radius:50%;background:var(--border-strong);opacity:.45}
+.soft-opening-dots button[aria-current="true"]{opacity:1;background:var(--ink);width:22px;border-radius:99px}
 .soft-opening-copy{display:flex;justify-content:space-between;align-items:end;gap:24px;padding:26px 32px 30px}
 .soft-opening-copy .eyebrow{margin-bottom:8px}
 .modal.soft-opening-dialog h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:40px;line-height:1.05;padding:0}
 .soft-opening-hours{margin-top:8px;font-size:18px;font-weight:600;letter-spacing:.5px}
 .soft-opening-actions{display:flex;gap:10px;flex-shrink:0}
 .soft-opening-dialog .modal-close{background:var(--surface);border-radius:50%}
-@media(max-width:700px){.soft-opening-copy{flex-direction:column;align-items:stretch;padding:20px 20px 22px}.modal.soft-opening-dialog h2{font-size:32px}.soft-opening-actions{flex-direction:column}.soft-opening-actions>*{width:100%;justify-content:center;text-align:center}}
+@media(max-width:700px){.soft-opening-slide{height:56vh;padding:10px}.soft-opening-arrow{display:none}.soft-opening-copy{flex-direction:column;align-items:stretch;padding:20px 20px 22px}.modal.soft-opening-dialog h2{font-size:32px}.soft-opening-actions{flex-direction:column}.soft-opening-actions>*{width:100%;justify-content:center;text-align:center}}
 
 /* Soft opening menu, set like the THICK. newspaper poster */
 .menu-section{--paper:#f4eee2;--paper-deep:#ebe3d3;background:var(--paper);padding:72px 0 64px;scroll-margin-top:90px;color:var(--ink)}
@@ -1780,3 +1790,5 @@ input:focus-visible {
 .featured-image img{object-fit:contain;mix-blend-mode:multiply}
 .craft-art img{mix-blend-mode:multiply}
 @media(max-width:700px){.menu-section{padding:44px 0 40px}.menu-dateline{flex-direction:column;gap:2px;font-size:9px}.menu-dateline span:nth-child(2){display:none}.menu-masthead h2{letter-spacing:-1px;margin:26px 0 16px}.menu-standfirst{font-size:15px}.menu-tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin-inline:-22px;padding-inline:22px;scrollbar-width:none}.menu-tabs::-webkit-scrollbar{display:none}.menu-tabs button{font-size:16px;padding:14px 14px 12px;flex-shrink:0}.menu-series-head{flex-direction:column;align-items:start;gap:10px;padding:26px 0 18px}.menu-series-head p{text-align:left}.menu-series-head h3 span{font-size:15px}.menu-grid{grid-template-columns:repeat(2,1fr)}.menu-card-link{padding:10px}.menu-card-copy{grid-template-columns:auto 1fr;gap:4px 8px}.menu-price{grid-column:1/-1}.menu-card-copy h4{font-size:16px}.menu-price{justify-self:start;font-size:15px}}
+.soft-opening-note{display:block;margin-top:6px;font-size:.9em;color:var(--muted)}
+.soft-opening-arrow.previous:hover .icon{transform:rotate(90deg) scale(1.08)}.soft-opening-arrow.next:hover .icon{transform:rotate(-90deg) scale(1.08)}

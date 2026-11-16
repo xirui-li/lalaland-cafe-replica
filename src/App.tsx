@@ -9,13 +9,11 @@ type ProductImage = { src: string; alt: string; clipPath?: string };
 type Collection = {
   id: string;
   title: string;
-  subtitle?: string;
   description: string;
   products: {
     id: string;
     title: string;
     series: string;
-    subtitle?: string;
     price?: string;
     images: ProductImage[];
   }[];
@@ -182,6 +180,101 @@ function Modal({
   );
 }
 
+const softOpeningSlides = [
+  {
+    src: "/assets/soft-opening.webp",
+    width: 1600,
+    height: 900,
+    alt: "THICK. newspaper poster: soft opening, 50% off your first bowl for new THICK Rewards members; grand opening November 21–22; free merch for members; spend $25 for a gacha spin. 1073 Wisconsin Ave NW, Georgetown, DC.",
+  },
+  {
+    src: "/assets/opening-hours.webp",
+    width: 1082,
+    height: 1400,
+    alt: "THICK. opening hours: soft opening now to November 20, 11:30 AM to 8 PM daily. THICK Opening grand opening weekend November 21–22, 11:30 AM to 10 PM daily, regular hours from November 21. THICK. × TOIMOI collab November 21–22 with a free photo booth for everyone, a photographer, and ribbon cutting on November 21 at 11:11 AM. First 100 in line on November 21 only: all 100 get a free THICK. sticker, the first 30 get an extra prize spin for embroidered caps, clear umbrellas, totes and more, and lucky tickets 29, 39 through 99 get $3 off their next visit. With purchase, one numbered ticket per customer. 1073 Wisconsin Ave NW, @thick_yogurt.",
+  },
+];
+
+function SoftOpeningSlides() {
+  const track = useRef<HTMLDivElement>(null);
+  const [current, setCurrent] = useState(0);
+  const [auto, setAuto] = useState(
+    () => !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  const go = (index: number) => {
+    const el = track.current;
+    if (!el) return;
+    const next = (index + softOpeningSlides.length) % softOpeningSlides.length;
+    el.scrollTo({ left: next * el.clientWidth, behavior: "smooth" });
+  };
+  useEffect(() => {
+    const el = track.current!;
+    const update = () => setCurrent(Math.round(el.scrollLeft / el.clientWidth));
+    el.addEventListener("scroll", update, { passive: true });
+    return () => el.removeEventListener("scroll", update);
+  }, []);
+  useEffect(() => {
+    if (!auto) return;
+    const timer = window.setTimeout(() => go(current + 1), 5000);
+    return () => window.clearTimeout(timer);
+  }, [auto, current]);
+  const stop = () => setAuto(false);
+  return (
+    <div
+      className="soft-opening-slides"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Soft opening posters"
+      onPointerDown={stop}
+      onWheel={stop}
+      onKeyDown={stop}
+    >
+      <div className="soft-opening-track" ref={track}>
+        {softOpeningSlides.map((slide, index) => (
+          <figure
+            className="soft-opening-slide"
+            key={slide.src}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${index + 1} of ${softOpeningSlides.length}`}
+          >
+            <img
+              src={assetUrl(slide.src)}
+              width={slide.width}
+              height={slide.height}
+              alt={slide.alt}
+            />
+          </figure>
+        ))}
+      </div>
+      <button
+        className="icon-button soft-opening-arrow previous"
+        aria-label="Previous poster"
+        onClick={() => { stop(); go(current - 1); }}
+      >
+        <Icon name="chevron" />
+      </button>
+      <button
+        className="icon-button soft-opening-arrow next"
+        aria-label="Next poster"
+        onClick={() => { stop(); go(current + 1); }}
+      >
+        <Icon name="chevron" />
+      </button>
+      <div className="soft-opening-dots">
+        {softOpeningSlides.map((slide, index) => (
+          <button
+            key={slide.src}
+            aria-label={`Show poster ${index + 1}`}
+            aria-current={index === current}
+            onClick={() => { stop(); go(index); }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function MenuSection({ onSelect }: { onSelect: (product: Product) => void }) {
   const [active, setActive] = useState(catalog[0].id);
   const series = catalog.find((collection) => collection.id === active)!;
@@ -222,7 +315,6 @@ function MenuSection({ onSelect }: { onSelect: (product: Product) => void }) {
           <div className="menu-series-head">
             <h3>
               {series.title}
-              {series.subtitle && <span lang="zh">{series.subtitle}</span>}
             </h3>
             <p>{series.description}</p>
           </div>
@@ -245,10 +337,7 @@ function MenuSection({ onSelect }: { onSelect: (product: Product) => void }) {
                     <span className="menu-card-number">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h4>
-                      {product.title}
-                      {product.subtitle && <small lang="zh">{product.subtitle}</small>}
-                    </h4>
+                    <h4>{product.title}</h4>
                     {product.price && <span className="menu-price">{product.price}</span>}
                   </div>
                 </button>
@@ -290,7 +379,7 @@ export default function App() {
   };
   const video = useRef<HTMLVideoElement>(null);
   const searchResults = allProducts.filter((product) =>
-    `${product.title} ${product.series} ${product.subtitle ?? ""} ${product.images[0].alt}`
+    `${product.title} ${product.series} ${product.images[0].alt}`
       .toLowerCase()
       .includes(query.toLowerCase().trim()),
   );
@@ -473,6 +562,10 @@ export default function App() {
                     <time dateTime={store.hours.closes}>
                       {store.hours.closesLabel}
                     </time>
+                    <span className="soft-opening-note">
+                      Soft opening through {store.softOpening.through}:{" "}
+                      {store.softOpening.label}
+                    </span>
                   </dd>
                 </div>
                 <div>
@@ -628,7 +721,6 @@ export default function App() {
           <div className="product-detail-copy">
             <p className="eyebrow">THICK. / {selected.series.toUpperCase()}</p>
             <h2>{selected.title}</h2>
-            {selected.subtitle && <p className="detail-subtitle" lang="zh">{selected.subtitle}</p>}
             {selected.price && <p className="detail-price">{selected.price}</p>}
             <p>{selected.images[0].alt}.</p>
             <p className="menu-note">
@@ -653,18 +745,14 @@ export default function App() {
           className="soft-opening-dialog"
           onClose={closeSoftOpening}
         >
-          <img
-            className="soft-opening-image"
-            src={assetUrl("/assets/soft-opening.webp")}
-            width={1600}
-            height={900}
-            alt="THICK. newspaper poster: soft opening, 50% off your first bowl for new THICK Rewards members; grand opening November 21–22, 11:30 AM–5:30 PM; free merch for members; spend $25 for a gacha spin. 1073 Wisconsin Ave NW, Georgetown, DC."
-          />
+          <SoftOpeningSlides />
           <div className="soft-opening-copy">
             <div>
               <p className="eyebrow">NOW OPEN · GEORGETOWN, DC</p>
               <h2>Soft opening</h2>
-              <p className="soft-opening-hours">11:30 AM – 8:00 PM</p>
+              <p className="soft-opening-hours">
+                Now – {store.softOpening.through} · {store.softOpening.label}
+              </p>
             </div>
             <div className="soft-opening-actions">
               <a className="button" href="#our-store" onClick={closeSoftOpening}>
