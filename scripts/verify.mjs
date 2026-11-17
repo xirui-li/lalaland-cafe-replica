@@ -84,11 +84,11 @@ try {
     for (const [file, hash] of [
       [
         "hero.mp4",
-        "32d694be19d33be5c1956d21131406a319fac47f8d6948c53666747038bf8079",
+        "cffdec517fd4e7ac6e46a8e6053ad4049661f1d86784bdab181e9870a4fd175c",
       ],
       [
         "hero-poster.jpg",
-        "6b38e9c5e727367ba9659f3017af0bc7011d422838613dd2a076637905a91417",
+        "57f49bac0ad9b4c1b51d2ea75690a8d63ebf272aeaa59572bf9c3caf6699b766",
       ],
     ])
       assert.equal(
@@ -108,7 +108,7 @@ try {
       inline: element.playsInline,
       filter: getComputedStyle(element).filter,
     }));
-    assert.ok(Math.abs(video.ratio - 864 / 496) < .01);
+    assert.ok(Math.abs(video.ratio - 480 / 276) < .01);
     assert.ok(video.autoplay && video.muted && video.loop && video.inline);
     assert.equal(video.filter, "none");
     const hero = await page.locator(".hero").boundingBox();
@@ -183,11 +183,11 @@ try {
       const tabs = menu.getByRole("tab");
       assert.deepEqual(
         (await tabs.allInnerTexts()).map((text) => text.replace(/\s*\d+$/, "")),
-        ["REMIX", "SWIRL", "DOME", "BULK", "LOADED", "SPHERE", "LIMITED"],
+        ["BULK", "SWIRL", "DOME", "REMIX", "LOADED", "SPHERE", "LIMITED"],
       );
-      assert.equal(await menu.locator(".menu-card").count(), 9);
+      assert.equal(await menu.locator(".menu-card").count(), 6);
       let total = 0;
-      for (const [name, count] of [["Remix", 9], ["Swirl", 6], ["Dome", 5], ["Bulk", 6], ["Loaded", 6], ["Sphere", 1], ["Limited", 2]]) {
+      for (const [name, count] of [["Bulk", 6], ["Swirl", 6], ["Dome", 5], ["Remix", 9], ["Loaded", 6], ["Sphere", 1], ["Limited", 2]]) {
         await menu.getByRole("tab", { name: new RegExp(`^${name}`, "i") }).click();
         assert.equal(await menu.getByRole("tab", { selected: true }).getAttribute("id"), `tab-${name.toLowerCase()}`);
         assert.equal(await menu.locator(".menu-card").count(), count);
@@ -201,8 +201,6 @@ try {
       }
       assert.equal(total, 35);
       assert.match(await menu.innerText(), /Mango Boat[\s\S]*\$13\.99/);
-      await menu.getByRole("tab", { name: /^Bulk/i }).click();
-      assert.match(await menu.innerText(), /Earth Bowl/);
       await menu.getByRole("tab", { name: /^Remix/i }).click();
     },
   );

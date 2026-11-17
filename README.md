@@ -19,7 +19,7 @@ A responsive React + TypeScript website for **THICK.**, the yogurt brand operate
 
 ## Media and theme requirements
 
-**Main hero video.** On 2026-11-15 the owner replaced the original hero footage with the THICK. brand film (cows, milk, meadow, yogurt close-ups, ending on the thick. logo). `public/assets/hero.mp4` is that film re-encoded for the web (H.264, 864×496, audio removed, faststart); `public/assets/hero-poster.jpg` is its opening frame. It plays in original colors, without the blue treatment. The browser checks verify the video and poster checksums.
+**Main hero video.** On 2026-11-15 the owner replaced the original hero footage with the THICK. brand film, and on 2026-11-17 with a re-edited cut (`视频.mov`: cows, milk, splash, yogurt close-ups, ending on the thick. logo). `public/assets/hero.mp4` is that cut re-encoded for the web (H.264, 480×276 as supplied, audio removed, faststart); `public/assets/hero-poster.jpg` is its opening frame. It plays in original colors, without the blue treatment. The browser checks verify the video and poster checksums.
 
 The site uses **PANTONE 2141 C**, approximated on screen as **#8BBEE8** ([color reference](https://www.colorxs.com/color/pantone-2141-c)). The palette combines this light blue with deep blue text and pale blue surfaces.
 
@@ -41,7 +41,7 @@ Ordering, social posts, and catering remain absent until confirmed destinations 
 
 **Soft opening (from 2026-11-15).** A dialog greets each visitor once per browser session with a swipeable carousel of two owner posters: the newspaper poster (`public/assets/soft-opening.webp`) and the opening hours letter rendered from `THICK_Opening_Hours_Letter.pdf` (`public/assets/opening-hours.webp`). It advances every 5 seconds until the visitor interacts, and stays still under reduced motion. The store section lists the regular hours and the soft opening hours.
 
-The menu section is styled after that newspaper poster (paper background, deep blue rules, serif headlines) and groups the menu into seven series with tabs: Remix, Swirl, Dome, Bulk, Loaded, Sphere, and Limited. Product names come from the supplied file names; BULK items also show their Chinese names. The six LOADED photos were supplied without names and are labelled Loaded 01–06. Only the two Limited desserts have confirmed prices ($12.99 and $13.99). Visitors can call the store for other prices. There is no ordering URL yet.
+The menu section is styled after that newspaper poster (paper background, deep blue rules, serif headlines) and groups the menu into seven series with tabs, in the owner’s order: Bulk, Swirl (yogurt × açaí), Dome, Remix, Loaded, Sphere, and Limited. Bulk opens first. Product names come from the supplied file names; the website shows English only. The six LOADED photos were supplied without names and are labelled Loaded 01–06. Only the two Limited desserts have confirmed prices ($12.99 and $13.99). Visitors can call the store for other prices. There is no ordering URL yet.
 
 The reference site's coffee catalog, shopping cart, account links, app promotion, newsletter demo, payment claims, and third-party policy links are no longer part of the interface. This site does not process orders, payments, or newsletter subscriptions. Accessibility controls support larger text, higher contrast, and reduced motion.
 

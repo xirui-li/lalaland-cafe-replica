@@ -1,105 +1,72 @@
 [
   {
-    "id": "remix",
-    "title": "Remix",
-    "description": "Strained yogurt bowls, topped your way.",
+    "id": "bulk",
+    "title": "Bulk",
+    "description": "Big bowls, piled high.",
     "products": [
       {
-        "id": "remix-caramel-cloud",
-        "title": "Caramel Cloud",
-        "series": "Remix",
+        "id": "bulk-earl-grey-peach",
+        "title": "Earl Grey Peach",
+        "series": "Bulk",
         "images": [
           {
-            "src": "/assets/menu/remix-caramel-cloud.webp",
-            "alt": "Illustrated yogurt bowl with blueberries, mango, strawberries and green grapes under a caramel drizzle"
+            "src": "/assets/menu/bulk-earl-grey-peach.webp",
+            "alt": "Yogurt bowl with peach slices, blueberries, mochi cubes and an Earl Grey peach sauce"
           }
         ]
       },
       {
-        "id": "remix-hazelnut-crush",
-        "title": "Hazelnut Crush",
-        "series": "Remix",
+        "id": "bulk-earth-bowl",
+        "title": "Earth Bowl",
+        "series": "Bulk",
         "images": [
           {
-            "src": "/assets/menu/remix-hazelnut-crush.webp",
-            "alt": "Illustrated yogurt bowl with blueberries, mango, strawberries and grapes under a chocolate hazelnut drizzle"
+            "src": "/assets/menu/bulk-earth-bowl.webp",
+            "alt": "Yogurt bowl with a blue and green Earth-painted scoop, kiwi, green grapes, dragon fruit and coconut"
           }
         ]
       },
       {
-        "id": "remix-honey-bloom",
-        "title": "Honey Bloom",
-        "series": "Remix",
+        "id": "bulk-mango-pomelo-sago",
+        "title": "Mango Pomelo Sago",
+        "series": "Bulk",
         "images": [
           {
-            "src": "/assets/menu/remix-honey-bloom.webp",
-            "alt": "Illustrated yogurt bowl with strawberries, blueberries and kiwi around a honey-drizzled center"
+            "src": "/assets/menu/bulk-mango-pomelo-sago.webp",
+            "alt": "Yogurt bowl with mango, lychee, pomelo and granola"
           }
         ]
       },
       {
-        "id": "remix-midnight-cocoa",
-        "title": "Midnight Cocoa",
-        "series": "Remix",
+        "id": "bulk-apple-cinnamon",
+        "title": "Apple Cinnamon",
+        "series": "Bulk",
         "images": [
           {
-            "src": "/assets/menu/remix-midnight-cocoa.webp",
-            "alt": "Illustrated yogurt bowl with blueberries, mango, strawberries and grapes under a dark cocoa drizzle"
+            "src": "/assets/menu/bulk-apple-cinnamon.webp",
+            "alt": "Yogurt bowl with diced apple, cinnamon apple sauce, pecans and raspberries"
           }
         ]
       },
       {
-        "id": "remix-peanut-hug",
-        "title": "Peanut Hug",
-        "series": "Remix",
+        "id": "bulk-dubai-chocolate-bowl",
+        "title": "Dubai Chocolate",
+        "series": "Bulk",
         "images": [
           {
-            "src": "/assets/menu/remix-peanut-hug.webp",
-            "alt": "Illustrated yogurt bowl with banana, strawberries and blueberries around a swirl of peanut butter"
+            "src": "/assets/menu/bulk-dubai-chocolate-bowl.webp",
+            "alt": "Yogurt bowl with a chocolate dome, pistachio, blueberries, blackberries and shredded pastry"
           }
         ]
       },
       {
-        "id": "remix-pistachio-pop",
-        "title": "Pistachio Pop",
-        "series": "Remix",
+        "id": "bulk-seoul-strawberry-honeycomb",
+        "title": "Seoul Strawberry Honeycomb",
+        "series": "Bulk",
         "images": [
           {
-            "src": "/assets/menu/remix-pistachio-pop.webp",
-            "alt": "Illustrated yogurt bowl with figs, mango, strawberries and a pistachio drizzle"
-          }
-        ]
-      },
-      {
-        "id": "remix-pumpkin-party",
-        "title": "Pumpkin Party",
-        "series": "Remix",
-        "images": [
-          {
-            "src": "/assets/menu/remix-pumpkin-party.webp",
-            "alt": "Illustrated yogurt bowl with apple slices and figs around a pumpkin drizzle"
-          }
-        ]
-      },
-      {
-        "id": "remix-rosy-glow",
-        "title": "Rosy Glow",
-        "series": "Remix",
-        "images": [
-          {
-            "src": "/assets/menu/remix-rosy-glow.webp",
-            "alt": "Illustrated yogurt bowl with raspberries, strawberries, figs and pineapple around a pink scoop"
-          }
-        ]
-      },
-      {
-        "id": "remix-tropic-bliss",
-        "title": "Tropic Bliss",
-        "series": "Remix",
-        "images": [
-          {
-            "src": "/assets/menu/remix-tropic-bliss.webp",
-            "alt": "Illustrated yogurt bowl with mango, passion fruit, berries and green grapes"
+            "src": "/assets/menu/bulk-seoul-strawberry-honeycomb.webp",
+            "alt": "Yogurt bowl with a strawberry scoop, honeycomb, strawberries, blueberries, kiwi and granola"
           }
         ]
       }
@@ -241,73 +208,106 @@
     ]
   },
   {
-    "id": "bulk",
-    "title": "Bulk",
-    "description": "Big bowls, piled high.",
+    "id": "remix",
+    "title": "Remix",
+    "description": "Strained yogurt bowls, topped your way.",
     "products": [
       {
-        "id": "bulk-earl-grey-peach",
-        "title": "Earl Grey Peach",
-        "series": "Bulk",
+        "id": "remix-caramel-cloud",
+        "title": "Caramel Cloud",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/menu/bulk-earl-grey-peach.webp",
-            "alt": "Yogurt bowl with peach slices, blueberries, mochi cubes and an Earl Grey peach sauce"
+            "src": "/assets/menu/remix-caramel-cloud.webp",
+            "alt": "Illustrated yogurt bowl with blueberries, mango, strawberries and green grapes under a caramel drizzle"
           }
         ]
       },
       {
-        "id": "bulk-earth-bowl",
-        "title": "Earth Bowl",
-        "series": "Bulk",
+        "id": "remix-hazelnut-crush",
+        "title": "Hazelnut Crush",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/menu/bulk-earth-bowl.webp",
-            "alt": "Yogurt bowl with a blue and green Earth-painted scoop, kiwi, green grapes, dragon fruit and coconut"
+            "src": "/assets/menu/remix-hazelnut-crush.webp",
+            "alt": "Illustrated yogurt bowl with blueberries, mango, strawberries and grapes under a chocolate hazelnut drizzle"
           }
         ]
       },
       {
-        "id": "bulk-mango-pomelo-sago",
-        "title": "Mango Pomelo Sago",
-        "series": "Bulk",
+        "id": "remix-honey-bloom",
+        "title": "Honey Bloom",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/menu/bulk-mango-pomelo-sago.webp",
-            "alt": "Yogurt bowl with mango, lychee, pomelo and granola"
+            "src": "/assets/menu/remix-honey-bloom.webp",
+            "alt": "Illustrated yogurt bowl with strawberries, blueberries and kiwi around a honey-drizzled center"
           }
         ]
       },
       {
-        "id": "bulk-apple-cinnamon",
-        "title": "Apple Cinnamon",
-        "series": "Bulk",
+        "id": "remix-midnight-cocoa",
+        "title": "Midnight Cocoa",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/menu/bulk-apple-cinnamon.webp",
-            "alt": "Yogurt bowl with diced apple, cinnamon apple sauce, pecans and raspberries"
+            "src": "/assets/menu/remix-midnight-cocoa.webp",
+            "alt": "Illustrated yogurt bowl with blueberries, mango, strawberries and grapes under a dark cocoa drizzle"
           }
         ]
       },
       {
-        "id": "bulk-dubai-chocolate-bowl",
-        "title": "Dubai Chocolate",
-        "series": "Bulk",
+        "id": "remix-peanut-hug",
+        "title": "Peanut Hug",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/menu/bulk-dubai-chocolate-bowl.webp",
-            "alt": "Yogurt bowl with a chocolate dome, pistachio, blueberries, blackberries and shredded pastry"
+            "src": "/assets/menu/remix-peanut-hug.webp",
+            "alt": "Illustrated yogurt bowl with banana, strawberries and blueberries around a swirl of peanut butter"
           }
         ]
       },
       {
-        "id": "bulk-seoul-strawberry-honeycomb",
-        "title": "Seoul Strawberry Honeycomb",
-        "series": "Bulk",
+        "id": "remix-pistachio-pop",
+        "title": "Pistachio Pop",
+        "series": "Remix",
         "images": [
           {
-            "src": "/assets/menu/bulk-seoul-strawberry-honeycomb.webp",
-            "alt": "Yogurt bowl with a strawberry scoop, honeycomb, strawberries, blueberries, kiwi and granola"
+            "src": "/assets/menu/remix-pistachio-pop.webp",
+            "alt": "Illustrated yogurt bowl with figs, mango, strawberries and a pistachio drizzle"
+          }
+        ]
+      },
+      {
+        "id": "remix-pumpkin-party",
+        "title": "Pumpkin Party",
+        "series": "Remix",
+        "images": [
+          {
+            "src": "/assets/menu/remix-pumpkin-party.webp",
+            "alt": "Illustrated yogurt bowl with apple slices and figs around a pumpkin drizzle"
+          }
+        ]
+      },
+      {
+        "id": "remix-rosy-glow",
+        "title": "Rosy Glow",
+        "series": "Remix",
+        "images": [
+          {
+            "src": "/assets/menu/remix-rosy-glow.webp",
+            "alt": "Illustrated yogurt bowl with raspberries, strawberries, figs and pineapple around a pink scoop"
+          }
+        ]
+      },
+      {
+        "id": "remix-tropic-bliss",
+        "title": "Tropic Bliss",
+        "series": "Remix",
+        "images": [
+          {
+            "src": "/assets/menu/remix-tropic-bliss.webp",
+            "alt": "Illustrated yogurt bowl with mango, passion fruit, berries and green grapes"
           }
         ]
       }
