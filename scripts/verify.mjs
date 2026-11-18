@@ -51,7 +51,7 @@ const top = async () => {
   await page.waitForTimeout(250);
 };
 try {
-  await page.goto(url, { waitUntil: "networkidle" });
+  await page.goto(url, { waitUntil: "load" });
   await page.evaluate(() => document.fonts.ready);
   await check("Soft opening announcement greets visitors and can be dismissed", async () => {
     const dialog = page.getByRole("dialog", { name: "THICK. soft opening" });
@@ -77,18 +77,18 @@ try {
     await page.screenshot({ path: "artifacts/soft-opening-1440.png" });
     await dialog.getByRole("button", { name: "Enter site" }).click();
     await dialog.waitFor({ state: "detached" });
-    await page.reload({ waitUntil: "networkidle" });
+    await page.reload({ waitUntil: "load" });
     assert.equal(await page.getByRole("dialog", { name: "THICK. soft opening" }).count(), 0);
   });
   await check("The THICK. brand film and poster are in place", async () => {
     for (const [file, hash] of [
       [
         "hero.mp4",
-        "cffdec517fd4e7ac6e46a8e6053ad4049661f1d86784bdab181e9870a4fd175c",
+        "d25898330de4654dfda0c49fbfdfd37d77faa238f94828328d43ad1eb4054012",
       ],
       [
         "hero-poster.jpg",
-        "57f49bac0ad9b4c1b51d2ea75690a8d63ebf272aeaa59572bf9c3caf6699b766",
+        "e35dd70e655a39240bcfedf1e39d752e76530204df953273b30d3da4ef15a189",
       ],
     ])
       assert.equal(
@@ -108,7 +108,7 @@ try {
       inline: element.playsInline,
       filter: getComputedStyle(element).filter,
     }));
-    assert.ok(Math.abs(video.ratio - 480 / 276) < .01);
+    assert.ok(Math.abs(video.ratio - 1920 / 1102) < .01);
     assert.ok(video.autoplay && video.muted && video.loop && video.inline);
     assert.equal(video.filter, "none");
     const hero = await page.locator(".hero").boundingBox();

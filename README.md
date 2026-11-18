@@ -19,7 +19,7 @@ A responsive React + TypeScript website for **THICK.**, the yogurt brand operate
 
 ## Media and theme requirements
 
-**Main hero video.** On 2026-11-15 the owner replaced the original hero footage with the THICK. brand film, and on 2026-11-17 with a re-edited cut (`视频.mov`: cows, milk, splash, yogurt close-ups, ending on the thick. logo). `public/assets/hero.mp4` is that cut re-encoded for the web (H.264, 480×276 as supplied, audio removed, faststart); `public/assets/hero-poster.jpg` is its opening frame. It plays in original colors, without the blue treatment. The browser checks verify the video and poster checksums.
+**Main hero video.** On 2026-11-15 the owner replaced the original hero footage with the THICK. brand film, and on 2026-11-17 with the 4K master (`10月6日 (2)(4).mp4`, 3762×2160, 60 fps: meadow, cows, milk, flowers, yogurt close-ups, ending on the thick. logo). `public/assets/hero.mp4` is that master re-encoded for the web (H.264, 1920×1102, 30 fps, CRF 27, audio removed, faststart, about 12 MB); `public/assets/hero-poster.jpg` is its opening frame. It plays in original colors, without the blue treatment. The browser checks verify the video and poster checksums.
 
 The site uses **PANTONE 2141 C**, approximated on screen as **#8BBEE8** ([color reference](https://www.colorxs.com/color/pantone-2141-c)). The palette combines this light blue with deep blue text and pale blue surfaces.
 
